@@ -56,7 +56,7 @@ export const TEAM = [
     name: "David Evans",
     role: "Restructuring Specialist", // TODO confirm title + firm line
     bio: "David has spent more than twenty years inside restructures and turnarounds, from ATO negotiations to formal appointments, and knows which lever to pull first.", // TODO David to confirm
-    photo: "", // TODO headshot from David
+    photo: "/team/david.jpg",
   },
 ] as const;
 

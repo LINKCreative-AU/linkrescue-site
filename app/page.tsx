@@ -10,13 +10,14 @@ import { DISCLAIMER, FOUNDER_QUOTE, SITE, TEAM } from "@/lib/site";
 import jamesPhoto from "@/public/team/james.jpg";
 import jamesQuotePhoto from "@/public/team/james-quote.jpg";
 import kylePhoto from "@/public/team/kyle.jpg";
+import davidPhoto from "@/public/team/david.jpg";
 
 // Static imports so next/image optimises them; keyed by name so lib/site.ts
 // stays the single source of truth for who appears.
 const PHOTOS: Record<string, StaticImageData> = {
   "James Webb": jamesPhoto,
   "Kyle Macmillan": kylePhoto,
-  // TODO "David Evans": davidPhoto - waiting on the file from David
+  "David Evans": davidPhoto,
 };
 
 export const metadata: Metadata = {
