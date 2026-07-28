@@ -5,8 +5,18 @@ import { SectionHead } from "@/components/SectionHead";
 import { Icon } from "@/components/Icons";
 import { JsonLd, faqSchema } from "@/components/Schema";
 import Image from "next/image";
+import type { StaticImageData } from "next/image";
 import { DISCLAIMER, FOUNDER_QUOTE, SITE, TEAM } from "@/lib/site";
 import jamesPhoto from "@/public/team/james.png";
+import kylePhoto from "@/public/team/kyle.jpg";
+
+// Static imports so next/image optimises them; keyed by name so lib/site.ts
+// stays the single source of truth for who appears.
+const PHOTOS: Record<string, StaticImageData> = {
+  "James Webb": jamesPhoto,
+  "Kyle Macmillan": kylePhoto,
+  // TODO "David Evans": davidPhoto - waiting on the file from David
+};
 
 export const metadata: Metadata = {
   title: "Business Rescue Assessment | ATO Debt & Director Penalty Help",
@@ -362,16 +372,16 @@ export default function Home() {
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {TEAM.map((t) => (
               <div key={t.name} className="rounded-xl2 border border-line bg-white p-7">
-                {t.photo ? (
+                {PHOTOS[t.name] ? (
                   <Image
-                    src={jamesPhoto}
+                    src={PHOTOS[t.name]}
                     alt={t.name}
                     width={80}
                     height={80}
                     className="mb-5 h-20 w-20 rounded-full bg-cloud object-cover"
                   />
                 ) : (
-                  // TODO headshots from Kyle + David - grey placeholder holds the layout
+                  // TODO headshot from David - grey placeholder holds the layout
                   <div className="mb-5 h-20 w-20 rounded-full bg-cloud" aria-hidden />
                 )}
                 <h3 className="font-display text-lg font-extrabold text-ink">{t.name}</h3>

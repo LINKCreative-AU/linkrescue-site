@@ -48,7 +48,7 @@ export const TEAM = [
     name: "Kyle Macmillan",
     role: "Insolvency Lawyer", // TODO confirm title + firm line
     bio: "Kyle brings the legal firepower: director penalties, safe harbour, creditor disputes and the formal tools, used early enough to change the ending.", // TODO Kyle to confirm
-    photo: "", // TODO headshot from Kyle
+    photo: "/team/kyle.jpg",
   },
   {
     name: "David Evans",
