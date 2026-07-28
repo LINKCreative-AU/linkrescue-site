@@ -391,7 +391,7 @@ function Result({
       <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
         {outcome.headline}
       </h3>
-      <p className="mt-3 text-ink/70">{outcome.meaning}</p>
+      <p className="mt-3 text-ink/75">{outcome.meaning}</p>
 
       <ul className="mt-5 space-y-2.5">
         {outcome.steps.map((s) => (

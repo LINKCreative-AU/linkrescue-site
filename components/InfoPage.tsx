@@ -62,7 +62,7 @@ export function InfoPage({
             <Link href="/" className="hover:text-ink">
               Home
             </Link>{" "}
-            / <span className="text-ink/70">{crumb}</span>
+            / <span className="text-ink/75">{crumb}</span>
           </nav>
           <SectionHead as="h1" eyebrow={eyebrow} title={title} mark={mark} intro={intro} accent />
           <div className="mt-7 flex flex-wrap gap-3">
@@ -155,7 +155,7 @@ export function InfoPage({
             <p className="guide-line text-rescue text-sm font-semibold uppercase tracking-wider">
               Where do you stand
             </p>
-            <p className="mt-3 text-sm text-ink/70">
+            <p className="mt-3 text-sm text-ink/75">
               Six questions, two minutes, instant result. You see how urgent
               your situation looks and the sensible next move.
             </p>
@@ -170,7 +170,7 @@ export function InfoPage({
                 <li key={r.href}>
                   <Link
                     href={r.href}
-                    className="text-sm font-medium text-ink/70 transition hover:text-rescue"
+                    className="text-sm font-medium text-ink/75 transition hover:text-rescue"
                   >
                     {r.label} →
                   </Link>

@@ -35,7 +35,7 @@ export default async function ThankYou({
           <h1 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
             Done. The next move is ours.
           </h1>
-          <p className="mt-4 text-lg text-ink/70">
+          <p className="mt-4 text-lg text-ink/75">
             Your assessment is with the team and the right person will call you
             back {TIMING[id]}. Keep your phone close, the call will come from a
             number you do not recognise.
@@ -51,7 +51,7 @@ export default async function ThankYou({
             </div>
           )}
 
-          <div className="mt-7 grid gap-3 text-sm text-ink/70">
+          <div className="mt-7 grid gap-3 text-sm text-ink/75">
             <p className="font-semibold text-ink">While you wait, three things that help:</p>
             <p>1. Pull together your ATO portal position, or your portal login.</p>
             <p>2. Find any letters of demand, default notices or ATO notices.</p>

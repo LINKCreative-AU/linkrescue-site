@@ -49,12 +49,12 @@ export default function Page() {
             <Link href="/" className="hover:text-ink">
               Home
             </Link>{" "}
-            / <span className="text-ink/70">Am I insolvent?</span>
+            / <span className="text-ink/75">Am I insolvent?</span>
           </nav>
           <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl">
             Am I insolvent? Check the <span className="marker">twelve signs</span>.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-ink/70">
+          <p className="mt-5 max-w-2xl text-lg text-ink/75">
             Insolvency is a legal test with a plain-language core: can the business pay its debts
             as they fall due. The indicators below are the ones courts and ASIC actually weigh.
             Asking the question early is a strength, not an admission.
@@ -129,7 +129,7 @@ export default function Page() {
             <p className="guide-line text-rescue text-sm font-semibold uppercase tracking-wider">
               Where do you stand
             </p>
-            <p className="mt-3 text-sm text-ink/70">
+            <p className="mt-3 text-sm text-ink/75">
               The indicator test is the technical lens. The two-minute assessment is the triage:
               instant result, clear next step.
             </p>
@@ -141,17 +141,17 @@ export default function Page() {
             <p className="eyebrow">Related</p>
             <ul className="mt-3 space-y-2.5">
               <li>
-                <Link href="/safe-harbour" className="text-sm font-medium text-ink/70 transition hover:text-rescue">
+                <Link href="/safe-harbour" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   Safe harbour →
                 </Link>
               </li>
               <li>
-                <Link href="/ato-payment-plan-calculator" className="text-sm font-medium text-ink/70 transition hover:text-rescue">
+                <Link href="/ato-payment-plan-calculator" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   ATO payment plan calculator →
                 </Link>
               </li>
               <li>
-                <Link href="/liquidation-alternatives" className="text-sm font-medium text-ink/70 transition hover:text-rescue">
+                <Link href="/liquidation-alternatives" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   Alternatives to liquidation →
                 </Link>
               </li>

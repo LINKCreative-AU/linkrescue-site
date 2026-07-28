@@ -53,12 +53,12 @@ export default function Page() {
             <Link href="/" className="hover:text-ink">
               Home
             </Link>{" "}
-            / <span className="text-ink/70">ATO payment plan calculator</span>
+            / <span className="text-ink/75">ATO payment plan calculator</span>
           </nav>
           <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl">
             See what the debt <span className="marker">actually costs</span> to carry.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-ink/70">
+          <p className="mt-5 max-w-2xl text-lg text-ink/75">
             The general interest charge compounds daily and no longer comes off your tax. Two
             sliders show you whether your payment plan clears the debt or just feeds it.
           </p>
@@ -127,7 +127,7 @@ export default function Page() {
             <p className="guide-line text-rescue text-sm font-semibold uppercase tracking-wider">
               Where do you stand
             </p>
-            <p className="mt-3 text-sm text-ink/70">
+            <p className="mt-3 text-sm text-ink/75">
               Six questions, two minutes, instant result, judgement-free.
             </p>
             <Link href="/assessment" className="btn btn-rescue mt-4 w-full">
@@ -138,17 +138,17 @@ export default function Page() {
             <p className="eyebrow">Related</p>
             <ul className="mt-3 space-y-2.5">
               <li>
-                <Link href="/ato-payment-plan" className="text-sm font-medium text-ink/70 transition hover:text-rescue">
+                <Link href="/ato-payment-plan" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   ATO payment plans →
                 </Link>
               </li>
               <li>
-                <Link href="/am-i-insolvent" className="text-sm font-medium text-ink/70 transition hover:text-rescue">
+                <Link href="/am-i-insolvent" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   Am I insolvent? The indicator test →
                 </Link>
               </li>
               <li>
-                <Link href="/ato-debt-help" className="text-sm font-medium text-ink/70 transition hover:text-rescue">
+                <Link href="/ato-debt-help" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   ATO debt help →
                 </Link>
               </li>

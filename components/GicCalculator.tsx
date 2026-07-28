@@ -83,7 +83,7 @@ export function GicCalculator() {
             <p className="font-display text-lg font-extrabold text-rescue-dark">
               At {fmt(monthly)} a month, this debt never clears.
             </p>
-            <p className="mt-2 text-sm text-ink/70">
+            <p className="mt-2 text-sm text-ink/75">
               Interest alone is about {fmt(r.firstMonthInterest)} in the first month
               {interestOnly
                 ? ", which is more than the payment. The balance grows every month you stay on this path."
@@ -98,7 +98,7 @@ export function GicCalculator() {
             <p className="font-display text-lg font-extrabold text-ink">
               About {r.months} months to clear, {fmt(r.totalInterest)} of it interest.
             </p>
-            <p className="mt-2 text-sm text-ink/70">
+            <p className="mt-2 text-sm text-ink/75">
               You would pay roughly {fmt(r.totalPaid)} in total, with interest of about{" "}
               {fmt(r.firstMonthInterest)} in the first month falling as the balance drops.
               {r.months > 24

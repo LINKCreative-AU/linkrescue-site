@@ -88,7 +88,7 @@ export function InsolvencyTest() {
         <p className={`font-display text-lg font-extrabold ${r.tone}`}>
           {count} of {INDICATORS.length} indicators: {r.label}.
         </p>
-        <p className="mt-2 text-sm text-ink/70">{r.text}</p>
+        <p className="mt-2 text-sm text-ink/75">{r.text}</p>
       </div>
 
       <div className="mt-5 flex flex-wrap gap-3">

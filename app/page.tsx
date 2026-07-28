@@ -112,7 +112,7 @@ export default function Home() {
               Under pressure? See where your business stands{" "}
               <span className="marker">in two minutes</span>.
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-ink/70">
+            <p className="mt-6 max-w-xl text-lg text-ink/75">
               Tell us your business, then answer six questions about cash flow,
               ATO debt and creditor pressure. You get an instant result and a
               clear next step. Confidential, free and built for directors who
@@ -251,7 +251,7 @@ export default function Home() {
                   <span className="section-no">0{i + 1}</span>
                 </div>
                 <h3 className="mt-5 font-display text-xl font-extrabold text-ink">{s.title}</h3>
-                <p className="mt-3 text-sm text-ink/70">{s.text}</p>
+                <p className="mt-3 text-sm text-ink/75">{s.text}</p>
               </div>
             ))}
           </div>
@@ -276,7 +276,7 @@ export default function Home() {
                 className="group rounded-xl2 border border-line bg-white p-7 transition hover:border-rescue"
               >
                 <h3 className="font-display text-xl font-extrabold text-ink">{p.title}</h3>
-                <p className="mt-3 text-sm text-ink/70">{p.text}</p>
+                <p className="mt-3 text-sm text-ink/75">{p.text}</p>
                 <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
                   Learn more →
                 </span>
@@ -294,7 +294,7 @@ export default function Home() {
               <h3 className="mt-2 font-display text-xl font-extrabold text-ink">
                 ATO payment plan calculator
               </h3>
-              <p className="mt-3 text-sm text-ink/70">
+              <p className="mt-3 text-sm text-ink/75">
                 Two sliders show what your tax debt costs to carry, and whether your payment
                 clears it or just feeds the interest.
               </p>
@@ -310,7 +310,7 @@ export default function Home() {
               <h3 className="mt-2 font-display text-xl font-extrabold text-ink">
                 Am I insolvent? The 12-sign check
               </h3>
-              <p className="mt-3 text-sm text-ink/70">
+              <p className="mt-3 text-sm text-ink/75">
                 The warning signs courts and ASIC actually weigh, turned into a two-minute
                 self-check. Answers never leave the page.
               </p>
@@ -389,7 +389,7 @@ export default function Home() {
                 )}
                 <h3 className="font-display text-lg font-extrabold text-ink">{t.name}</h3>
                 <p className="text-sm font-semibold text-rescue">{t.role}</p>
-                <p className="mt-3 text-sm text-ink/70">{t.bio}</p>
+                <p className="mt-3 text-sm text-ink/75">{t.bio}</p>
               </div>
             ))}
           </div>
@@ -430,7 +430,7 @@ export default function Home() {
                   {s.stat}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-ink">{s.label}</p>
-                <p className="mt-3 text-sm text-ink/70">{s.text}</p>
+                <p className="mt-3 text-sm text-ink/75">{s.text}</p>
               </div>
             ))}
           </div>
@@ -479,7 +479,7 @@ export default function Home() {
             {FAQS.map((f) => (
               <div key={f.q} className="rounded-xl2 border border-line bg-white p-7">
                 <h3 className="font-display text-lg font-extrabold text-ink">{f.q}</h3>
-                <p className="mt-3 text-sm text-ink/70">{f.a}</p>
+                <p className="mt-3 text-sm text-ink/75">{f.a}</p>
               </div>
             ))}
           </div>

@@ -67,7 +67,7 @@ export function DpnDeadline() {
               <p className="font-display text-lg font-extrabold text-rescue-dark">
                 A lockdown DPN has no 21-day escape window.
               </p>
-              <p className="mt-2 text-sm text-ink/70">
+              <p className="mt-2 text-sm text-ink/75">
                 The personal liability locked in when the lodgments ran late, so the work now is
                 strategy: what gets paid, in what order, from what source, and what the company
                 does next. That is a conversation to have this week, not this month.
@@ -79,7 +79,7 @@ export function DpnDeadline() {
                 Treat it as {Math.max(state.remaining, 0)} day{state.remaining === 1 ? "" : "s"}{" "}
                 remaining until someone reads the notice.
               </p>
-              <p className="mt-2 text-sm text-ink/70">
+              <p className="mt-2 text-sm text-ink/75">
                 The notice type changes everything and it is stated in the wording. Send it to us
                 or read it with us on the phone today, DPN enquiries go straight to the top of the
                 queue.
@@ -90,7 +90,7 @@ export function DpnDeadline() {
               <p className="font-display text-lg font-extrabold text-rescue-dark">
                 About {state.remaining} day{state.remaining === 1 ? "" : "s"} left on the clock.
               </p>
-              <p className="mt-2 text-sm text-ink/70">
+              <p className="mt-2 text-sm text-ink/75">
                 Inside the window, every option is still live: payment, small business
                 restructuring, voluntary administration or liquidation can each lead to the
                 penalty being remitted. The earlier in the window you act, the more of them are
@@ -102,7 +102,7 @@ export function DpnDeadline() {
               <p className="font-display text-lg font-extrabold text-rescue-dark">
                 The 21-day window looks closed.
               </p>
-              <p className="mt-2 text-sm text-ink/70">
+              <p className="mt-2 text-sm text-ink/75">
                 You still have moves, they are different moves: statutory defences, negotiation
                 with the ATO, and protecting your position from here. An expired clock makes the
                 call more urgent, not less worth making.

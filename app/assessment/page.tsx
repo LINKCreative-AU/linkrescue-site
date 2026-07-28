@@ -27,7 +27,7 @@ export default function AssessmentPage() {
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl">
             Six questions. <span className="marker">Instant result</span>.
           </h1>
-          <p className="mt-5 text-lg text-ink/70">
+          <p className="mt-5 text-lg text-ink/75">
             Your result appears the moment the last question is answered. If
             you would rather talk first,{" "}
             <a href={SITE.phoneHref} className="font-semibold text-rescue hover:text-rescue-dark">

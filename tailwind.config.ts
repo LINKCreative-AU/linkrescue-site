@@ -13,7 +13,7 @@ const config: Config = {
         // site's single accent. It sits outside the regular division palette
         // on purpose: rescue.link.com.au stands beside LINK, not inside the
         // family tree.
-        ink: "#101820",
+        ink: "#000000",
         cloud: "#f4f5f6",
         line: "#e7e9ec",
         rescue: {

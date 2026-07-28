@@ -28,7 +28,7 @@ export function Header() {
         <div className="hidden shrink-0 items-center gap-4 lg:flex">
           <a
             href={SITE.phoneHref}
-            className="hidden whitespace-nowrap text-sm font-semibold text-ink/70 hover:text-ink xl:block"
+            className="hidden whitespace-nowrap text-sm font-semibold text-ink/75 hover:text-ink xl:block"
           >
             {SITE.phone}
           </a>

@@ -81,7 +81,7 @@ export function SbrCalculator() {
             <p className="font-display text-lg font-extrabold text-rescue-dark">
               Over the $1 million SBR ceiling.
             </p>
-            <p className="mt-2 text-sm text-ink/70">
+            <p className="mt-2 text-sm text-ink/75">
               SBR is capped at $1 million in total liabilities, excluding
               employee entitlements. Above that line the rescue tools are
               voluntary administration and a deed of company arrangement, which
@@ -95,7 +95,7 @@ export function SbrCalculator() {
               A plan in the range of {fmt(r.low)} to {fmt(r.high)}, with{" "}
               {fmt(r.writtenOffLow)} to {fmt(r.writtenOffHigh)} written off.
             </p>
-            <p className="mt-2 text-sm text-ink/70">
+            <p className="mt-2 text-sm text-ink/75">
               Spread over up to {PLAN_MONTHS} months, that is roughly{" "}
               {fmt(r.lowMonthly)} to {fmt(r.highMonthly)} a month, and no
               interest accrues on a plan the way it does on the debt.
@@ -136,7 +136,7 @@ export function SbrCalculator() {
           ))}
         </div>
         {!r.overCap && (
-          <p className="mt-3 text-sm text-ink/70">
+          <p className="mt-3 text-sm text-ink/75">
             {gatesTicked === GATES.length
               ? "All gates ticked and under the debt ceiling: on these answers, SBR looks open to you."
               : "Unticked gates are jobs, not dead ends. Catching up lodgments and entitlements is usually the first stage of the engagement."}
