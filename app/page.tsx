@@ -4,7 +4,9 @@ import { Assessment } from "@/components/Assessment";
 import { SectionHead } from "@/components/SectionHead";
 import { Icon } from "@/components/Icons";
 import { JsonLd, faqSchema } from "@/components/Schema";
-import { DISCLAIMER, SITE, TEAM } from "@/lib/site";
+import Image from "next/image";
+import { DISCLAIMER, FOUNDER_QUOTE, SITE, TEAM } from "@/lib/site";
+import jamesPhoto from "@/public/team/james.png";
 
 export const metadata: Metadata = {
   title: "Business Rescue Assessment | ATO Debt & Director Penalty Help",
@@ -159,6 +161,26 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* Founder quote: a face and a voice before any selling */}
+          <figure className="mt-10 flex flex-col items-start gap-6 rounded-xl2 border border-line bg-white p-7 sm:flex-row sm:items-center sm:p-8">
+            <Image
+              src={jamesPhoto}
+              alt={FOUNDER_QUOTE.name}
+              width={96}
+              height={96}
+              className="h-24 w-24 shrink-0 rounded-full bg-cloud object-cover"
+            />
+            <div>
+              <blockquote className="font-display text-lg font-bold leading-snug tracking-tight text-ink sm:text-xl">
+                “{FOUNDER_QUOTE.text}”
+              </blockquote>
+              <figcaption className="mt-3 text-sm text-ink/60">
+                <span className="font-semibold text-ink">{FOUNDER_QUOTE.name}</span> ·{" "}
+                {FOUNDER_QUOTE.role}
+              </figcaption>
+            </div>
+          </figure>
         </div>
       </section>
 
@@ -293,15 +315,15 @@ export default function Home() {
           <SectionHead
             no="04"
             eyebrow="Why LINK Rescue"
-            title="Advisors first. Judgement never."
+            title="Growth accountants, with a rescue toolkit."
             dark
-            intro={SITE.group.line}
+            intro="LINK is not a compliance shop. You get accountants who work on strategy, pricing and profit first, because the way out of trouble is a business that makes money. Then the law and specialist practitioners get used properly to protect you while it happens."
           />
           <div className="grid gap-6 sm:grid-cols-2">
             {[
               {
-                title: "Backed by LINK",
-                text: "Accounting, bookkeeping, finance, wealth and property under one group. Whatever the path, the team around you already exists.",
+                title: "Growth first",
+                text: "The plan out of trouble is a plan to make more money, not just a payment schedule. Strategy, pricing, profit and cash come before the paperwork.",
               },
               {
                 title: "You stay in control",
@@ -335,13 +357,23 @@ export default function Home() {
             eyebrow="Who you talk to"
             title="Real people, on the phone, fast."
             mark="Real people"
-            intro="No call centres and no forms that vanish. Your enquiry lands with one of these three."
+            intro="No call centres and no forms that vanish. A growth accountant, an insolvency lawyer and a restructuring specialist: your situation gets all three lenses, and your enquiry lands with a person, not a queue."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {TEAM.map((t) => (
               <div key={t.name} className="rounded-xl2 border border-line bg-white p-7">
-                {/* TODO real headshots - grey placeholder holds the layout */}
-                <div className="mb-5 h-20 w-20 rounded-full bg-cloud" aria-hidden />
+                {t.photo ? (
+                  <Image
+                    src={jamesPhoto}
+                    alt={t.name}
+                    width={80}
+                    height={80}
+                    className="mb-5 h-20 w-20 rounded-full bg-cloud object-cover"
+                  />
+                ) : (
+                  // TODO headshots from Kyle + David - grey placeholder holds the layout
+                  <div className="mb-5 h-20 w-20 rounded-full bg-cloud" aria-hidden />
+                )}
                 <h3 className="font-display text-lg font-extrabold text-ink">{t.name}</h3>
                 <p className="text-sm font-semibold text-rescue">{t.role}</p>
                 <p className="mt-3 text-sm text-ink/70">{t.bio}</p>

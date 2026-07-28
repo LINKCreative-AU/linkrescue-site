@@ -34,26 +34,38 @@ export const NAV = [
 
 // The people behind the page. TODO with James: confirm roles, bios and real
 // headshots for all three before launch.
+// The frontline: growth accountant + insolvency lawyer + restructuring
+// specialist. TODO James: confirm roles, firm affiliations and bios with Kyle
+// and David before launch; their headshots drop into public/team/.
 export const TEAM = [
   {
     name: "James Webb",
-    role: "Director", // TODO confirm title
-    bio: "James leads the LINK group's digital and advisory engines and makes sure every rescue enquiry lands with the right person the same day.", // TODO James to confirm
-    photo: "/team/james.jpg", // TODO real headshot
+    role: "Co-Founder, LINK", // TODO confirm title
+    bio: "James co-founded the LINK group and leads its growth engines. His lens on a rescue is a growth accountant's: fix the model, fix the cash, then make the business worth saving.", // TODO James to confirm
+    photo: "/team/james.png",
   },
   {
     name: "Kyle Macmillan",
-    role: "Advisor", // TODO confirm title
-    bio: "Kyle works with directors under pressure to map the numbers, the options and the order to take them in.", // TODO Kyle to confirm
-    photo: "/team/kyle.jpg", // TODO real headshot
+    role: "Insolvency Lawyer", // TODO confirm title + firm line
+    bio: "Kyle brings the legal firepower: director penalties, safe harbour, creditor disputes and the formal tools, used early enough to change the ending.", // TODO Kyle to confirm
+    photo: "", // TODO headshot from Kyle
   },
   {
-    name: "Dave Evans",
-    role: "Advisor", // TODO confirm title
-    bio: "Dave brings the restructuring and turnaround lens, from ATO negotiations through to formal appointments where they are the right call.", // TODO Dave to confirm
-    photo: "/team/dave.jpg", // TODO real headshot
+    name: "David Evans",
+    role: "Restructuring Specialist", // TODO confirm title + firm line
+    bio: "David has spent more than twenty years inside restructures and turnarounds, from ATO negotiations to formal appointments, and knows which lever to pull first.", // TODO David to confirm
+    photo: "", // TODO headshot from David
   },
 ] as const;
+
+// The founder quote that sits under the comfort strip. TODO James: confirm
+// or reword, this is drafted from your brief.
+export const FOUNDER_QUOTE = {
+  text: "We are accountants, but not the stuffy compliance kind. We look at how your business makes money, what will genuinely get you out of this, and then we use the law and the best specialists in the country to save your backside from destruction.",
+  name: "James Webb",
+  role: "Co-Founder, LINK",
+  photo: "/team/james.png",
+} as const;
 
 // Compliance line used near every result and lead form. Positioning per the
 // brief: no guaranteed outcomes, LINK as trusted advisors who guide clients
