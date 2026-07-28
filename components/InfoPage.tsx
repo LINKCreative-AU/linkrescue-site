@@ -157,7 +157,7 @@ export function InfoPage({
             </p>
             <p className="mt-3 text-sm text-ink/70">
               Six questions, two minutes, instant result. You see how urgent
-              your situation looks before anyone asks who you are.
+              your situation looks and the sensible next move.
             </p>
             <Link href="/assessment" className="btn btn-rescue mt-4 w-full">
               Start the assessment

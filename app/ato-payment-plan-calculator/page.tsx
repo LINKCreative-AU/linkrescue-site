@@ -128,7 +128,7 @@ export default function Page() {
               Where do you stand
             </p>
             <p className="mt-3 text-sm text-ink/70">
-              Six questions, two minutes, instant result, before anyone asks who you are.
+              Six questions, two minutes, instant result, judgement-free.
             </p>
             <Link href="/assessment" className="btn btn-rescue mt-4 w-full">
               Start the assessment

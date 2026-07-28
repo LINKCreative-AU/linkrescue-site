@@ -6,7 +6,7 @@ import { DISCLAIMER, SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Free Business Rescue Assessment - Instant Result",
   description:
-    "You answer six questions about cash flow, ATO debt, creditor pressure and solvency. You get an instant result and a clear next step, before anyone asks for contact details.",
+    "Tell us your business, answer six questions about cash flow, ATO debt, creditor pressure and solvency, and get an instant result with a clear next step. Free and confidential.",
   alternates: { canonical: "/assessment" },
 };
 
@@ -28,8 +28,8 @@ export default function AssessmentPage() {
             Six questions. <span className="marker">Instant result</span>.
           </h1>
           <p className="mt-5 text-lg text-ink/70">
-            You see your result before we ask for anything. If you would rather
-            talk first,{" "}
+            Your result appears the moment the last question is answered. If
+            you would rather talk first,{" "}
             <a href={SITE.phoneHref} className="font-semibold text-rescue hover:text-rescue-dark">
               call {SITE.phone}
             </a>

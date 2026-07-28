@@ -1,59 +1,84 @@
-// Lead delivery: Supabase storage + Slack notification + Resend email, all
-// env-driven with graceful fallback. Any channel can be unconfigured or fail
-// and the lead still lands through the others; worst case it is logged so a
-// lead is never silently dropped.
+// Lead delivery, cart-style (the gstregister funnel pattern): one row per
+// assessment "cart", created the moment business + email land, updated on
+// every answered question, finalised on completion. Abandoned carts stay in
+// the table with their progress attached, ready for follow-up.
+//
+// Storage is a Supabase upsert keyed on the client cart id. Slack and email
+// fire only on completion. Every channel is env-driven with graceful
+// fallback; worst case the lead is logged so it is never silently dropped.
 //
 // Env:
-//   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY  → row in rescue_leads (REST, no SDK)
-//   SLACK_LEADS_WEBHOOK                      → incoming-webhook post to the leads channel
+//   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY  → rows in rescue_leads (REST, no SDK)
+//   SLACK_LEADS_WEBHOOK                      → incoming-webhook post on completed leads
 //   RESEND_API_KEY, RESEND_FROM, LEADS_TO    → email via Resend (LEADS_TO = comma list)
 
 import type { Outcome } from "./assessment";
 
-export type Lead = {
-  name: string;
-  phone: string;
-  email: string;
-  business: string;
-  answers: { topic: string; answer: string }[];
-  rawAnswers: number[];
-  score: number;
-  outcome: Outcome;
-  flags: string[];
-  attribution: { utm: Record<string, string>; referrer: string; landing: string };
+export type LeadStage = "started" | "progress" | "completed";
+
+export type CartRecord = {
+  id: string;
+  stage: LeadStage;
+  email?: string;
+  business?: string;
+  abn?: string;
+  entityType?: string;
+  entityLocation?: string;
+  name?: string;
+  phone?: string;
+  rawAnswers?: number[];
+  answers?: { topic: string; answer: string }[];
+  score?: number;
+  outcome?: Outcome;
+  flags?: string[];
+  attribution?: { utm: Record<string, string>; referrer: string; landing: string };
 };
 
-export async function storeLead(lead: Lead): Promise<boolean> {
+export type CompletedCart = CartRecord &
+  Required<Pick<CartRecord, "name" | "phone" | "email" | "answers" | "score" | "outcome">>;
+
+export async function upsertCart(rec: CartRecord): Promise<boolean> {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {
-    console.log("[lead - supabase not configured]");
+    console.log(`[lead - supabase not configured] stage=${rec.stage} id=${rec.id}`);
     return false;
   }
+  const row: Record<string, unknown> = {
+    id: rec.id,
+    stage: rec.stage,
+    updated_at: new Date().toISOString(),
+  };
+  if (rec.email !== undefined) row.email = rec.email;
+  if (rec.business !== undefined) row.business = rec.business || null;
+  if (rec.abn !== undefined) row.abn = rec.abn || null;
+  if (rec.entityType !== undefined) row.entity_type = rec.entityType || null;
+  if (rec.entityLocation !== undefined) row.entity_location = rec.entityLocation || null;
+  if (rec.name !== undefined) row.name = rec.name;
+  if (rec.phone !== undefined) row.phone = rec.phone;
+  if (rec.rawAnswers !== undefined) row.raw_answers = rec.rawAnswers;
+  if (rec.answers !== undefined) row.answers = rec.answers;
+  if (rec.score !== undefined) row.score = rec.score;
+  if (rec.outcome !== undefined) {
+    row.outcome = rec.outcome.id;
+    row.priority = rec.outcome.priority;
+  }
+  if (rec.flags !== undefined) row.flags = rec.flags;
+  if (rec.attribution !== undefined) {
+    row.utm = rec.attribution.utm;
+    row.referrer = rec.attribution.referrer || null;
+    row.landing_path = rec.attribution.landing || null;
+  }
   try {
-    const res = await fetch(`${url}/rest/v1/rescue_leads`, {
+    const res = await fetch(`${url}/rest/v1/rescue_leads?on_conflict=id`, {
       method: "POST",
       headers: {
         apikey: key,
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
-        Prefer: "return=minimal",
+        Prefer: "resolution=merge-duplicates,return=minimal",
       },
-      body: JSON.stringify({
-        name: lead.name,
-        phone: lead.phone,
-        email: lead.email,
-        business: lead.business || null,
-        answers: lead.answers,
-        raw_answers: lead.rawAnswers,
-        score: lead.score,
-        outcome: lead.outcome.id,
-        priority: lead.outcome.priority,
-        flags: lead.flags,
-        utm: lead.attribution.utm,
-        referrer: lead.attribution.referrer || null,
-        landing_path: lead.attribution.landing || null,
-      }),
+      body: JSON.stringify(row),
     });
     if (!res.ok) {
       console.error("[lead supabase failed]", res.status, await res.text().catch(() => ""));
@@ -72,24 +97,25 @@ const PRIORITY_PREFIX: Record<string, string> = {
   standard: ":large_green_circle:",
 };
 
-export async function notifySlack(lead: Lead): Promise<boolean> {
+export async function notifySlack(rec: CompletedCart): Promise<boolean> {
   const hook = process.env.SLACK_LEADS_WEBHOOK;
   if (!hook) {
     console.log("[lead - slack not configured]");
     return false;
   }
-  const utm = Object.entries(lead.attribution.utm)
+  const utm = Object.entries(rec.attribution?.utm ?? {})
     .map(([k, v]) => `${k}=${v}`)
     .join(" ");
-  const summary = lead.answers.map((a) => `• *${a.topic}:* ${a.answer}`).join("\n");
+  const summary = rec.answers.map((a) => `• *${a.topic}:* ${a.answer}`).join("\n");
   const text = [
-    `${PRIORITY_PREFIX[lead.outcome.priority]} New rescue lead - *${lead.outcome.label}* (score ${lead.score})`,
-    `*Name:* ${lead.name}`,
-    `*Phone:* ${lead.phone}`,
-    `*Email:* ${lead.email}`,
-    lead.business ? `*Business:* ${lead.business}` : "",
+    `${PRIORITY_PREFIX[rec.outcome.priority]} New rescue lead - *${rec.outcome.label}* (score ${rec.score})`,
+    `*Name:* ${rec.name}`,
+    `*Phone:* ${rec.phone}`,
+    `*Email:* ${rec.email}`,
+    rec.business ? `*Business:* ${rec.business}${rec.abn ? ` (ABN ${rec.abn})` : ""}` : "",
+    rec.entityLocation ? `*Location:* ${rec.entityLocation}` : "",
     summary,
-    utm ? `*Source:* ${utm}` : lead.attribution.referrer ? `*Referrer:* ${lead.attribution.referrer}` : "",
+    utm ? `*Source:* ${utm}` : rec.attribution?.referrer ? `*Referrer:* ${rec.attribution.referrer}` : "",
   ]
     .filter(Boolean)
     .join("\n");
@@ -110,23 +136,24 @@ export async function notifySlack(lead: Lead): Promise<boolean> {
   }
 }
 
-export async function emailLead(lead: Lead): Promise<boolean> {
+export async function emailLead(rec: CompletedCart): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   const to = (process.env.LEADS_TO ?? "rescue@link.com.au") // TODO confirm rescue inbox
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
   const from = process.env.RESEND_FROM ?? "LINK Rescue <onboarding@resend.dev>";
-  const subject = `[${lead.outcome.label}] Rescue lead - ${lead.name}`;
+  const subject = `[${rec.outcome.label}] Rescue lead - ${rec.name}`;
   const lines: [string, string][] = [
-    ["Outcome", `${lead.outcome.label} (${lead.outcome.priority} priority, score ${lead.score})`],
-    ["Name", lead.name],
-    ["Phone", lead.phone],
-    ["Email", lead.email],
-    ["Business", lead.business || "-"],
-    ...lead.answers.map((a) => [a.topic, a.answer] as [string, string]),
-    ["Source", JSON.stringify(lead.attribution.utm)],
-    ["Referrer", lead.attribution.referrer || "-"],
+    ["Outcome", `${rec.outcome.label} (${rec.outcome.priority} priority, score ${rec.score})`],
+    ["Name", rec.name],
+    ["Phone", rec.phone],
+    ["Email", rec.email],
+    ["Business", rec.business ? `${rec.business}${rec.abn ? ` (ABN ${rec.abn})` : ""}` : "-"],
+    ["Location", rec.entityLocation || "-"],
+    ...rec.answers.map((a) => [a.topic, a.answer] as [string, string]),
+    ["Source", JSON.stringify(rec.attribution?.utm ?? {})],
+    ["Referrer", rec.attribution?.referrer || "-"],
   ];
   const text = lines.map(([k, v]) => `${k}: ${v}`).join("\n");
   if (!key) {

@@ -58,7 +58,7 @@ const PATHS = [
 const FAQS = [
   {
     q: "Is the assessment free and confidential?",
-    a: "Yes. The six questions are free, the result is instant and nothing you enter is shared outside the LINK Rescue team. You see your result before we ask for any contact details, and leaving your details is your call.",
+    a: "Yes. The six questions are free, the result is instant and nothing you enter is shared outside the LINK Rescue team. We ask for your business and email up front so your result is saved and a human can check in; adding your phone number for a callback stays your call.",
   },
   {
     q: "Will you tell me to liquidate my company?",
@@ -99,10 +99,10 @@ export default function Home() {
               <span className="marker">in two minutes</span>.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-ink/70">
-              You answer six questions about cash flow, ATO debt and creditor
-              pressure. You get an instant result and a clear next step, before
-              anyone asks for your details. Confidential, free and built for
-              directors who want options while they still have them.
+              Tell us your business, then answer six questions about cash flow,
+              ATO debt and creditor pressure. You get an instant result and a
+              clear next step. Confidential, free and built for directors who
+              want options while they still have them.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-ink/60">
               <span className="inline-flex items-center gap-2">
