@@ -129,6 +129,39 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Comfort strip: the first thing after the hero is reassurance, not a pitch */}
+      <section className="border-b border-line bg-rescue-light/25 py-12 lg:py-16">
+        <div className="container-x">
+          <h2 className="max-w-2xl font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+            First, breathe. <span className="marker">This is fixable</span>, and you found the
+            right place to start.
+          </h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            {[
+              {
+                title: "No judgement, at all",
+                text: "Tax debt and cash pressure happen to good businesses run by good people. We have seen every version of this, and you will be talked to like a human, never a case number.",
+              },
+              {
+                title: "Nothing happens without you",
+                text: "Talking to us is confidential and commits you to nothing. It notifies nobody, not the ATO, not your bank, not your creditors. Every decision stays yours, at every step.",
+              },
+              {
+                title: "You are not carrying this alone",
+                text: "From the first call there is a team beside you, backed by the LINK group. Most directors tell us the weight lifts the day someone else finally knows the full picture.",
+              },
+            ].map((c) => (
+              <div key={c.title}>
+                <p className="guide-line text-rescue text-sm font-semibold uppercase tracking-wider">
+                  {c.title}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-ink/75">{c.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* The signs */}
       <section className="py-16 lg:py-24">
         <div className="container-x">
@@ -214,6 +247,42 @@ export default function Home() {
                 </span>
               </Link>
             ))}
+          </div>
+
+          {/* Free tools promo */}
+          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            <Link
+              href="/ato-payment-plan-calculator"
+              className="group rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-7 transition hover:border-rescue"
+            >
+              <p className="eyebrow !text-rescue">Free tool</p>
+              <h3 className="mt-2 font-display text-xl font-extrabold text-ink">
+                ATO payment plan calculator
+              </h3>
+              <p className="mt-3 text-sm text-ink/70">
+                Two sliders show what your tax debt costs to carry, and whether your payment
+                clears it or just feeds the interest.
+              </p>
+              <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
+                Run the numbers →
+              </span>
+            </Link>
+            <Link
+              href="/am-i-insolvent"
+              className="group rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-7 transition hover:border-rescue"
+            >
+              <p className="eyebrow !text-rescue">Free tool</p>
+              <h3 className="mt-2 font-display text-xl font-extrabold text-ink">
+                Am I insolvent? The 12-sign check
+              </h3>
+              <p className="mt-3 text-sm text-ink/70">
+                The warning signs courts and ASIC actually weigh, turned into a two-minute
+                self-check. Answers never leave the page.
+              </p>
+              <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
+                Check the signs →
+              </span>
+            </Link>
           </div>
         </div>
       </section>

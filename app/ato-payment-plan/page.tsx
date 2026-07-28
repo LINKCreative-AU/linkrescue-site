@@ -84,8 +84,8 @@ export default function Page() {
         },
       ]}
       related={[
+        { label: "ATO payment plan calculator", href: "/ato-payment-plan-calculator" },
         { label: "ATO debt help", href: "/ato-debt-help" },
-        { label: "Director Penalty Notices", href: "/director-penalty-notice" },
         { label: "Small business restructuring", href: "/small-business-restructuring" },
       ]}
     />

@@ -14,6 +14,12 @@ const HELP = [
   { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
 ];
 
+const TOOLS = [
+  { label: "ATO payment plan calculator", href: "/ato-payment-plan-calculator" },
+  { label: "Am I insolvent? 12-sign check", href: "/am-i-insolvent" },
+  { label: "DPN deadline checker", href: "/director-penalty-notice" },
+];
+
 const COMPANY = [
   { label: "How it works", href: "/#how-it-works" },
   { label: "Who you talk to", href: "/#team" },
@@ -25,7 +31,7 @@ export function Footer() {
   return (
     <footer className="bg-ink py-16 text-white/70">
       <div className="container-x">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Logo onDark height={22} />
             <p className="mt-5 max-w-sm text-sm text-white/55">
@@ -45,6 +51,7 @@ export function Footer() {
           </div>
 
           <FooterCol title="How we help" links={HELP} />
+          <FooterCol title="Free tools" links={TOOLS} />
           <FooterCol title="Company" links={COMPANY} />
         </div>
 

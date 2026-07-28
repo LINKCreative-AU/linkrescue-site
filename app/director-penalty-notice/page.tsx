@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { InfoPage } from "@/components/InfoPage";
+import { DpnDeadline } from "@/components/DpnDeadline";
 
 export const metadata: Metadata = {
   title: "Director Penalty Notice (DPN) Help - Act Within 21 Days",
@@ -19,6 +20,7 @@ export default function Page() {
       intro="A Director Penalty Notice is the ATO's mechanism for making you personally liable for the company's unpaid PAYG withholding, GST and super. The response depends on which type you hold and the date printed on it, so the first job is reading the notice properly."
       serviceName="Director Penalty Notice response"
       serviceDescription="Urgent guidance for Australian company directors who have received a Director Penalty Notice from the ATO."
+      afterHero={<DpnDeadline />}
       sections={[
         {
           heading: "The two types, and why the difference matters.",

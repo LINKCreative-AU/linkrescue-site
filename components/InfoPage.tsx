@@ -27,6 +27,7 @@ export function InfoPage({
   sections,
   faqs,
   related,
+  afterHero,
 }: {
   path: string;
   crumb: string;
@@ -39,6 +40,8 @@ export function InfoPage({
   sections: InfoSection[];
   faqs: { q: string; a: string }[];
   related: { label: string; href: string }[];
+  /** Optional interactive widget rendered between the hero and the article. */
+  afterHero?: React.ReactNode;
 }) {
   return (
     <main>
@@ -75,6 +78,7 @@ export function InfoPage({
 
       <div className="container-x grid gap-12 py-14 lg:grid-cols-[1fr_320px] lg:py-20">
         <article className="max-w-3xl">
+          {afterHero && <div className="mb-12">{afterHero}</div>}
           {sections.map((s) => (
             <section key={s.heading} className="mb-10">
               <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
