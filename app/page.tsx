@@ -393,10 +393,85 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Track record: real aggregate outcomes + group reviews.
+          TODO James: swap in named case studies when the SBR client stories are pulled together. */}
+      <section className="bg-cloud/50 py-16 lg:py-24">
+        <div className="container-x">
+          <SectionHead
+            no="06"
+            eyebrow="The track record"
+            title="Real rescues. Real reviews."
+            mark="Real rescues"
+            intro="LINK Rescue is a new front door on a group that has done this work for years."
+          />
+          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            {[
+              {
+                stat: "20 to 40c",
+                label: "in the dollar",
+                text: "Typical accepted plans in small business restructures we have supported, with the balance written off on completion.",
+              },
+              {
+                stat: "$200k to $500k",
+                label: "typical debts walking in",
+                text: "The businesses we help are not lost causes. They are viable operations buried under tax debt that built up faster than it could clear.",
+              },
+              {
+                stat: "520+ reviews",
+                label: "4.9 average across the LINK group",
+                text: "The accountants behind this site are the same team clients rate on Google every week, year after year.",
+              },
+            ].map((s) => (
+              <div key={s.stat} className="rounded-xl2 border border-line bg-white p-7">
+                <p className="font-display text-3xl font-extrabold tracking-tight text-rescue">
+                  {s.stat}
+                </p>
+                <p className="mt-1 text-sm font-semibold text-ink">{s.label}</p>
+                <p className="mt-3 text-sm text-ink/70">{s.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+            {[
+              {
+                quote:
+                  "Kelly has taken immense pressure off my husband and myself. We have confidence, going forward, that we will be compliant and certain of the financial situation of our business.",
+                tag: "Google review · LINK Advisors",
+              },
+              {
+                quote:
+                  "Since working with LINK my business is thriving. I no longer have to chase corrections or beg for work to be done, everything is handled professionally and promptly.",
+                tag: "Google review · LINK Advisors",
+              },
+              {
+                quote:
+                  "They took the stress out of the process and made everything simple.",
+                tag: "Google review · LINK Advisors",
+              },
+            ].map((r) => (
+              <figure key={r.quote} className="rounded-xl2 border border-line bg-white p-7">
+                <div className="flex gap-0.5 text-rescue" aria-label="5 stars">
+                  {"★★★★★"}
+                </div>
+                <blockquote className="mt-3 text-sm leading-relaxed text-ink/75">
+                  “{r.quote}”
+                </blockquote>
+                <figcaption className="mt-3 text-xs font-semibold text-ink/50">{r.tag}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-6 max-w-3xl text-xs leading-relaxed text-ink/45">
+            Plan outcomes are historical results from matters the LINK team has
+            supported, every situation differs and past results are not a
+            promise. Reviews relate to services across the LINK group.
+          </p>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="bg-cloud/50 py-16 lg:py-24">
         <div className="container-x">
-          <SectionHead no="06" eyebrow="Questions" title="Asked every week." />
+          <SectionHead no="07" eyebrow="Questions" title="Asked every week." />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {FAQS.map((f) => (
               <div key={f.q} className="rounded-xl2 border border-line bg-white p-7">

@@ -91,6 +91,62 @@ export async function upsertCart(rec: CartRecord): Promise<boolean> {
   }
 }
 
+/**
+ * The visitor's copy: their result, what it means and the next step, sent the
+ * moment they complete. Not a mailing list, a deliverable. Requires
+ * RESEND_API_KEY; BOOKING_URL adds a book-a-time button when configured.
+ */
+export async function emailVisitor(rec: CompletedCart): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    console.log("[visitor email - resend not configured]");
+    return false;
+  }
+  const from = process.env.RESEND_FROM ?? "LINK Rescue <onboarding@resend.dev>";
+  const booking = process.env.BOOKING_URL;
+  const firstName = rec.name.split(" ")[0];
+  const subject = `Your business rescue result: ${rec.outcome.label}`;
+  const steps = rec.outcome.steps.map((s) => `• ${s}`).join("\n");
+  const text = [
+    `Hi ${firstName},`,
+    ``,
+    `Here is the result of the assessment you just ran${rec.business ? ` for ${rec.business}` : ""}:`,
+    ``,
+    `${rec.outcome.label.toUpperCase()}: ${rec.outcome.headline}`,
+    ``,
+    rec.outcome.meaning,
+    ``,
+    `The sensible next moves:`,
+    steps,
+    ``,
+    `The right person is already lined up to call you. If you would rather not wait, call 07 3899 8311${booking ? ` or book a time that suits you: ${booking}` : ""}.`,
+    ``,
+    `James, Kyle and David`,
+    `LINK Rescue · rescue.link.com.au`,
+    ``,
+    `This email is your assessment result, not a mailing list. The result is general information, not financial, legal or insolvency advice, and no outcome is guaranteed.`,
+  ].join("\n");
+  const html = text
+    .split("\n\n")
+    .map((p) => `<p style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#101820">${p.replace(/\n/g, "<br/>")}</p>`)
+    .join("");
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from, to: [rec.email], subject, text, html }),
+    });
+    if (!res.ok) {
+      console.error("[visitor email failed]", res.status, await res.text().catch(() => ""));
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("[visitor email failed]", e);
+    return false;
+  }
+}
+
 const PRIORITY_PREFIX: Record<string, string> = {
   urgent: ":rotating_light: *URGENT - DPN* :rotating_light:",
   high: ":red_circle: *High priority*",

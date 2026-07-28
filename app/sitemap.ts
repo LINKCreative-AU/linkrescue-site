@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/voluntary-administration", priority: 0.8 },
     { path: "/safe-harbour", priority: 0.7 },
     { path: "/liquidation-alternatives", priority: 0.8 },
+    { path: "/what-it-costs", priority: 0.7 },
     { path: "/privacy", priority: 0.2 },
   ];
   return routes.map((r) => ({

@@ -59,7 +59,17 @@ export default async function ThankYou({
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={SITE.phoneHref} className="btn btn-rescue">
+            {process.env.NEXT_PUBLIC_BOOKING_URL && (
+              <a
+                href={process.env.NEXT_PUBLIC_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-rescue"
+              >
+                Book a time now
+              </a>
+            )}
+            <a href={SITE.phoneHref} className={process.env.NEXT_PUBLIC_BOOKING_URL ? "btn btn-ghost" : "btn btn-rescue"}>
               Call {SITE.phone}
             </a>
             <a href="/" className="btn btn-ghost">

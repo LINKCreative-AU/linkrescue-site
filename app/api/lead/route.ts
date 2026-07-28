@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { QUESTIONS, score, summarise } from "@/lib/assessment";
-import { emailLead, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
+import { emailLead, emailVisitor, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
 
 // Cart-style lead intake (gstregister funnel pattern):
 //   started   → business + email captured, cart row created
@@ -105,6 +105,7 @@ export async function POST(req: Request) {
     upsertCart(rec),
     notifySlack(rec),
     emailLead(rec),
+    emailVisitor(rec), // the visitor's copy of their result
   ]);
   if (!stored && !slacked && !emailed) {
     console.error("[lead - all channels unconfigured or failed]", JSON.stringify(rec));

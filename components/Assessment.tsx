@@ -516,9 +516,21 @@ function LeadForm({
         <Field label="Phone" type="tel" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} required autoComplete="tel" />
         <Field label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} required autoComplete="email" />
       </div>
-      <button type="submit" disabled={busy} className="btn btn-rescue mt-4 w-full sm:w-auto">
-        {busy ? "Sending…" : outcome.cta}
-      </button>
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <button type="submit" disabled={busy} className="btn btn-rescue w-full sm:w-auto">
+          {busy ? "Sending…" : outcome.cta}
+        </button>
+        {process.env.NEXT_PUBLIC_BOOKING_URL && (
+          <a
+            href={process.env.NEXT_PUBLIC_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost w-full sm:w-auto"
+          >
+            Or book a time now
+          </a>
+        )}
+      </div>
       {error && (
         <p className="mt-3 text-sm font-medium text-red-700">
           That did not go through. Try again, or call {SITE.phone} and we will

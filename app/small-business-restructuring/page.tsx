@@ -54,7 +54,7 @@ export default function Page() {
       faqs={[
         {
           q: "How much of the debt gets written off in an SBR?",
-          a: "Every plan is different and nothing is guaranteed. Accepted plans commonly return creditors a fraction of face value, with the remainder written off when the plan completes. What a credible number looks like for your company depends on what the business can genuinely fund.",
+          a: "Every plan is different and nothing is guaranteed. In restructures the LINK team has supported, businesses with debts between $200,000 and $500,000 have typically had plans accepted at between 20 and 40 cents in the dollar, with the remainder written off when the plan completes. What a credible number looks like for your company depends on what the business can genuinely fund.",
         },
         {
           q: "Do I lose control of my company during restructuring?",

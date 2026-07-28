@@ -12,6 +12,7 @@ const HELP = [
   { label: "Voluntary administration", href: "/voluntary-administration" },
   { label: "Safe harbour", href: "/safe-harbour" },
   { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
+  { label: "What it costs", href: "/what-it-costs" },
 ];
 
 const TOOLS = [

@@ -30,6 +30,7 @@ export const NAV = [
   { label: "Director penalties", href: "/director-penalty-notice" },
   { label: "Restructuring", href: "/small-business-restructuring" },
   { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
+  { label: "What it costs", href: "/what-it-costs" },
 ] as const;
 
 // The people behind the page. TODO with James: confirm roles, bios and real
