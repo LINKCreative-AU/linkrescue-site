@@ -64,7 +64,7 @@ export default function Page() {
       faqs={[
         {
           q: "How long can an ATO payment plan run?",
-          a: "Most plans run up to two years, and the ATO prefers the shortest timeframe the cash flow supports. Longer arrangements exist for the right circumstances but need a stronger case. A plan you cannot sustain is worse than a shorter honest conversation about what the business can afford.",
+          a: "Most plans run up to two years, and the ATO prefers the shortest timeframe the cash flow supports. Longer arrangements exist for the right circumstances but need a stronger case. A plan you cannot sustain is worse than a shorter, franker conversation about what the business can afford.",
         },
         {
           q: "Will the ATO accept my payment plan proposal?",
