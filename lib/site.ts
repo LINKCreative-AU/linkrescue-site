@@ -24,12 +24,13 @@ export const SITE = {
   },
 } as const;
 
+// Header nav: five short labels that hold one line at laptop widths.
+// "How it works" and the long-form labels live in the footer instead.
 export const NAV = [
-  { label: "How it works", href: "/#how-it-works" },
   { label: "ATO debt", href: "/ato-debt-help" },
   { label: "Director penalties", href: "/director-penalty-notice" },
   { label: "Restructuring", href: "/small-business-restructuring" },
-  { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
+  { label: "Liquidation", href: "/liquidation-alternatives" },
   { label: "What it costs", href: "/what-it-costs" },
 ] as const;
 
@@ -43,7 +44,7 @@ export const TEAM = [
     name: "James Webb",
     role: "Co-Founder, LINK", // TODO confirm title
     bio: "James co-founded the LINK group and leads its growth engines. His lens on a rescue is a growth accountant's: fix the model, fix the cash, then make the business worth saving.", // TODO James to confirm
-    photo: "/team/james.png",
+    photo: "/team/james.jpg",
   },
   {
     name: "Kyle Macmillan",
@@ -65,7 +66,7 @@ export const FOUNDER_QUOTE = {
   text: "We are accountants, but not the stuffy compliance kind. We look at how your business makes money, what will genuinely get you out of this, and then we use the law and the best specialists in the country to save your backside from destruction.",
   name: "James Webb",
   role: "Co-Founder, LINK",
-  photo: "/team/james.png",
+  photo: "/team/james.jpg",
 } as const;
 
 // Compliance line used near every result and lead form. Positioning per the

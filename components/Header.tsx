@@ -8,28 +8,31 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur">
-      <div className="container-x flex h-16 items-center justify-between">
-        <a href="/" aria-label="LINK Rescue home">
+      <div className="container-x flex h-16 items-center justify-between gap-6">
+        <a href="/" aria-label="LINK Rescue home" className="shrink-0">
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-sm font-medium text-ink/60 transition hover:text-ink"
+              className="whitespace-nowrap text-sm font-medium text-ink/60 transition hover:text-ink"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <a href={SITE.phoneHref} className="text-sm font-semibold text-ink/70 hover:text-ink">
+        <div className="hidden shrink-0 items-center gap-4 lg:flex">
+          <a
+            href={SITE.phoneHref}
+            className="hidden whitespace-nowrap text-sm font-semibold text-ink/70 hover:text-ink xl:block"
+          >
             {SITE.phone}
           </a>
-          <a href="/assessment" className="btn btn-rescue">
+          <a href="/assessment" className="btn btn-rescue whitespace-nowrap">
             Start the assessment
           </a>
         </div>

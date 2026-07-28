@@ -7,7 +7,8 @@ import { JsonLd, faqSchema } from "@/components/Schema";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { DISCLAIMER, FOUNDER_QUOTE, SITE, TEAM } from "@/lib/site";
-import jamesPhoto from "@/public/team/james.png";
+import jamesPhoto from "@/public/team/james.jpg";
+import jamesQuotePhoto from "@/public/team/james-quote.jpg";
 import kylePhoto from "@/public/team/kyle.jpg";
 
 // Static imports so next/image optimises them; keyed by name so lib/site.ts
@@ -174,12 +175,13 @@ export default function Home() {
 
           {/* Founder quote: a face and a voice before any selling */}
           <figure className="mt-10 flex flex-col items-start gap-6 rounded-xl2 border border-line bg-white p-7 sm:flex-row sm:items-center sm:p-8">
+            {/* Self-circled asset with rescue-tint stripes - no rounding needed */}
             <Image
-              src={jamesPhoto}
+              src={jamesQuotePhoto}
               alt={FOUNDER_QUOTE.name}
-              width={96}
-              height={96}
-              className="h-24 w-24 shrink-0 rounded-full bg-cloud object-cover"
+              width={112}
+              height={112}
+              className="h-28 w-28 shrink-0"
             />
             <div>
               <blockquote className="font-display text-lg font-bold leading-snug tracking-tight text-ink sm:text-xl">
