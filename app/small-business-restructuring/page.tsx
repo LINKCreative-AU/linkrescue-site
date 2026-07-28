@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { InfoPage } from "@/components/InfoPage";
+import { SbrCalculator } from "@/components/SbrCalculator";
 
 export const metadata: Metadata = {
   title: "Small Business Restructuring (SBR) - Keep Control, Cut Debt",
@@ -19,6 +20,7 @@ export default function Page() {
       intro="Small business restructuring, SBR, is the formal process built for exactly the businesses this site serves: viable companies buried under debt, most often ATO debt. You keep trading, you stay in control, and creditors vote on a plan that usually compromises debt to a fraction of its face value."
       serviceName="Small business restructuring"
       serviceDescription="Guidance on the small business restructuring process for eligible Australian companies with debts under $1 million."
+      afterHero={<SbrCalculator />}
       sections={[
         {
           heading: "How SBR works.",
