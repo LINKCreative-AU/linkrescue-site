@@ -75,12 +75,25 @@ export function Assessment({ compact = false }: { compact?: boolean }) {
   }
 
   if (result) {
-    return <Result outcome={result.outcome} total={result.total} answers={answers} />;
+    return (
+      <Result
+        outcome={result.outcome}
+        total={result.total}
+        answers={answers}
+        onRestart={() => {
+          setAnswers([]);
+          setStep(0);
+        }}
+      />
+    );
   }
 
   const q = QUESTIONS[step];
   return (
-    <div className={`rounded-xl2 border border-line bg-white ${compact ? "p-6" : "p-6 sm:p-8"}`}>
+    <div
+      aria-live="polite"
+      className={`rounded-xl2 border border-line bg-white ${compact ? "p-6" : "p-6 sm:p-8"}`}
+    >
       <div className="mb-5 flex items-center justify-between gap-4">
         <p className="eyebrow">
           Question {step + 1} of {QUESTIONS.length} · {q.topic}
@@ -137,10 +150,12 @@ function Result({
   outcome,
   total,
   answers,
+  onRestart,
 }: {
   outcome: Outcome;
   total: number;
   answers: number[];
+  onRestart: () => void;
 }) {
   const style = OUTCOME_STYLE[outcome.id];
   const urgent = outcome.priority !== "standard";
@@ -164,7 +179,7 @@ function Result({
       <ul className="mt-5 space-y-2.5">
         {outcome.steps.map((s) => (
           <li key={s} className="flex gap-3 text-sm text-ink/80">
-            <span className="mt-0.5 text-rescue">—</span>
+            <span aria-hidden className="mt-2 h-[2px] w-4 shrink-0 bg-rescue" />
             {s}
           </li>
         ))}
@@ -187,6 +202,14 @@ function Result({
         advice, and no outcome is guaranteed. Talking to us is confidential and
         free, with no obligation.
       </p>
+
+      <button
+        type="button"
+        onClick={onRestart}
+        className="mt-3 text-xs font-semibold text-ink/50 underline-offset-2 hover:text-ink hover:underline"
+      >
+        Start the assessment again
+      </button>
     </div>
   );
 }

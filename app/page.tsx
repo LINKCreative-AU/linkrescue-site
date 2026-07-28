@@ -24,9 +24,14 @@ const SIGNS = [
 
 const PATHS = [
   {
-    title: "ATO payment plans and debt negotiation",
-    text: "Most ATO debt positions can be engaged with, and engagement changes how the ATO treats you. You get a realistic plan built on real numbers, not hope.",
+    title: "ATO debt help",
+    text: "Most ATO debt positions can be engaged with, and engagement changes how the ATO treats you. You get the full playbook, from lodgments to remission to restructure.",
     href: "/ato-debt-help",
+  },
+  {
+    title: "ATO payment plans",
+    text: "The ATO accepts plans it believes in: realistic instalments built from a real cash flow, not hope. You get one that holds, or a straight answer that a plan is the wrong tool.",
+    href: "/ato-payment-plan",
   },
   {
     title: "Director Penalty Notice response",
@@ -39,6 +44,11 @@ const PATHS = [
     href: "/small-business-restructuring",
   },
   {
+    title: "Voluntary administration",
+    text: "Breathing space with a deadline attached: a moratorium, an independent administrator, and a creditor vote on a rescue deal. Heavier, and sometimes exactly right.",
+    href: "/voluntary-administration",
+  },
+  {
     title: "Alternatives to liquidation",
     text: "Liquidation is one option among several, and rarely the first. You see the full menu, from informal workouts to safe harbour to formal appointments.",
     href: "/liquidation-alternatives",
@@ -47,7 +57,7 @@ const PATHS = [
 
 const FAQS = [
   {
-    q: "Is the assessment really free and confidential?",
+    q: "Is the assessment free and confidential?",
     a: "Yes. The six questions are free, the result is instant and nothing you enter is shared outside the LINK Rescue team. You see your result before we ask for any contact details, and leaving your details is your call.",
   },
   {

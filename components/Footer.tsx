@@ -6,8 +6,11 @@ import symbol from "@/public/link-symbol-reversed.png";
 const HELP = [
   { label: "Business rescue assessment", href: "/assessment" },
   { label: "ATO debt help", href: "/ato-debt-help" },
+  { label: "ATO payment plans", href: "/ato-payment-plan" },
   { label: "Director Penalty Notices", href: "/director-penalty-notice" },
   { label: "Small business restructuring", href: "/small-business-restructuring" },
+  { label: "Voluntary administration", href: "/voluntary-administration" },
+  { label: "Safe harbour", href: "/safe-harbour" },
   { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
 ];
 

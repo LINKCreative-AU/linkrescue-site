@@ -6,8 +6,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", priority: 1 },
     { path: "/assessment", priority: 0.9 },
     { path: "/ato-debt-help", priority: 0.8 },
+    { path: "/ato-payment-plan", priority: 0.8 },
     { path: "/director-penalty-notice", priority: 0.8 },
     { path: "/small-business-restructuring", priority: 0.8 },
+    { path: "/voluntary-administration", priority: 0.8 },
+    { path: "/safe-harbour", priority: 0.7 },
     { path: "/liquidation-alternatives", priority: 0.8 },
     { path: "/privacy", priority: 0.2 },
   ];

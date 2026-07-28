@@ -27,6 +27,16 @@ export default function Page() {
             "A lockdown DPN is issued when the company's lodgments were more than three months late. The personal liability has already locked in, and paying the debt is the path that removes it. That makes the surrounding strategy, what to pay, in what order, from what source, the conversation that matters.",
             "Directors often hold both types across different periods at once. The notice needs to be read line by line before anything is decided.",
           ],
+          table: {
+            headers: ["", "Non-lockdown DPN", "Lockdown DPN"],
+            rows: [
+              ["When it is issued", "Company lodged on time but did not pay", "Lodgments were more than 3 months late"],
+              ["Your window", "21 days from the date on the notice", "Liability has already locked in"],
+              ["What removes the penalty", "Pay the debt, or appoint an SBR practitioner, administrator or liquidator within the 21 days", "Payment of the debt"],
+              ["What it covers", "Unpaid PAYG withholding, GST and super", "Unpaid PAYG withholding, GST and super"],
+              ["The right first move", "Get the notice read today, every option is live", "Strategy on what to pay, in what order, from what source"],
+            ],
+          },
         },
         {
           heading: "What to do in the first 24 hours.",
@@ -42,6 +52,12 @@ export default function Page() {
           heading: "The mail you have not opened counts too.",
           paragraphs: [
             "The ATO sends DPNs to your address on record with ASIC. A notice you never opened, or that went to an old address, is still running its clock. If there is ATO mail you have been avoiding, opening it with someone beside you is a better plan than not opening it at all.",
+          ],
+        },
+        {
+          heading: "If the 21 days have already passed.",
+          paragraphs: [
+            "You still have moves, they are just different moves. Statutory defences exist for directors who were ill, who took all reasonable steps, or who could not take part in management, and they turn on evidence. The size of the penalty, your personal asset position and the company's future all shape what a negotiation with the ATO looks like, and the ATO negotiates with directors who engage. What you do not have is time to spend deciding alone. An expired clock makes the conversation more urgent, not less worth having.",
           ],
         },
       ]}
@@ -64,9 +80,9 @@ export default function Page() {
         },
       ]}
       related={[
-        { label: "ATO debt help", href: "/ato-debt-help" },
         { label: "Small business restructuring", href: "/small-business-restructuring" },
-        { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
+        { label: "Voluntary administration", href: "/voluntary-administration" },
+        { label: "ATO debt help", href: "/ato-debt-help" },
       ]}
     />
   );

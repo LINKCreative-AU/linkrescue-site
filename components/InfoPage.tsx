@@ -11,6 +11,8 @@ export type InfoSection = {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
+  /** Optional comparison table rendered after the bullets. */
+  table?: { headers: string[]; rows: string[][] };
 };
 
 export function InfoPage({
@@ -87,11 +89,40 @@ export function InfoPage({
                 <ul className="mt-4 space-y-2.5">
                   {s.bullets.map((b) => (
                     <li key={b} className="flex gap-3 text-ink/75">
-                      <span className="mt-0.5 text-rescue">—</span>
+                      <span aria-hidden className="mt-2.5 h-[2px] w-4 shrink-0 bg-rescue" />
                       {b}
                     </li>
                   ))}
                 </ul>
+              )}
+              {s.table && (
+                <div className="mt-5 overflow-x-auto rounded-xl2 border border-line">
+                  <table className="w-full min-w-[480px] border-collapse text-sm">
+                    <thead>
+                      <tr className="bg-cloud/70 text-left">
+                        {s.table.headers.map((h) => (
+                          <th key={h} className="px-4 py-3 font-display font-extrabold text-ink">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {s.table.rows.map((row) => (
+                        <tr key={row[0]} className="border-t border-line align-top">
+                          {row.map((cell, i) => (
+                            <td
+                              key={i}
+                              className={`px-4 py-3 ${i === 0 ? "font-semibold text-ink" : "text-ink/75"}`}
+                            >
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )}
             </section>
           ))}

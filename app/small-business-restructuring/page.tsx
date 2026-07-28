@@ -45,7 +45,7 @@ export default function Page() {
           ],
         },
         {
-          heading: "The honest trade-offs.",
+          heading: "The trade-offs, stated plainly.",
           paragraphs: [
             "SBR appears on the public record, and some suppliers and financiers will notice. Secured creditors and employee entitlements sit outside the plan. The company must be able to fund the plan it proposes and keep current obligations paid as they arise, a plan the business cannot afford helps nobody. Where those trade-offs do not fit, the alternatives page covers the other paths.",
           ],

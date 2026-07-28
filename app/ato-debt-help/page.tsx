@@ -66,9 +66,9 @@ export default function Page() {
         },
       ]}
       related={[
+        { label: "ATO payment plans", href: "/ato-payment-plan" },
         { label: "Director Penalty Notices", href: "/director-penalty-notice" },
         { label: "Small business restructuring", href: "/small-business-restructuring" },
-        { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
       ]}
     />
   );

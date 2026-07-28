@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InfoPage } from "@/components/InfoPage";
 
 export const metadata: Metadata = {
-  title: "Alternatives to Liquidation - The Full Menu of Options",
+  title: "Company Liquidation & The Alternatives - The Full Menu",
   description:
-    "Liquidation is one option, and rarely the first. Payment plans, informal workouts, safe harbour, small business restructuring and voluntary administration compared, so you choose a path instead of defaulting into one.",
+    "Before you liquidate a company, see the full menu. Payment plans, informal workouts, safe harbour, small business restructuring and voluntary administration compared against liquidation, so you choose a path instead of defaulting into one.",
   alternates: { canonical: "/liquidation-alternatives" },
 };
 

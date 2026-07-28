@@ -34,13 +34,29 @@ export function Header() {
           </a>
         </div>
 
-        <button className="lg:hidden" aria-label="Menu" onClick={() => setOpen((v) => !v)}>
-          <div className="space-y-1.5">
-            <span className="block h-0.5 w-6 bg-ink" />
-            <span className="block h-0.5 w-6 bg-ink" />
-            <span className="block h-0.5 w-6 bg-ink" />
-          </div>
-        </button>
+        <div className="flex items-center gap-5 lg:hidden">
+          {/* Urgent callers are the highest-value mobile visitors - keep the phone one tap away */}
+          <a href={SITE.phoneHref} aria-label={`Call ${SITE.phone}`} className="text-rescue">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-6 w-6"
+            >
+              <path d="M5 3h4l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z" />
+            </svg>
+          </a>
+          <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+            <div className="space-y-1.5">
+              <span className="block h-0.5 w-6 bg-ink" />
+              <span className="block h-0.5 w-6 bg-ink" />
+              <span className="block h-0.5 w-6 bg-ink" />
+            </div>
+          </button>
+        </div>
       </div>
 
       {open && (
