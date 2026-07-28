@@ -1,0 +1,20 @@
+import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/site";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const routes = [
+    { path: "", priority: 1 },
+    { path: "/assessment", priority: 0.9 },
+    { path: "/ato-debt-help", priority: 0.8 },
+    { path: "/director-penalty-notice", priority: 0.8 },
+    { path: "/small-business-restructuring", priority: 0.8 },
+    { path: "/liquidation-alternatives", priority: 0.8 },
+    { path: "/privacy", priority: 0.2 },
+  ];
+  return routes.map((r) => ({
+    url: `${SITE.url}${r.path}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: r.priority,
+  }));
+}
