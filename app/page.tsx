@@ -327,25 +327,25 @@ export default function Home() {
             eyebrow="Why LINK Rescue"
             title="Growth accountants, with a rescue toolkit."
             dark
-            intro="LINK is not a compliance shop. You get accountants who work on strategy, pricing and profit first, because the way out of trouble is a business that makes money. Then the law and specialist practitioners get used properly to protect you while it happens."
+            intro="LINK is an accounting firm, a bookkeeping practice and a marketing agency, all started by James. That matters because a rescue is more than a debt deal: the books, the lodgments, the tax and the revenue all have to work again, and one team can pull every lever."
           />
           <div className="grid gap-6 sm:grid-cols-2">
             {[
               {
-                title: "Growth first",
-                text: "The plan out of trouble is a plan to make more money, not just a payment schedule. Strategy, pricing, profit and cash come before the paperwork.",
+                title: "Books up to speed",
+                text: "Messy books hide your real position and stall every negotiation. The LINK bookkeeping team rebuilds them fast, so every decision runs on facts.",
               },
               {
-                title: "You stay in control",
-                text: "You get options and trade-offs, laid out in plain language. The decision stays yours at every step.",
+                title: "Lodgments up to scratch",
+                text: "Unlodged returns block payment plans, restructuring and safe harbour alike. We catch you up, and save you as much tax as the law allows on the way through.",
               },
               {
-                title: "Early beats urgent",
-                text: "Most rescue options reward speed. A conversation this week keeps doors open that a statutory demand closes.",
+                title: "Marketing that finds the leak",
+                text: "Debt is usually a revenue story too. The LINK marketing team looks at where the sales went and what brings them back: offer, pricing, pipeline.",
               },
               {
-                title: "Confidential by default",
-                text: "Talking to us notifies nobody. Not the ATO, not your bank, not your creditors, not your competitors.",
+                title: "Protection while you fix it",
+                text: "While the business heals, the law and specialist practitioners keep you safe: director penalties handled, safe harbour running, creditors managed.",
               },
             ].map((c) => (
               <div key={c.title}>
