@@ -44,10 +44,6 @@ export function Footer() {
               <a href={SITE.phoneHref} className="hover:text-white">
                 {SITE.phone}
               </a>
-              <br />
-              <a href={`mailto:${SITE.email}`} className="hover:text-white">
-                {SITE.email}
-              </a>
             </p>
           </div>
 

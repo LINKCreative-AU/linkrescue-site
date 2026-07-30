@@ -11,7 +11,9 @@ export const SITE = {
   url: "https://rescue.link.com.au",
   phone: "07 3899 8311", // TODO confirm dedicated rescue line with James
   phoneHref: "tel:0738998311",
-  email: "rescue@link.com.au", // TODO confirm rescue inbox with James
+  // NO public email address, deliberately. A mailto in the markup is a free
+  // address for every scraper that crawls the site. Contact is the phone
+  // number and the form. Do not reintroduce one without a spam-handling plan.
   abn: "63 620 787 742", // TODO confirm entity ABN for the rescue offering
   color: "#7B1E3A",
   colorBright: "#A34D63",

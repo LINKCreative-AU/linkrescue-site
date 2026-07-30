@@ -55,11 +55,11 @@ export default function Privacy() {
           </h2>
           <p>
             You can ask what we hold about you, ask us to correct it, or ask us
-            to delete it by emailing{" "}
-            <a href={`mailto:${SITE.email}`} className="font-semibold text-rescue">
-              {SITE.email}
+            to delete it by calling{" "}
+            <a href={SITE.phoneHref} className="font-semibold text-rescue">
+              {SITE.phone}
             </a>
-            . If you are not satisfied with our response you can contact the
+            or using the form on our contact page. If you are not satisfied with our response you can contact the
             Office of the Australian Information Commissioner at oaic.gov.au.
           </p>
         </div>

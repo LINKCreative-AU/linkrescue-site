@@ -12,7 +12,6 @@ export function firmSchema() {
     name: "LINK Rescue",
     url: SITE.url,
     telephone: "+61 7 3899 8311", // TODO update when the dedicated rescue line is confirmed
-    email: SITE.email,
     logo: `${SITE.url}/link-logo.png`,
     description:
       "Confidential business rescue guidance for Australian company directors: ATO debt, Director Penalty Notices, creditor pressure, restructuring and alternatives to liquidation.",
