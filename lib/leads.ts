@@ -194,11 +194,17 @@ export async function notifySlack(rec: CompletedCart): Promise<boolean> {
 
 export async function emailLead(rec: CompletedCart): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
-  const to = (process.env.LEADS_TO ?? "rescue@link.com.au") // TODO confirm rescue inbox
+  // Rescue has no entry of its own in the group register
+  // (SLACK-EMAIL-INTEGRATIONS.md in the linkhq repo); James's call 2026-07-30 is
+  // that it delivers to the same place as Advisors. The previous fallback,
+  // rescue@link.com.au, was never confirmed to exist.
+  const to = (process.env.LEADS_TO ?? "k1q9k5c8u4v2o2l6@linkcohq.slack.com")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-  const from = process.env.RESEND_FROM ?? "LINK Rescue <onboarding@resend.dev>";
+  // link.com.au is verified in Resend, so the shared leads@ sender works; it is
+  // SEND-ONLY and must never appear as a recipient.
+  const from = process.env.RESEND_FROM ?? "LINK Rescue <leads@link.com.au>";
   const subject = `[${rec.outcome.label}] Rescue lead - ${rec.name}`;
   const lines: [string, string][] = [
     ["Outcome", `${rec.outcome.label} (${rec.outcome.priority} priority, score ${rec.score})`],
