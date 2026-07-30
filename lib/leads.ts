@@ -102,7 +102,11 @@ export async function emailVisitor(rec: CompletedCart): Promise<boolean> {
     console.log("[visitor email - resend not configured]");
     return false;
   }
-  const from = process.env.RESEND_FROM ?? "LINK Rescue <onboarding@resend.dev>";
+  // Deliberately NOT RESEND_FROM: that carries the shared leads@ sender, which
+  // is send-only and would bounce any reply from the visitor. This one goes to a
+  // real person, so it sends from the verified link.com.au domain on an address
+  // that can take a reply.
+  const from = "LINK Rescue <noreply@link.com.au>";
   const booking = process.env.BOOKING_URL;
   const firstName = rec.name.split(" ")[0];
   const subject = `Your business rescue result: ${rec.outcome.label}`;
