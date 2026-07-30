@@ -30,17 +30,17 @@ const COMPANY = [
 
 export function Footer() {
   return (
-    <footer className="bg-ink py-16 text-white/70">
+    <footer className="bg-ink py-16 text-white">
       <div className="container-x">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Logo onDark height={22} />
-            <p className="mt-5 max-w-sm text-sm text-white/55">
+            <p className="mt-5 max-w-sm text-sm text-white/70">
               Confidential help for business owners under pressure: ATO debt,
               director penalties, creditor stress and the paths through them.{" "}
               {SITE.group.line}
             </p>
-            <p className="mt-5 text-sm text-white/55">
+            <p className="mt-5 text-sm text-white/70">
               <a href={SITE.phoneHref} className="hover:text-white">
                 {SITE.phone}
               </a>
@@ -56,11 +56,11 @@ export function Footer() {
           <FooterCol title="Company" links={COMPANY} />
         </div>
 
-        <p className="mt-10 max-w-4xl border-t border-white/10 pt-6 text-xs leading-relaxed text-white/40">
+        <p className="mt-10 max-w-4xl border-t border-white/10 pt-6 text-xs leading-relaxed text-white/55">
           {DISCLAIMER}
         </p>
 
-        <div className="mt-6 flex flex-col items-start justify-between gap-4 text-xs text-white/40 sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 text-xs text-white/55 sm:flex-row sm:items-center">
           <p>
             © {new Date().getFullYear()} LINK Rescue · ABN {SITE.abn}. All rights reserved.
           </p>
@@ -91,14 +91,17 @@ function FooterCol({
 }) {
   return (
     <div>
-      <p className="eyebrow !text-white/40">{title}</p>
+      <p className="font-semibold text-white">
+        {title}
+        <span className="text-rescue-bright">.</span>
+      </p>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
           <li key={l.href}>
             <a
               href={l.href}
               {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className="text-sm text-white/65 transition hover:text-white"
+              className="text-sm text-white/60 transition hover:text-white"
             >
               {l.label}
             </a>
