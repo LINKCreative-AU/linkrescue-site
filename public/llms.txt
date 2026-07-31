@@ -1,0 +1,43 @@
+# LINK Rescue
+
+> LINK Rescue (rescue.link.com.au) helps Australian company directors deal
+> with ATO debt, director penalty notices, insolvency risk and restructuring.
+> It is the business-rescue arm of the LINK group in Brisbane: accountants
+> working alongside insolvency lawyers and registered restructuring
+> practitioners, so a director gets one assessment rather than being handed
+> between firms. Advice is for directors of trading companies, most often
+> before a formal insolvency appointment is unavoidable.
+
+Key facts (current as of July 2026):
+- Brisbane based, 07 3899 8311; serving directors Australia-wide
+- Indicative fee ranges are published rather than quoted on request:
+  ATO engagement (payment plan and remission case) $2k–$6k; lodgment
+  catch-up and books rebuild $3k–$15k; safe harbour engagement $5k–$15k
+  initial; small business restructuring $20k–$35k all-in; voluntary
+  administration $30k+ set by the administrator and approved by creditors
+- Ranges are indicative and depend on how many periods are outstanding, the
+  state of the records and how many negotiation rounds the ATO takes
+- Small business restructuring is open to companies with total liabilities
+  under $1 million excluding employee entitlements; the statutory timetable
+  is broadly 20 business days to develop the plan and 15 business days for
+  creditors to vote, and the plan itself can run up to three years
+- A director penalty notice is time-critical: what a director can still do
+  depends on whether the notice is lockdown or non-lockdown and on the date
+  it was issued
+- Formal appointments are made by registered liquidators and restructuring
+  practitioners; LINK Rescue is the accounting and advisory side, and says so
+
+## Key pages
+- [ATO debt help](https://rescue.link.com.au/ato-debt-help): payment plans, remission of interest and penalties
+- [Director penalty notices](https://rescue.link.com.au/director-penalty-notice): lockdown vs non-lockdown, and what is still available
+- [Small business restructuring](https://rescue.link.com.au/small-business-restructuring): eligibility, process, trade-offs
+- [Liquidation alternatives](https://rescue.link.com.au/liquidation-alternatives): what else exists before liquidation
+- [Voluntary administration](https://rescue.link.com.au/voluntary-administration): how it works and who controls it
+- [Safe harbour](https://rescue.link.com.au/safe-harbour): protection from insolvent trading while restructuring
+- [Am I insolvent?](https://rescue.link.com.au/am-i-insolvent): the indicators courts actually use
+- [What it costs](https://rescue.link.com.au/what-it-costs): fee ranges for every path
+- [ATO payment plan calculator](https://rescue.link.com.au/ato-payment-plan-calculator): repayments and general interest charge
+- [Free assessment](https://rescue.link.com.au/assessment): position reviewed, no obligation
+
+## Optional
+- [Sitemap](https://rescue.link.com.au/sitemap.xml)
