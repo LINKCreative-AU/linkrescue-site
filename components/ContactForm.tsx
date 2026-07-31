@@ -20,6 +20,26 @@ const URGENCY = [
   { id: "planning", label: "Nothing is on fire, I want to plan" },
 ];
 
+// "How did you hear about us?" - Brad's ask, 31 July 2026. The UTM and
+// referrer data already captured only sees the click; it cannot see an
+// accountant's recommendation, or someone asking an AI assistant what to do
+// about a director penalty notice - and that answer arrives with no referrer
+// at all. Optional, last, and a select rather than radios: it is the least
+// important question on the form and should not outweigh the fields that
+// actually get someone called back.
+const HEARD_OPTIONS = [
+  "Google search",
+  "ChatGPT, Claude or another AI assistant",
+  "My accountant or bookkeeper",
+  "A friend, family member or colleague",
+  "My lawyer or another adviser",
+  "Social media",
+  "An article, podcast or news story",
+  "Another part of LINK",
+  "Something else",
+];
+const HEARD_OTHER = "Something else";
+
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
 export function ContactForm() {
@@ -34,6 +54,8 @@ export function ContactForm() {
     // server-side rather than blocking the submit.
     urgency: "",
     message: "",
+    heard: "",
+    heardDetail: "",
     company: "", // honeypot
   });
   const [state, setState] = useState<State>("idle");
@@ -49,7 +71,14 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, attribution }),
+        body: JSON.stringify({
+          ...form,
+          heard:
+            form.heard === HEARD_OTHER && form.heardDetail.trim()
+              ? `${form.heard}: ${form.heardDetail.trim()}`
+              : form.heard,
+          attribution,
+        }),
       });
       if (!res.ok) throw new Error(String(res.status));
       const data = await res.json().catch(() => ({ delivered: true }));
@@ -194,6 +223,35 @@ export function ContactForm() {
           className="w-full rounded-lg border border-line px-4 py-2.5 text-sm focus:border-rescue focus:outline-none"
         />
       </label>
+
+      <label className="mt-6 block">
+        <span className="mb-1 block text-xs font-semibold text-ink/60">
+          How did you hear about us? <span className="font-normal text-ink/40">optional</span>
+        </span>
+        <select
+          value={form.heard}
+          onChange={(e) => setForm({ ...form, heard: e.target.value })}
+          className="w-full rounded-lg border border-line bg-white px-4 py-2.5 text-sm focus:border-rescue focus:outline-none"
+        >
+          <option value="">Select one</option>
+          {HEARD_OPTIONS.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+      </label>
+      {form.heard === HEARD_OTHER && (
+        <input
+          type="text"
+          value={form.heardDetail}
+          onChange={(e) => setForm({ ...form, heardDetail: e.target.value })}
+          maxLength={120}
+          placeholder="Where, roughly?"
+          aria-label="Where did you hear about us?"
+          className="mt-2 w-full rounded-lg border border-line px-4 py-2.5 text-sm focus:border-rescue focus:outline-none"
+        />
+      )}
 
       {/* Honeypot. Hidden from people, irresistible to bots. */}
       <div aria-hidden className="absolute left-[-9999px] h-0 w-0 overflow-hidden">

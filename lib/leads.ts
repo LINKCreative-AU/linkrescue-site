@@ -274,6 +274,8 @@ export type Enquiry = {
   business?: string;
   urgency: string;
   message?: string;
+  /** Self-reported "how did you hear about us" (Brad's ask, 2026-07-31). */
+  heard?: string;
   attribution?: { utm: Record<string, string>; referrer: string; landing: string };
 };
 
@@ -292,6 +294,9 @@ export async function notifyEnquiry(rec: Enquiry): Promise<boolean> {
     ["Business", rec.business || "-"],
     ["Urgency", rec.urgency],
     ["Message", rec.message || "-"],
+    // Self-reported, and worth more than the UTM line under it: no analytics
+    // tool can see an accountant's recommendation or an AI assistant's answer.
+    ["Heard about us", rec.heard || "-"],
     ["Source", JSON.stringify(rec.attribution?.utm ?? {})],
     ["Referrer", rec.attribution?.referrer || "-"],
   ];
@@ -311,6 +316,7 @@ export async function notifyEnquiry(rec: Enquiry): Promise<boolean> {
             rec.email ? `*Email:* ${rec.email}` : "",
             rec.business ? `*Business:* ${rec.business}` : "",
             rec.message ? `*What is happening:* ${rec.message}` : "",
+            rec.heard ? `*Heard about us:* ${rec.heard}` : "",
           ]
             .filter(Boolean)
             .join("\n"),

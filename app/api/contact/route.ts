@@ -42,6 +42,7 @@ export async function POST(req: Request) {
     business: clean(data.business),
     urgency: URGENCY.includes(urgency) ? urgency : "soon",
     message: clean(data.message, MAX_MESSAGE),
+    heard: clean(data.heard),
     attribution: {
       utm: Object.fromEntries(
         Object.entries((data.attribution?.utm as Record<string, unknown>) ?? {})
