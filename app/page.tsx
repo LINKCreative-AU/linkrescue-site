@@ -6,7 +6,7 @@ import { Icon } from "@/components/Icons";
 import { JsonLd, faqSchema } from "@/components/Schema";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
-import { DISCLAIMER, FOUNDER_QUOTE, SITE, TEAM } from "@/lib/site";
+import { CONFIDENTIALITY, DISCLAIMER, FOUNDER_QUOTE, SITE, TEAM } from "@/lib/site";
 import jamesPhoto from "@/public/team/james.jpg";
 import jamesQuotePhoto from "@/public/team/james-quote.jpg";
 import kylePhoto from "@/public/team/kyle.jpg";
@@ -72,7 +72,7 @@ const PATHS = [
 const FAQS = [
   {
     q: "Is the assessment free and confidential?",
-    a: "Yes. The six questions are free, the result is instant and nothing you enter is shared outside the LINK Rescue team. We ask for your business and email up front so your result is saved and a human can check in; adding your phone number for a callback stays your call.",
+    a: `Yes. The six questions are free, the result is instant and nothing you enter is shared outside the LINK Rescue team. ${CONFIDENTIALITY} We ask for an email up front so your result is saved and a human can check in, and your business name if you want to give it - both can be skipped, and adding your phone number for a callback stays your call.`,
   },
   {
     q: "Will you tell me to liquidate my company?",
@@ -158,7 +158,7 @@ export default function Home() {
               },
               {
                 title: "Nothing happens without you",
-                text: "Talking to us is confidential and commits you to nothing. It notifies nobody, not the ATO, not your bank, not your creditors. Every decision stays yours, at every step.",
+                text: `${CONFIDENTIALITY} It notifies nobody, not the ATO, not your bank, not your creditors. Every decision stays yours, at every step.`,
               },
               {
                 title: "You are not carrying this alone",

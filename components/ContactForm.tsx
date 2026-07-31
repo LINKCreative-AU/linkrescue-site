@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SITE } from "@/lib/site";
+import { CONFIDENTIALITY, SITE } from "@/lib/site";
 
 // The callback request on /contact. Deliberately short: name and phone are
 // the only required fields, because the person filling this in is usually
@@ -227,9 +227,10 @@ export function ContactForm() {
         </p>
       )}
 
-      <p className="mt-4 text-xs leading-relaxed text-ink/45">
-        Confidential, free and judgement-free. Nothing goes further than the
-        LINK Rescue team, and there is no spam, ever.
+      <p className="mt-4 text-xs leading-relaxed text-ink/55">{CONFIDENTIALITY}</p>
+      <p className="mt-2 text-xs leading-relaxed text-ink/45">
+        Free and judgement-free. Nothing goes further than the LINK Rescue
+        team, and there is no spam, ever.
       </p>
     </form>
   );

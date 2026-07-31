@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { QUESTIONS, score, type Outcome } from "@/lib/assessment";
-import { SITE } from "@/lib/site";
+import { CONFIDENTIALITY, SITE } from "@/lib/site";
 
 // The hero feature, cart-style (the gstregister funnel pattern):
 //   1. Business (ABR lookup) + email first - the cart opens here, so an
@@ -368,10 +368,11 @@ function IntroStep({
         </button>
       </p>
 
-      <p className="mt-4 text-xs leading-relaxed text-ink/45">
-        Confidential, free and judgement-free. Your email saves your result so a
-        human can follow up with help; nothing goes further than the LINK Rescue
-        team and there is no spam, ever.
+      <p className="mt-4 text-xs leading-relaxed text-ink/55">{CONFIDENTIALITY}</p>
+      <p className="mt-2 text-xs leading-relaxed text-ink/45">
+        Free and judgement-free. Your email saves your result so a human can
+        follow up with help; nothing goes further than the LINK Rescue team and
+        there is no spam, ever.
         {abrEnabled && " Business search powered by ABN Lookup."}
       </p>
     </form>
@@ -448,10 +449,11 @@ function Result({
         entityLocation={entityLocation}
       />
 
-      <p className="mt-4 text-xs leading-relaxed text-ink/45">
+      <p className="mt-4 text-xs leading-relaxed text-ink/55">{CONFIDENTIALITY}</p>
+      <p className="mt-2 text-xs leading-relaxed text-ink/45">
         Your result is general information, not financial, legal or insolvency
-        advice, and no outcome is guaranteed. Talking to us is confidential and
-        free, with no obligation.
+        advice, and no outcome is guaranteed. Talking to us is free, with no
+        obligation.
       </p>
 
       <button

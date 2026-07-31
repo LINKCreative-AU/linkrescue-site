@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { Icon } from "@/components/Icons";
 import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/Schema";
-import { DISCLAIMER, SITE } from "@/lib/site";
+import { CONFIDENTIALITY, DISCLAIMER, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact LINK Rescue - Confidential, Free, No Obligation",
@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     q: "Is what I tell you confidential?",
-    a: "Yes. What you tell us stays with the LINK Rescue team. We are not going to contact the ATO, your bank or your creditors off the back of a phone call - nothing happens without your say-so.",
+    a: `${CONFIDENTIALITY} What you tell us stays with the LINK Rescue team. We are not going to contact the ATO, your bank or your creditors off the back of a phone call, and nothing is set in motion by talking to us.`,
   },
   {
     q: "I have a director penalty notice with a date on it. What do I do right now?",
@@ -108,7 +108,14 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <p className="mt-5 text-sm text-ink/55">
+            {/* The promise goes here, not in a policy page. The fear that stops
+                a director ringing an accountant is that the call itself starts
+                something they cannot stop. */}
+            <p className="mt-8 border-l-2 border-rescue pl-5 text-base font-medium leading-relaxed text-ink/80">
+              {CONFIDENTIALITY}
+            </p>
+
+            <p className="mt-6 text-sm text-ink/55">
               Level 1, 57 Berwick Street, Fortitude Valley QLD 4006 · we work
               with directors Australia-wide, and most of this happens by phone.
             </p>

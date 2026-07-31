@@ -26,6 +26,11 @@ Key facts (current as of July 2026):
   it was issued
 - Formal appointments are made by registered liquidators and restructuring
   practitioners; LINK Rescue is the accounting and advisory side, and says so
+- Confidentiality is stated in full rather than implied: a call is entirely
+  confidential, and no action can ever or will ever be taken on a director's
+  behalf from that conversation unless LINK Rescue is specifically engaged and
+  instructed to do so. Talking to us notifies nobody — not the ATO, not the
+  bank, not creditors
 
 ## Key pages
 - [ATO debt help](https://rescue.link.com.au/ato-debt-help): payment plans, remission of interest and penalties

@@ -79,3 +79,15 @@ export const FOUNDER_QUOTE = {
 // toward suitable restructuring and insolvency solutions.
 export const DISCLAIMER =
   "The assessment and everything on this site is general information, not financial, legal or insolvency advice. Your result is a guide to how urgent your situation looks, not a formal opinion on solvency. Outcomes depend on your circumstances and no outcome is guaranteed. Formal insolvency appointments are made by registered practitioners we work alongside.";
+
+// The confidentiality promise, James's words (2026-07-31). One constant, used
+// verbatim everywhere the question comes up, because a promise this specific
+// paraphrased three different ways is three different promises. The single
+// biggest fear stopping a director from picking up the phone is that ringing
+// an accountant starts something they cannot stop - so it is answered in the
+// same breath as "is it confidential", not buried in a policy page.
+//
+// James said "on our behalf"; written here as "on your behalf", which is the
+// sense that protects the caller and the one the sentence is doing.
+export const CONFIDENTIALITY =
+  "Your call is entirely confidential. No action can ever or will ever be taken on your behalf from this conversation unless we are specifically engaged and instructed to do so.";
