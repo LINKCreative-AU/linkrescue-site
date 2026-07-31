@@ -252,3 +252,114 @@ export async function emailLead(rec: CompletedCart): Promise<boolean> {
     return false;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Direct enquiries from /contact.
+//
+// Deliberately NOT written to rescue_leads: that table's shape is the
+// assessment cart (answers, score, outcome, priority), and an enquiry has
+// none of those. Rather than write half-empty rows against a schema this repo
+// cannot see, enquiries go straight to the two channels a human actually
+// watches - Slack and the leads inbox - with a console fallback so nothing is
+// ever silently dropped. If enquiries need to land in the database later, add
+// a table of their own rather than bending this one.
+//
+// Urgency is the caller's own words, not a score. A director who says the
+// notice is dated is not something to grade.
+
+export type Enquiry = {
+  name: string;
+  phone: string;
+  email?: string;
+  business?: string;
+  urgency: string;
+  message?: string;
+  attribution?: { utm: Record<string, string>; referrer: string; landing: string };
+};
+
+const URGENCY_PREFIX: Record<string, string> = {
+  "dpn": ":rotating_light: *DPN / deadline* :rotating_light:",
+  "urgent": ":red_circle: *This week*",
+  "soon": ":large_yellow_circle: *Weeks, not days*",
+  "planning": ":large_green_circle: *Planning ahead*",
+};
+
+export async function notifyEnquiry(rec: Enquiry): Promise<boolean> {
+  const lines: [string, string][] = [
+    ["Name", rec.name],
+    ["Phone", rec.phone],
+    ["Email", rec.email || "-"],
+    ["Business", rec.business || "-"],
+    ["Urgency", rec.urgency],
+    ["Message", rec.message || "-"],
+    ["Source", JSON.stringify(rec.attribution?.utm ?? {})],
+    ["Referrer", rec.attribution?.referrer || "-"],
+  ];
+  const text = lines.map(([k, v]) => `${k}: ${v}`).join("\n");
+  const subject = `[Enquiry] Rescue contact - ${rec.name}`;
+
+  const hook = process.env.SLACK_LEADS_WEBHOOK;
+  const slack = hook
+    ? fetch(hook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: [
+            `${URGENCY_PREFIX[rec.urgency] ?? ":speech_balloon:"} New contact enquiry (not an assessment)`,
+            `*Name:* ${rec.name}`,
+            `*Phone:* ${rec.phone}`,
+            rec.email ? `*Email:* ${rec.email}` : "",
+            rec.business ? `*Business:* ${rec.business}` : "",
+            rec.message ? `*What is happening:* ${rec.message}` : "",
+          ]
+            .filter(Boolean)
+            .join("\n"),
+        }),
+      })
+        .then((r) => r.ok)
+        .catch(() => false)
+    : Promise.resolve(false);
+
+  const key = process.env.RESEND_API_KEY;
+  // Same routing as assessment leads: the Advisors channel address, per
+  // James 2026-07-30. leads@ is SEND-ONLY and must never be a recipient.
+  const to = (process.env.LEADS_TO ?? "k1q9k5c8u4v2o2l6@linkcohq.slack.com")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const from = process.env.RESEND_FROM ?? "LINK Rescue <leads@link.com.au>";
+  const mail = key
+    ? fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from,
+          to,
+          subject,
+          text,
+          // reply_to only when they gave an address - replying to nothing is worse
+          // than no reply button at all.
+          ...(rec.email ? { reply_to: rec.email } : {}),
+          html:
+            `<h2 style="font-family:sans-serif">${subject}</h2>` +
+            `<table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">` +
+            lines
+              .map(
+                ([k, v]) =>
+                  `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td style="padding:4px 0"><strong>${v}</strong></td></tr>`
+              )
+              .join("") +
+            `</table>`,
+        }),
+      })
+        .then((r) => r.ok)
+        .catch(() => false)
+    : Promise.resolve(false);
+
+  const [slacked, emailed] = await Promise.all([slack, mail]);
+  if (!slacked && !emailed) {
+    console.error(`[enquiry - all channels unconfigured or failed] ${subject}\n${text}`);
+    return false;
+  }
+  return true;
+}

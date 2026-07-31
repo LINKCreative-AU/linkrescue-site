@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/safe-harbour", priority: 0.7 },
     { path: "/liquidation-alternatives", priority: 0.8 },
     { path: "/what-it-costs", priority: 0.7 },
+    { path: "/contact", priority: 0.6 },
     { path: "/privacy", priority: 0.2 },
   ];
   return routes.map((r) => ({

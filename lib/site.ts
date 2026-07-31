@@ -26,14 +26,17 @@ export const SITE = {
   },
 } as const;
 
-// Header nav: five short labels that hold one line at laptop widths.
+// Header nav: six short labels that hold one line at laptop widths.
 // "How it works" and the long-form labels live in the footer instead.
+// Contact is last, where people look for it, and is the only nav item that is
+// not a topic - someone hunting for it has already decided they want a human.
 export const NAV = [
   { label: "ATO debt", href: "/ato-debt-help" },
   { label: "Director penalties", href: "/director-penalty-notice" },
   { label: "Restructuring", href: "/small-business-restructuring" },
   { label: "Liquidation", href: "/liquidation-alternatives" },
   { label: "What it costs", href: "/what-it-costs" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 // The people behind the page. TODO with James: confirm roles, bios and real

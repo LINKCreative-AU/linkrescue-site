@@ -11,6 +11,16 @@ import { SITE } from "@/lib/site";
 //   3. Instant result on screen, then name + phone to finalise
 // The ABR search degrades to a plain business-name field until ABR_GUID is
 // configured server-side.
+//
+// The intro is a soft gate, not a wall. Email is the only required field and
+// there is a visible way past it, because this audience is not a normal
+// funnel: a director who is ashamed of their position and worried about who
+// finds out will close the tab rather than name their company to a website
+// they have known for ninety seconds. Skipping means no "started" cart row -
+// that lead is genuinely lost if they abandon - which is the trade being
+// made deliberately. Nobody who would have completed is turned away, and the
+// business name is asked for again at the result, where the same question
+// costs far less.
 
 const UTM_KEY = "rescue_attribution";
 const CART_KEY = "rescue_cart_id";
@@ -137,6 +147,7 @@ export function Assessment({ compact = false }: { compact?: boolean }) {
         entity={entity}
         setEntity={setEntity}
         onBegin={begin}
+        onSkip={() => setIntro(false)}
       />
     );
   }
@@ -227,6 +238,7 @@ function IntroStep({
   entity,
   setEntity,
   onBegin,
+  onSkip,
 }: {
   compact: boolean;
   email: string;
@@ -236,6 +248,7 @@ function IntroStep({
   entity: Entity;
   setEntity: (e: Entity) => void;
   onBegin: (e: React.FormEvent) => void;
+  onSkip: () => void;
 }) {
   const [results, setResults] = useState<AbrResult[]>([]);
   const [abrEnabled, setAbrEnabled] = useState(true);
@@ -269,7 +282,10 @@ function IntroStep({
     }, 300);
   }
 
-  const ready = email.includes("@") && (entity !== null || businessText.trim().length > 1);
+  // Email only. The business name is worth asking for - it lets the ABR fill
+  // in the entity and saves the caller explaining - but it is not worth a lost
+  // assessment, so it does not gate the button.
+  const ready = email.includes("@");
 
   return (
     <form
@@ -284,13 +300,12 @@ function IntroStep({
       <div className="relative mt-5">
         <label className="block">
           <span className="mb-1 block text-xs font-semibold text-ink/60">
-            Business name or ABN
+            Business name or ABN <span className="font-normal text-ink/40">optional</span>
           </span>
           <input
             type="text"
             value={entity ? entity.name : businessText}
             onChange={(e) => onBusinessInput(e.target.value)}
-            required
             autoComplete="organization"
             placeholder={abrEnabled ? "Start typing to search the ABR" : "Your business name"}
             className="w-full rounded-lg border border-line px-4 py-2.5 text-sm focus:border-rescue focus:outline-none"
@@ -342,6 +357,16 @@ function IntroStep({
       <button type="submit" disabled={!ready} className="btn btn-rescue mt-5 w-full disabled:opacity-50">
         Start the six questions
       </button>
+
+      <p className="mt-4 text-center">
+        <button
+          type="button"
+          onClick={onSkip}
+          className="text-xs font-semibold text-ink/50 underline underline-offset-2 hover:text-ink"
+        >
+          I would rather not say yet - just show me the questions
+        </button>
+      </p>
 
       <p className="mt-4 text-xs leading-relaxed text-ink/45">
         Confidential, free and judgement-free. Your email saves your result so a
@@ -460,6 +485,9 @@ function LeadForm({
   entityLocation: string;
 }) {
   const [form, setForm] = useState({ name: "", phone: "", email: initialEmail });
+  // Only asked here when it was skipped at the intro. At this point they have
+  // seen their result and the question costs almost nothing.
+  const [businessLate, setBusinessLate] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
 
@@ -481,7 +509,7 @@ function LeadForm({
           })(),
           stage: "completed",
           ...form,
-          business,
+          business: business || businessLate,
           abn,
           entityType,
           entityLocation,
@@ -515,6 +543,14 @@ function LeadForm({
         <Field label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} required autoComplete="name" />
         <Field label="Phone" type="tel" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} required autoComplete="tel" />
         <Field label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} required autoComplete="email" />
+        {!business && (
+          <Field
+            label="Business name (optional)"
+            value={businessLate}
+            onChange={setBusinessLate}
+            autoComplete="organization"
+          />
+        )}
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <button type="submit" disabled={busy} className="btn btn-rescue w-full sm:w-auto">

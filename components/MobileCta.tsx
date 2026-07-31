@@ -5,11 +5,14 @@ import { SITE } from "@/lib/site";
 
 // Fixed bottom action bar on small screens: distressed owners browse on
 // phones, and the two actions that matter should never be more than one
-// thumb-tap away. Hidden on the assessment flow and thank-you page, where
-// the page itself is the action.
+// thumb-tap away. Hidden on the assessment flow, the thank-you page and
+// contact, where the page itself is the action - on contact it was stacking a
+// second "Call" button under a hero that already leads with one.
 export function MobileCta() {
   const pathname = usePathname();
-  if (pathname === "/assessment" || pathname === "/thank-you") return null;
+  if (pathname === "/assessment" || pathname === "/thank-you" || pathname === "/contact") {
+    return null;
+  }
   return (
     <>
       <div aria-hidden className="h-16 md:hidden" />

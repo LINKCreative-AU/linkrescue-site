@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Logo } from "./Logo";
 import { DISCLAIMER, SITE } from "@/lib/site";
 import symbol from "@/public/link-symbol-reversed.png";
@@ -22,6 +23,7 @@ const TOOLS = [
 ];
 
 const COMPANY = [
+  { label: "Contact us", href: "/contact" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Who you talk to", href: "/#team" },
   { label: "Privacy", href: "/privacy" },
@@ -44,6 +46,14 @@ export function Footer() {
               <a href={SITE.phoneHref} className="hover:text-white">
                 {SITE.phone}
               </a>
+              <br />
+              <Link href="/contact" className="hover:text-white">
+                Contact us
+              </Link>
+              <br />
+              <span className="text-white/45">
+                Level 1, 57 Berwick Street, Fortitude Valley QLD 4006
+              </span>
             </p>
           </div>
 

@@ -38,6 +38,7 @@ Key facts (current as of July 2026):
 - [What it costs](https://rescue.link.com.au/what-it-costs): fee ranges for every path
 - [ATO payment plan calculator](https://rescue.link.com.au/ato-payment-plan-calculator): repayments and general interest charge
 - [Free assessment](https://rescue.link.com.au/assessment): position reviewed, no obligation
+- [Contact](https://rescue.link.com.au/contact): phone, callback request, and what happens after you get in touch
 
 ## Optional
 - [Sitemap](https://rescue.link.com.au/sitemap.xml)

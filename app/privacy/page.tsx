@@ -59,10 +59,14 @@ export default function Privacy() {
             <a href={SITE.phoneHref} className="font-semibold text-rescue">
               {SITE.phone}
             </a>{" "}
-            and asking for the privacy officer, or by writing to us at Level 1,
-            57 Berwick Street, Fortitude Valley QLD 4006. If you are not
-            satisfied with our response you can contact the Office of the
-            Australian Information Commissioner at oaic.gov.au.
+            and asking for the privacy officer, through the{" "}
+            <a href="/contact" className="font-semibold text-rescue">
+              contact page
+            </a>
+            , or by writing to us at Level 1, 57 Berwick Street, Fortitude
+            Valley QLD 4006. If you are not satisfied with our response you can
+            contact the Office of the Australian Information Commissioner at
+            oaic.gov.au.
           </p>
         </div>
       </div>
