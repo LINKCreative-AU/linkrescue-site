@@ -107,8 +107,14 @@ export async function POST(req: Request) {
     emailLead(rec),
     emailVisitor(rec), // the visitor's copy of their result
   ]);
+  // Three independent channels, so one failing is survivable. All three failing
+  // means the assessment exists nowhere durable, and this is the one form on
+  // the site where the person filling it in is in genuine trouble. Sending them
+  // to a result page that implies we have their details would be the worst
+  // possible outcome, so fail loudly and let the form offer the phone number.
   if (!stored && !slacked && !emailed) {
-    console.error("[lead - all channels unconfigured or failed]", JSON.stringify(rec));
+    console.error("[lead NOT DELIVERED - every channel unconfigured or failed]", JSON.stringify(rec));
+    return NextResponse.json({ ok: false, error: "not-delivered" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true, outcome: outcome.id });
