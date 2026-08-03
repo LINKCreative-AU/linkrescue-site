@@ -20,7 +20,7 @@ export function ogImage(title: string, eyebrow = "Business rescue assessment") {
         }}
       >
         <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
-          <span style={{ fontSize: 44, fontWeight: 800, color: "#101820", letterSpacing: -1 }}>
+          <span style={{ fontSize: 44, fontWeight: 800, color: "#000000", letterSpacing: -1 }}>
             LINK
           </span>
           <span style={{ fontSize: 40, fontWeight: 800, color: "#7B1E3A", letterSpacing: -1 }}>
@@ -54,7 +54,7 @@ export function ogImage(title: string, eyebrow = "Business rescue assessment") {
             style={{
               fontSize: title.length > 45 ? 56 : 68,
               fontWeight: 800,
-              color: "#101820",
+              color: "#000000",
               letterSpacing: -2,
               lineHeight: 1.05,
               maxWidth: 1000,

@@ -132,7 +132,7 @@ export async function emailVisitor(rec: CompletedCart): Promise<boolean> {
   ].join("\n");
   const html = text
     .split("\n\n")
-    .map((p) => `<p style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#101820">${p.replace(/\n/g, "<br/>")}</p>`)
+    .map((p) => `<p style="font-family:sans-serif;font-size:15px;line-height:1.6;color:#000000">${p.replace(/\n/g, "<br/>")}</p>`)
     .join("");
   try {
     const res = await fetch("https://api.resend.com/emails", {
