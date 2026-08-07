@@ -24,7 +24,7 @@ export function SectionHead({
   as: Tag = "h2",
 }: {
   no?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   mark?: string; // substring of title to wrap in the marker highlight
   intro?: string;
@@ -34,24 +34,17 @@ export function SectionHead({
 }) {
   return (
     <div className="max-w-3xl">
-      <div className="mb-6 flex items-center gap-4">
-        {no && (
+      {eyebrow && (
+        <div className="mb-6">
           <span
-            className={`font-display text-2xl font-semibold tracking-tight ${
-              dark ? "text-white/25" : "text-ink/20"
+            className={`eyebrow ${accent ? "text-rescue" : ""} ${
+              dark ? "!border-white/60 !text-white/60" : ""
             }`}
           >
-            {no}
+            {eyebrow}
           </span>
-        )}
-        <span
-          className={`eyebrow guide-line-inline ${
-            accent ? "text-rescue" : ""
-          } ${dark ? "!text-white/60" : ""}`}
-        >
-          <span className={dark ? "text-white/60" : "text-neutral-500"}>{eyebrow}</span>
-        </span>
-      </div>
+        </div>
+      )}
       <Tag
         className={`font-display text-4xl font-normal leading-[1.02] tracking-tight sm:text-5xl ${
           dark ? "text-white" : "text-ink"

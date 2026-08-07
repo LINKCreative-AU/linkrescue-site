@@ -22,7 +22,7 @@ body {
 
 /* Section eyebrow - small, grey, uppercase (guide uses grey labels, not colour) */
 .eyebrow {
-  @apply inline-flex h-[35px] items-center rounded-full border border-current px-4 text-[13px] font-normal uppercase tracking-[0.12em];
+  @apply inline-flex h-auto min-h-[35px] items-center rounded-full border border-current px-4 py-1 text-[13px] font-normal leading-snug uppercase tracking-[0.12em];
 }
 
 /* The "Guide Line" - the V1.5 signature: a short rule above/beside a label.
@@ -53,21 +53,18 @@ body {
 
 .marker {
   @apply font-bold;
-  padding-bottom: 0.1em;
   background: linear-gradient(#7B1E3A, #7B1E3A) left bottom / 100% 4px no-repeat;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 .hl-under {
   @apply font-bold;
-  padding-bottom: 0.1em;
   background: linear-gradient(#7B1E3A, #7B1E3A) left bottom / 100% 4px no-repeat;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 .hl-under-var {
   @apply font-bold;
-  padding-bottom: 0.1em;
   background: linear-gradient(var(--u), var(--u)) left bottom / 100% 4px no-repeat;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -75,7 +72,7 @@ body {
 
 /* Big editorial section number, e.g. 01 / 02 */
 .section-no {
-  @apply font-display text-2xl font-extrabold tracking-tight text-ink/25;
+  display: none;
 }
 
 /* V1.5 signature gradient - Rescue burgundy + its light tone */

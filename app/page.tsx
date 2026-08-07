@@ -201,7 +201,6 @@ export default function Home() {
       <section className="py-16 lg:py-24">
         <div className="container-x">
           <SectionHead
-            no="01"
             eyebrow="Sound familiar"
             title="The pressure has patterns."
             mark="patterns"
@@ -222,7 +221,6 @@ export default function Home() {
       <section id="how-it-works" className="bg-cloud/50 py-16 lg:py-24">
         <div className="container-x">
           <SectionHead
-            no="02"
             eyebrow="How it works"
             title="Three steps, no runaround."
             mark="no runaround"
@@ -262,7 +260,6 @@ export default function Home() {
       <section className="py-16 lg:py-24">
         <div className="container-x">
           <SectionHead
-            no="03"
             eyebrow="The options"
             title="Liquidation is a last resort, not a starting point."
             mark="last resort"
@@ -326,7 +323,6 @@ export default function Home() {
       <section className="bg-ink py-16 text-white lg:py-24">
         <div className="container-x grid items-start gap-10 lg:grid-cols-2">
           <SectionHead
-            no="04"
             eyebrow="Why LINK Rescue"
             title="Growth accountants, with a rescue toolkit."
             dark
@@ -366,7 +362,6 @@ export default function Home() {
       <section id="team" className="py-16 lg:py-24">
         <div className="container-x">
           <SectionHead
-            no="05"
             eyebrow="Who you talk to"
             title="Real people, on the phone, fast."
             mark="Real people"
@@ -401,7 +396,6 @@ export default function Home() {
       <section className="bg-cloud/50 py-16 lg:py-24">
         <div className="container-x">
           <SectionHead
-            no="06"
             eyebrow="The track record"
             title="Real rescues. Real reviews."
             mark="Real rescues"
@@ -474,7 +468,7 @@ export default function Home() {
       {/* FAQ */}
       <section className="bg-cloud/50 py-16 lg:py-24">
         <div className="container-x">
-          <SectionHead no="07" eyebrow="Questions" title="Asked every week." />
+          <SectionHead eyebrow="Questions" title="Asked every week." />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {FAQS.map((f) => (
               <div key={f.q} className="rounded-xl2 border border-line bg-white p-7">
