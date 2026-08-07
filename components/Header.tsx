@@ -13,19 +13,18 @@ export function Header() {
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-6 lg:flex">
-          {NAV.map((n) => (
-            <a
-              key={n.href}
-              href={n.href}
-              className="whitespace-nowrap text-sm font-medium text-ink/60 transition hover:text-ink"
-            >
-              {n.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden shrink-0 items-center gap-4 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex">
+          <nav className="flex items-center gap-6">
+            {NAV.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="whitespace-nowrap text-sm font-semibold text-ink underline-offset-4 transition hover:underline"
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
           <a
             href={SITE.phoneHref}
             className="hidden whitespace-nowrap text-sm font-semibold text-ink/75 hover:text-ink xl:block"

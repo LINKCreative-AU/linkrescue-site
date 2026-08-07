@@ -11,7 +11,7 @@ export default function Privacy() {
   return (
     <main className="container-x py-14 lg:py-20">
       <div className="max-w-3xl">
-        <h1 className="font-display text-4xl font-extrabold tracking-tight text-ink">
+        <h1 className="font-display text-4xl font-normal tracking-tight text-ink">
           Privacy policy.
         </h1>
         <div className="mt-8 space-y-6 leading-relaxed text-ink/75">
@@ -21,7 +21,7 @@ export default function Privacy() {
             personal information in line with the Privacy Act 1988 (Cth) and
             the Australian Privacy Principles.
           </p>
-          <h2 className="font-display text-2xl font-extrabold text-ink">What we collect.</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink">What we collect.</h2>
           <p>
             Your assessment answers are collected anonymously and are not
             linked to you unless you choose to leave your contact details. If
@@ -29,7 +29,7 @@ export default function Privacy() {
             name if provided, your assessment result, and how you found the
             site (referrer and campaign parameters).
           </p>
-          <h2 className="font-display text-2xl font-extrabold text-ink">How we use it.</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink">How we use it.</h2>
           <p>
             Your information is used for one purpose: contacting you about your
             enquiry and helping you with it. Enquiries are stored securely,
@@ -39,18 +39,18 @@ export default function Privacy() {
             information and we never use a rescue enquiry for unrelated
             marketing.
           </p>
-          <h2 className="font-display text-2xl font-extrabold text-ink">Storage and security.</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink">Storage and security.</h2>
           <p>
             Enquiries are stored in access-controlled systems used by the LINK
             group. We keep information only as long as needed to help you and
             to meet our legal obligations, then delete it.
           </p>
-          <h2 className="font-display text-2xl font-extrabold text-ink">Analytics.</h2>
+          <h2 className="font-display text-2xl font-semibold text-ink">Analytics.</h2>
           <p>
             The site uses privacy-friendly analytics to understand how pages
             perform. Assessment answers are not sent to analytics tools.
           </p>
-          <h2 className="font-display text-2xl font-extrabold text-ink">
+          <h2 className="font-display text-2xl font-semibold text-ink">
             Access, correction and questions.
           </h2>
           <p>

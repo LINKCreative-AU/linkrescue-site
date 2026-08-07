@@ -4,7 +4,7 @@
 
 :root {
   /* Elza drops in here once the web licence lands; empty for now → falls back to Work Sans */
-  --font-display: "";
+  --font-display: var(--font-sans);
 }
 
 html {
@@ -17,12 +17,12 @@ body {
 
 /* Editorial layout bits, per the V1.5 look */
 .container-x {
-  @apply mx-auto w-full max-w-content px-6;
+  @apply mx-auto w-full max-w-content px-6 sm:px-10 xl:px-[87px];
 }
 
 /* Section eyebrow - small, grey, uppercase (guide uses grey labels, not colour) */
 .eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500;
+  @apply inline-flex h-[35px] items-center rounded-full border border-current px-4 text-[13px] font-normal uppercase tracking-[0.12em];
 }
 
 /* The "Guide Line" - the V1.5 signature: a short rule above/beside a label.
@@ -31,16 +31,14 @@ body {
   @apply relative;
 }
 .guide-line::before {
-  content: "";
-  @apply mb-3 block h-[2px] w-10 bg-current;
+  content: none;
 }
 .guide-line-inline::before {
-  content: "";
-  @apply mr-3 inline-block h-[2px] w-8 translate-y-[-5px] bg-current align-middle;
+  content: none;
 }
 
 .btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition;
+  @apply inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-base font-semibold transition;
 }
 /* Master brand = black actions; burgundy reserved for the accent moments */
 .btn-primary {
@@ -53,23 +51,24 @@ body {
   @apply bg-rescue text-white hover:bg-rescue-dark active:opacity-90;
 }
 
-/* Marker highlight - the guide's light-tone highlight convention, Rescue edition.
-   An inline highlighter tint that follows the text across line wraps; the uneven
-   radii + faded edges keep it feeling like a marker pass, not a solid block. */
 .marker {
-  background-image: linear-gradient(
-    100deg,
-    rgba(243, 222, 228, 0.25) 0%,
-    #f3dee4 5%,
-    #f3dee4 94%,
-    rgba(243, 222, 228, 0.25) 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 78%;
-  background-position: 0 62%;
-  border-radius: 0.35em 0.2em 0.4em 0.25em;
-  padding: 0 0.14em;
-  margin: 0 -0.14em;
+  @apply font-bold;
+  padding-bottom: 0.1em;
+  background: linear-gradient(#7B1E3A, #7B1E3A) left bottom / 100% 4px no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.hl-under {
+  @apply font-bold;
+  padding-bottom: 0.1em;
+  background: linear-gradient(#7B1E3A, #7B1E3A) left bottom / 100% 4px no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.hl-under-var {
+  @apply font-bold;
+  padding-bottom: 0.1em;
+  background: linear-gradient(var(--u), var(--u)) left bottom / 100% 4px no-repeat;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }

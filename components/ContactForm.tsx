@@ -93,7 +93,7 @@ export function ContactForm() {
     return (
       <div className="rounded-xl2 border-2 border-rescue/30 bg-white p-6 sm:p-8" aria-live="polite">
         <p className="eyebrow text-rescue">Received</p>
-        <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-ink">
+        <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">
           {form.name.split(" ")[0]}, we have your number.
         </h3>
         {state === "sent-undelivered" ? (
@@ -143,7 +143,7 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} className="relative rounded-xl2 border border-line bg-white p-6 sm:p-8">
       <p className="eyebrow">Ask for a call back</p>
-      <h3 className="mt-2 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+      <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
         Two fields. We will call you.
       </h3>
       <p className="mt-3 text-sm text-ink/65">

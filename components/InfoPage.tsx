@@ -81,7 +81,7 @@ export function InfoPage({
           {afterHero && <div className="mb-12">{afterHero}</div>}
           {sections.map((s) => (
             <section key={s.heading} className="mb-10">
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
                 {s.heading}
               </h2>
               {s.paragraphs.map((p) => (
@@ -105,7 +105,7 @@ export function InfoPage({
                     <thead>
                       <tr className="bg-cloud/70 text-left">
                         {s.table.headers.map((h) => (
-                          <th key={h} className="px-4 py-3 font-display font-extrabold text-ink">
+                          <th key={h} className="px-4 py-3 font-display font-semibold text-ink">
                             {h}
                           </th>
                         ))}
@@ -132,13 +132,13 @@ export function InfoPage({
           ))}
 
           <section className="mb-4">
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
               Common questions.
             </h2>
             <div className="mt-6 space-y-6">
               {faqs.map((f) => (
                 <div key={f.q}>
-                  <h3 className="font-display text-lg font-extrabold text-ink">{f.q}</h3>
+                  <h3 className="font-display text-lg font-semibold text-ink">{f.q}</h3>
                   <p className="mt-2 leading-relaxed text-ink/75">{f.a}</p>
                 </div>
               ))}
@@ -165,7 +165,7 @@ export function InfoPage({
           </div>
           <div className="rounded-xl2 border border-line p-6">
             <p className="eyebrow">Related</p>
-            <ul className="mt-3 space-y-2.5">
+            <ul className="mt-6 space-y-2.5">
               {related.map((r) => (
                 <li key={r.href}>
                   <Link

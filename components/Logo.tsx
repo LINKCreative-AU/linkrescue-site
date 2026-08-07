@@ -23,7 +23,7 @@ export function Logo({
         className={onDark ? "brightness-0 invert" : ""}
       />
       <span
-        className={`font-display font-extrabold tracking-tight ${
+        className={`font-display font-semibold tracking-tight ${
           onDark ? "text-rescue-bright" : "text-rescue"
         }`}
         style={{ fontSize: height * 0.92, lineHeight: 1 }}

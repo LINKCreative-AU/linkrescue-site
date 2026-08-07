@@ -32,7 +32,7 @@ export default async function ThankYou({
           <p className="guide-line text-rescue text-sm font-semibold uppercase tracking-wider">
             You are on the list
           </p>
-          <h1 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+          <h1 className="mt-3 font-display text-3xl font-normal tracking-tight text-ink sm:text-4xl">
             Done. The next move is ours.
           </h1>
           <p className="mt-4 text-lg text-ink/75">

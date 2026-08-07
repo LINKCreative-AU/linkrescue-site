@@ -48,7 +48,7 @@ export function SbrCalculator() {
       <p className="eyebrow guide-line-inline text-rescue">
         <span className="text-neutral-500">SBR outcome estimator</span>
       </p>
-      <h2 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
+      <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">
         What could a restructure look like for your debt?
       </h2>
       <p className="mt-2 text-sm text-ink/60">
@@ -78,7 +78,7 @@ export function SbrCalculator() {
       <div aria-live="polite" className="mt-6 rounded-lg border border-line bg-cloud/50 p-5">
         {r.overCap ? (
           <>
-            <p className="font-display text-lg font-extrabold text-rescue-dark">
+            <p className="font-display text-lg font-semibold text-rescue-dark">
               Over the $1 million SBR ceiling.
             </p>
             <p className="mt-2 text-sm text-ink/75">
@@ -91,7 +91,7 @@ export function SbrCalculator() {
           </>
         ) : (
           <>
-            <p className="font-display text-lg font-extrabold text-ink">
+            <p className="font-display text-lg font-semibold text-ink">
               A plan in the range of {fmt(r.low)} to {fmt(r.high)}, with{" "}
               {fmt(r.writtenOffLow)} to {fmt(r.writtenOffHigh)} written off.
             </p>
@@ -182,7 +182,7 @@ function SliderField({
     <label className="block">
       <span className="flex items-baseline justify-between">
         <span className="text-xs font-semibold text-ink/60">{label}</span>
-        <span className="font-display text-lg font-extrabold text-ink">{fmt(value)}</span>
+        <span className="font-display text-lg font-semibold text-ink">{fmt(value)}</span>
       </span>
       <input
         type="range"

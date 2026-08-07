@@ -37,7 +37,7 @@ export function SectionHead({
       <div className="mb-6 flex items-center gap-4">
         {no && (
           <span
-            className={`font-display text-2xl font-extrabold tracking-tight ${
+            className={`font-display text-2xl font-semibold tracking-tight ${
               dark ? "text-white/25" : "text-ink/20"
             }`}
           >
@@ -53,7 +53,7 @@ export function SectionHead({
         </span>
       </div>
       <Tag
-        className={`font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl ${
+        className={`font-display text-4xl font-normal leading-[1.02] tracking-tight sm:text-5xl ${
           dark ? "text-white" : "text-ink"
         }`}
       >

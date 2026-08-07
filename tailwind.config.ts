@@ -32,7 +32,7 @@ const config: Config = {
         xl2: "1.25rem",
       },
       maxWidth: {
-        content: "1200px",
+        content: "1440px",
       },
     },
   },

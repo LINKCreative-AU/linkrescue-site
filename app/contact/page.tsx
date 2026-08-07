@@ -90,7 +90,7 @@ export default function ContactPage() {
             <p className="eyebrow guide-line-inline text-rescue">
               <span className="text-neutral-500">Contact</span>
             </p>
-            <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl">
+            <h1 className="mt-5 font-display text-4xl font-normal leading-[1.02] tracking-tight text-ink sm:text-5xl">
               Talk to someone who has <span className="marker">seen this before</span>.
             </h1>
             <p className="mt-5 text-lg text-ink/75">
@@ -134,7 +134,7 @@ export default function ContactPage() {
                   <span className="section-no">0{i + 1}</span>
                 </div>
                 <p className="eyebrow mt-5">{r.eyebrow}</p>
-                <h2 className="mt-2 font-display text-xl font-extrabold text-ink">{r.title}</h2>
+                <h2 className="mt-6 font-display text-xl font-semibold text-ink">{r.title}</h2>
                 <p className="mt-3 text-sm text-ink/75">{r.body}</p>
               </div>
             ))}
@@ -149,7 +149,7 @@ export default function ContactPage() {
             <ContactForm />
 
             <div>
-              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
                 What happens after you get in touch.
               </h2>
               <ol className="mt-6 space-y-5">
@@ -172,7 +172,7 @@ export default function ContactPage() {
                       {i + 1}
                     </span>
                     <div>
-                      <p className="font-display font-extrabold text-ink">{s.t}</p>
+                      <p className="font-display font-semibold text-ink">{s.t}</p>
                       <p className="mt-1 text-sm text-ink/75">{s.d}</p>
                     </div>
                   </li>
@@ -181,7 +181,7 @@ export default function ContactPage() {
 
               <div className="mt-8 rounded-xl2 border border-line bg-cloud/50 p-6">
                 <p className="eyebrow">Not ready to talk yet?</p>
-                <h3 className="mt-2 font-display text-lg font-extrabold text-ink">
+                <h3 className="mt-6 font-display text-lg font-semibold text-ink">
                   Six questions, instant result.
                 </h3>
                 <p className="mt-2 text-sm text-ink/75">
@@ -215,13 +215,13 @@ export default function ContactPage() {
       <section className="border-t border-line bg-cloud/50 py-14 lg:py-20">
         <div className="container-x">
           <div className="mx-auto max-w-3xl">
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
               The questions people ask before they call.
             </h2>
             <dl className="mt-8 divide-y divide-line border-y border-line">
               {FAQS.map((f) => (
                 <div key={f.q} className="py-5">
-                  <dt className="font-display font-extrabold text-ink">{f.q}</dt>
+                  <dt className="font-display font-semibold text-ink">{f.q}</dt>
                   <dd className="mt-2 text-sm leading-relaxed text-ink/75">{f.a}</dd>
                 </div>
               ))}

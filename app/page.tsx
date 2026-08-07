@@ -108,7 +108,7 @@ export default function Home() {
             <p className="eyebrow guide-line-inline text-rescue">
               <span className="text-neutral-500">Business rescue assessment</span>
             </p>
-            <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 font-display text-4xl font-normal leading-[1.02] tracking-tight text-ink sm:text-5xl lg:text-6xl">
               Under pressure? See where your business stands{" "}
               <span className="marker">in two minutes</span>.
             </h1>
@@ -146,7 +146,7 @@ export default function Home() {
       {/* Comfort strip: the first thing after the hero is reassurance, not a pitch */}
       <section className="border-b border-line bg-rescue-light/25 py-12 lg:py-16">
         <div className="container-x">
-          <h2 className="max-w-2xl font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+          <h2 className="max-w-2xl font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
             First, breathe. <span className="marker">This is fixable</span>, and you found the
             right place to start.
           </h2>
@@ -250,7 +250,7 @@ export default function Home() {
                   <s.icon className="h-7 w-7 text-rescue" />
                   <span className="section-no">0{i + 1}</span>
                 </div>
-                <h3 className="mt-5 font-display text-xl font-extrabold text-ink">{s.title}</h3>
+                <h3 className="mt-5 font-display text-xl font-semibold text-ink">{s.title}</h3>
                 <p className="mt-3 text-sm text-ink/75">{s.text}</p>
               </div>
             ))}
@@ -275,7 +275,7 @@ export default function Home() {
                 href={p.href}
                 className="group rounded-xl2 border border-line bg-white p-7 transition hover:border-rescue"
               >
-                <h3 className="font-display text-xl font-extrabold text-ink">{p.title}</h3>
+                <h3 className="font-display text-xl font-semibold text-ink">{p.title}</h3>
                 <p className="mt-3 text-sm text-ink/75">{p.text}</p>
                 <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
                   Learn more →
@@ -291,7 +291,7 @@ export default function Home() {
               className="group rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-7 transition hover:border-rescue"
             >
               <p className="eyebrow !text-rescue">Free tool</p>
-              <h3 className="mt-2 font-display text-xl font-extrabold text-ink">
+              <h3 className="mt-6 font-display text-xl font-semibold text-ink">
                 ATO payment plan calculator
               </h3>
               <p className="mt-3 text-sm text-ink/75">
@@ -307,7 +307,7 @@ export default function Home() {
               className="group rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-7 transition hover:border-rescue"
             >
               <p className="eyebrow !text-rescue">Free tool</p>
-              <h3 className="mt-2 font-display text-xl font-extrabold text-ink">
+              <h3 className="mt-6 font-display text-xl font-semibold text-ink">
                 Am I insolvent? The 12-sign check
               </h3>
               <p className="mt-3 text-sm text-ink/75">
@@ -387,7 +387,7 @@ export default function Home() {
                   // TODO headshot from David - grey placeholder holds the layout
                   <div className="mb-5 h-20 w-20 rounded-full bg-cloud" aria-hidden />
                 )}
-                <h3 className="font-display text-lg font-extrabold text-ink">{t.name}</h3>
+                <h3 className="font-display text-lg font-semibold text-ink">{t.name}</h3>
                 <p className="text-sm font-semibold text-rescue">{t.role}</p>
                 <p className="mt-3 text-sm text-ink/75">{t.bio}</p>
               </div>
@@ -426,7 +426,7 @@ export default function Home() {
               },
             ].map((s) => (
               <div key={s.stat} className="rounded-xl2 border border-line bg-white p-7">
-                <p className="font-display text-3xl font-extrabold tracking-tight text-rescue">
+                <p className="font-display text-3xl font-semibold tracking-tight text-rescue">
                   {s.stat}
                 </p>
                 <p className="mt-1 text-sm font-semibold text-ink">{s.label}</p>
@@ -478,7 +478,7 @@ export default function Home() {
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {FAQS.map((f) => (
               <div key={f.q} className="rounded-xl2 border border-line bg-white p-7">
-                <h3 className="font-display text-lg font-extrabold text-ink">{f.q}</h3>
+                <h3 className="font-display text-lg font-semibold text-ink">{f.q}</h3>
                 <p className="mt-3 text-sm text-ink/75">{f.a}</p>
               </div>
             ))}
@@ -490,7 +490,7 @@ export default function Home() {
       <section className="py-16 lg:py-24">
         <div className="container-x">
           <div className="rescue-gradient rounded-xl2 p-10 text-white sm:p-14">
-            <h2 className="max-w-2xl font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
+            <h2 className="max-w-2xl font-display text-3xl font-normal leading-tight tracking-tight sm:text-4xl">
               The best time to check was six months ago. The second best time is
               now.
             </h2>

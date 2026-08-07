@@ -55,7 +55,7 @@ export default function Page() {
             </Link>{" "}
             / <span className="text-ink/75">ATO payment plan calculator</span>
           </nav>
-          <h1 className="font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl">
+          <h1 className="font-display text-4xl font-normal leading-[1.02] tracking-tight text-ink sm:text-5xl">
             See what the debt <span className="marker">actually costs</span> to carry.
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-ink/75">
@@ -70,7 +70,7 @@ export default function Page() {
           <GicCalculator />
 
           <article className="mt-12">
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
               How the general interest charge works.
             </h2>
             <p className="mt-4 leading-relaxed text-ink/75">
@@ -80,7 +80,7 @@ export default function Page() {
               deductible, which means a business now needs to earn the interest in pre-tax
               profit just to stand still.
             </p>
-            <h2 className="mt-10 font-display text-2xl font-extrabold tracking-tight text-ink">
+            <h2 className="mt-10 font-display text-2xl font-semibold tracking-tight text-ink">
               What the number should tell you.
             </h2>
             <p className="mt-4 leading-relaxed text-ink/75">
@@ -104,13 +104,13 @@ export default function Page() {
               maps which path fits your answers.
             </p>
 
-            <h2 className="mt-10 font-display text-2xl font-extrabold tracking-tight text-ink">
+            <h2 className="mt-10 font-display text-2xl font-semibold tracking-tight text-ink">
               Common questions.
             </h2>
             <div className="mt-6 space-y-6">
               {FAQS.map((f) => (
                 <div key={f.q}>
-                  <h3 className="font-display text-lg font-extrabold text-ink">{f.q}</h3>
+                  <h3 className="font-display text-lg font-semibold text-ink">{f.q}</h3>
                   <p className="mt-2 leading-relaxed text-ink/75">{f.a}</p>
                 </div>
               ))}
@@ -136,7 +136,7 @@ export default function Page() {
           </div>
           <div className="rounded-xl2 border border-line p-6">
             <p className="eyebrow">Related</p>
-            <ul className="mt-3 space-y-2.5">
+            <ul className="mt-6 space-y-2.5">
               <li>
                 <Link href="/ato-payment-plan" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   ATO payment plans →

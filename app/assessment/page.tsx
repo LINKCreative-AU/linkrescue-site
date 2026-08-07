@@ -24,7 +24,7 @@ export default function AssessmentPage() {
           <p className="eyebrow guide-line-inline text-rescue">
             <span className="text-neutral-500">Business rescue assessment</span>
           </p>
-          <h1 className="mt-5 font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-ink sm:text-5xl">
+          <h1 className="mt-5 font-display text-4xl font-normal leading-[1.02] tracking-tight text-ink sm:text-5xl">
             Six questions. <span className="marker">Instant result</span>.
           </h1>
           <p className="mt-5 text-lg text-ink/75">

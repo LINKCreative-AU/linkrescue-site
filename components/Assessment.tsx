@@ -196,7 +196,7 @@ export function Assessment({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
 
-      <h3 className="font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+      <h3 className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
         {q.text}
       </h3>
 
@@ -293,7 +293,7 @@ function IntroStep({
       className={`rounded-xl2 border border-line bg-white ${compact ? "p-6" : "p-6 sm:p-8"}`}
     >
       <p className="eyebrow">Before the six questions</p>
-      <h3 className="mt-2 font-display text-xl font-extrabold tracking-tight text-ink sm:text-2xl">
+      <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
         First, who are we helping?
       </h3>
 
@@ -414,7 +414,7 @@ function Result({
         <p className="eyebrow">{business ? `Result for ${business}` : "Your result"}</p>
       </div>
 
-      <h3 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink sm:text-3xl">
+      <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
         {outcome.headline}
       </h3>
       <p className="mt-3 text-ink/75">{outcome.meaning}</p>
@@ -531,7 +531,7 @@ function LeadForm({
 
   return (
     <form onSubmit={submit} className="mt-6 border-t border-line pt-6">
-      <p className="font-display text-lg font-extrabold text-ink">{outcome.cta}.</p>
+      <p className="font-display text-lg font-semibold text-ink">{outcome.cta}.</p>
       <p className="mt-1 text-sm text-ink/60">
         Add a name and number and the right person calls you back
         {outcome.priority === "urgent"

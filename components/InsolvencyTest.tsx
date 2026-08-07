@@ -53,7 +53,7 @@ export function InsolvencyTest() {
       <p className="eyebrow guide-line-inline text-rescue">
         <span className="text-neutral-500">Solvency indicator check</span>
       </p>
-      <h2 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
+      <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">
         Tick what is true for your business right now.
       </h2>
       <p className="mt-2 text-sm text-ink/60">
@@ -85,7 +85,7 @@ export function InsolvencyTest() {
       </div>
 
       <div aria-live="polite" className="mt-6 rounded-lg border border-line bg-cloud/50 p-5">
-        <p className={`font-display text-lg font-extrabold ${r.tone}`}>
+        <p className={`font-display text-lg font-semibold ${r.tone}`}>
           {count} of {INDICATORS.length} indicators: {r.label}.
         </p>
         <p className="mt-2 text-sm text-ink/75">{r.text}</p>

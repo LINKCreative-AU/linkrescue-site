@@ -26,7 +26,7 @@ export function DpnDeadline() {
       <p className="eyebrow guide-line-inline text-rescue">
         <span className="text-neutral-500">DPN deadline checker</span>
       </p>
-      <h2 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
+      <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">
         How much clock do you have left?
       </h2>
       <p className="mt-2 text-sm text-ink/60">
@@ -64,7 +64,7 @@ export function DpnDeadline() {
         <div aria-live="polite" className="mt-5 rounded-lg bg-cloud/60 p-5">
           {type === "lockdown" ? (
             <>
-              <p className="font-display text-lg font-extrabold text-rescue-dark">
+              <p className="font-display text-lg font-semibold text-rescue-dark">
                 A lockdown DPN has no 21-day escape window.
               </p>
               <p className="mt-2 text-sm text-ink/75">
@@ -75,7 +75,7 @@ export function DpnDeadline() {
             </>
           ) : type === "unsure" ? (
             <>
-              <p className="font-display text-lg font-extrabold text-rescue-dark">
+              <p className="font-display text-lg font-semibold text-rescue-dark">
                 Treat it as {Math.max(state.remaining, 0)} day{state.remaining === 1 ? "" : "s"}{" "}
                 remaining until someone reads the notice.
               </p>
@@ -87,7 +87,7 @@ export function DpnDeadline() {
             </>
           ) : state.remaining > 0 ? (
             <>
-              <p className="font-display text-lg font-extrabold text-rescue-dark">
+              <p className="font-display text-lg font-semibold text-rescue-dark">
                 About {state.remaining} day{state.remaining === 1 ? "" : "s"} left on the clock.
               </p>
               <p className="mt-2 text-sm text-ink/75">
@@ -99,7 +99,7 @@ export function DpnDeadline() {
             </>
           ) : (
             <>
-              <p className="font-display text-lg font-extrabold text-rescue-dark">
+              <p className="font-display text-lg font-semibold text-rescue-dark">
                 The 21-day window looks closed.
               </p>
               <p className="mt-2 text-sm text-ink/75">

@@ -50,7 +50,7 @@ export function GicCalculator() {
       <p className="eyebrow guide-line-inline text-rescue">
         <span className="text-neutral-500">ATO debt calculator</span>
       </p>
-      <h2 className="mt-4 font-display text-2xl font-extrabold tracking-tight text-ink">
+      <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">
         What is your tax debt costing you?
       </h2>
       <p className="mt-2 text-sm text-ink/60">
@@ -80,7 +80,7 @@ export function GicCalculator() {
       <div aria-live="polite" className="mt-6 rounded-lg border border-line bg-cloud/50 p-5">
         {interestOnly || r.neverClears ? (
           <>
-            <p className="font-display text-lg font-extrabold text-rescue-dark">
+            <p className="font-display text-lg font-semibold text-rescue-dark">
               At {fmt(monthly)} a month, this debt never clears.
             </p>
             <p className="mt-2 text-sm text-ink/75">
@@ -95,7 +95,7 @@ export function GicCalculator() {
           </>
         ) : (
           <>
-            <p className="font-display text-lg font-extrabold text-ink">
+            <p className="font-display text-lg font-semibold text-ink">
               About {r.months} months to clear, {fmt(r.totalInterest)} of it interest.
             </p>
             <p className="mt-2 text-sm text-ink/75">
@@ -140,7 +140,7 @@ function SliderField({
     <label className="block">
       <span className="flex items-baseline justify-between">
         <span className="text-xs font-semibold text-ink/60">{label}</span>
-        <span className="font-display text-lg font-extrabold text-ink">{fmt(value)}</span>
+        <span className="font-display text-lg font-semibold text-ink">{fmt(value)}</span>
       </span>
       <input
         type="range"
