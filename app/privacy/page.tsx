@@ -42,13 +42,38 @@ import { SITE } from "@/lib/site";
 // policy names the responsible entities under the Privacy Act, so this page
 // points there instead. Put it back once the entity is confirmed.
 //
+// CORRECTED 1 Sep 2026, after an audit checked the page against the code.
+//
+//   - THE ANONYMITY CLAIM WAS FALSE and had been inherited from the page this
+//     replaced, then made stronger in the rewrite without anyone checking it.
+//     components/Assessment.tsx asks for email on the FIRST screen as a
+//     required field, and lib/leads.ts creates the cart "the moment business +
+//     email land", then pushes {stage:"progress", answers} on every single
+//     question. So on the default path the answers are tied to an email from
+//     question one and a half-finished assessment sits on the server, which is
+//     the opposite of what the page promised. The copy now describes that, and
+//     names the skip link as the way to actually stay unlinked. If the flow
+//     changes, this paragraph changes with it.
+//   - THE DELETION RIGHT came back. The page this replaced promised deletion
+//     on request; the group policy promises access and correction and says
+//     nothing about deletion, so cutting it withdrew a published right by
+//     accident.
+//   - THE COVERAGE CLAIM was softened. The group policy's "Who this policy
+//     covers" list names Advisors, Books, Advance, Living, Wealth, Creative,
+//     Marketing, Cowork, Recruitment and Culture - NOT Rescue - and no entity
+//     in it is listed as operating Rescue. Saying it "covers LINK Rescue" was
+//     asserting something the document does not support. The real fix is on
+//     link.com.au: add Rescue to the division and entity lists. Until that
+//     happens this page points at the group policy without claiming to be
+//     named in it.
+//
 // NOT LEGAL REVIEW. The group policy has been through its own process; this
 // page's site-specific wording has not.
 
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "The complete LINK privacy policy is at link.com.au. The assessment is anonymous unless you leave your details, and a rescue enquiry is never used for marketing.",
+    "The complete LINK privacy policy is at link.com.au. What the assessment saves and when, and our promise that a rescue enquiry is never used for marketing.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -59,9 +84,10 @@ export default function Privacy() {
         <h1 className="font-display text-4xl font-normal tracking-tight text-ink">Privacy.</h1>
 
         <p className="mt-6 leading-relaxed text-ink/75">
-          We have a complete privacy policy available at link.com.au. It covers {SITE.name} and
-          every other LINK division - what we collect, why, who we disclose it to, how it is held
-          and how long for, and how to access it, correct it or complain.
+          We have a complete privacy policy available at link.com.au. It is the LINK group policy
+          and it is how the group handles your personal information - what we collect, why, who we
+          disclose it to, how it is held and how long for, and how to access it, correct it or
+          complain.
         </p>
 
         <div className="mt-8">
@@ -88,10 +114,12 @@ export default function Privacy() {
             plainly rather than leaving you to find them in a group document.
           </p>
           <p>
-            <strong className="font-semibold text-ink">The assessment is anonymous.</strong> Your
-            answers are not linked to you at all unless you choose to leave your contact details
-            at the end. You can work through it and close the tab and we will not know who you
-            were.
+            <strong className="font-semibold text-ink">What the assessment saves, and when.</strong>{" "}
+            The first screen asks for your email, and if you give it, your answers are saved
+            against it as you go - not at the end. That is so we can pick the conversation up
+            with you if you stop partway, which people in this position often do. If you would
+            rather not, the &ldquo;I would rather not say yet&rdquo; link on that screen skips it
+            and nothing you answer is linked to you at all.
           </p>
           <p>
             <strong className="font-semibold text-ink">
@@ -116,6 +144,12 @@ export default function Privacy() {
             advertising pixel, no tracking between sites. Your assessment answers are never sent
             to it.
           </p>
+          <p>
+            <strong className="font-semibold text-ink">You can ask us to delete it.</strong> Not
+            just to see it or correct it - if you want what we hold about you gone, ask and we
+            will delete it.
+          </p>
+
           <p>
             If you would rather talk to a person about any of this, call{" "}
             <a href={SITE.phoneHref} className="font-semibold text-rescue">
