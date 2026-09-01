@@ -58,14 +58,20 @@ import { SITE } from "@/lib/site";
 //     on request; the group policy promises access and correction and says
 //     nothing about deletion, so cutting it withdrew a published right by
 //     accident.
-//   - THE COVERAGE CLAIM was softened. The group policy's "Who this policy
-//     covers" list names Advisors, Books, Advance, Living, Wealth, Creative,
-//     Marketing, Cowork, Recruitment and Culture - NOT Rescue - and no entity
-//     in it is listed as operating Rescue. Saying it "covers LINK Rescue" was
-//     asserting something the document does not support. The real fix is on
-//     link.com.au: add Rescue to the division and entity lists. Until that
-//     happens this page points at the group policy without claiming to be
-//     named in it.
+//   - THE COVERAGE CLAIM was softened, and then restored. The group policy's
+//     "Who this policy covers" list did not name Rescue, and no entity in it
+//     was shown as operating Rescue, so saying it "covers LINK Rescue" was
+//     asserting something the document did not support. That was fixed at the
+//     source on 1 Sep 2026: link.com.au/privacy now lists LINK Rescue as a
+//     division, puts it under The Link Collective (the ABN this site's footer
+//     already publishes), and names registered liquidators and restructuring
+//     practitioners in its disclosure list. So this page says what its
+//     siblings say again, and the sentence is now true.
+//
+//     STILL OPEN: lib/site.ts carries the ABN with "TODO confirm entity ABN
+//     for the rescue offering". The group policy is now consistent with what
+//     this site publishes; nobody has confirmed the published ABN is right.
+//     If it is wrong it is wrong in two places, and both need correcting.
 //
 // NOT LEGAL REVIEW. The group policy has been through its own process; this
 // page's site-specific wording has not.
@@ -84,10 +90,10 @@ export default function Privacy() {
         <h1 className="font-display text-4xl font-normal tracking-tight text-ink">Privacy.</h1>
 
         <p className="mt-6 leading-relaxed text-ink/75">
-          We have a complete privacy policy available at link.com.au. It is the LINK group policy
-          and it is how the group handles your personal information - what we collect, why, who we
-          disclose it to, how it is held and how long for, and how to access it, correct it or
-          complain.
+          We have a complete privacy policy available at link.com.au. It covers {SITE.name} and
+          every other LINK division - what we collect, why, who we disclose it to, how it is held
+          and how long for, and how to access it, correct it or complain. It names the insolvency
+          professionals we may bring in, which is the disclosure that matters most here.
         </p>
 
         <div className="mt-8">
