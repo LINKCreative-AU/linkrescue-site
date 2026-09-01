@@ -1,9 +1,54 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 
+// CUT DOWN TO A POINTER, 31 Aug 2026, on the client's instruction: each
+// division site's /privacy should open, say the complete policy is at
+// link.com.au, and give you a link to click.
+//
+// This one was a full standalone mini-policy rather than a thin layer - it
+// never had the treatment the other divisions got in August - so this is a
+// rewrite, not a trim.
+//
+// THIS PAGE KEEPS MORE THAN ITS SIBLINGS, and the reason is the audience. The
+// people reading this are in financial distress and deciding whether it is
+// safe to type anything at all. Confidentiality is the product here, so the
+// specific promises stay even though the general handling goes.
+//
+// THREE THINGS ARE KEPT, all checked against the group policy on 31 Aug 2026:
+//
+//   1. THE ASSESSMENT IS ANONYMOUS unless you choose to leave contact details.
+//      Nothing in the group policy says this, and it is the single fact most
+//      likely to decide whether someone uses the tool.
+//   2. A RESCUE ENQUIRY IS NEVER USED FOR UNRELATED MARKETING. This is a
+//      STRONGER commitment than the group policy, whose direct marketing
+//      clause permits sending information about LINK services "where you would
+//      reasonably expect us to". Deleting this sentence would quietly weaken a
+//      promise made to people at their worst moment. It must not be removed
+//      without someone deciding, on the record, to withdraw the promise.
+//   3. DISCLOSURE TO INSOLVENCY PRACTITIONERS, only with your knowledge. The
+//      word "insolvency" does not appear in the group policy at all.
+//
+// Also kept, briefly: what runs on the site. Vercel Analytics only, no tag
+// manager and no advertising pixel - checked across app/, components/ and
+// lib/ - and assessment answers are never sent to it.
+//
+// REMOVED because the group policy carries it: collection, use, storage,
+// retention, security, access and correction, the Privacy Officer's contact
+// details and the OAIC escalation route.
+//
+// THE ABN IS DELIBERATELY NOT STATED HERE. lib/site.ts carries it with a
+// "TODO confirm entity ABN for the rescue offering" against it, and an
+// unconfirmed ABN is not something to assert on a privacy page. The group
+// policy names the responsible entities under the Privacy Act, so this page
+// points there instead. Put it back once the entity is confirmed.
+//
+// NOT LEGAL REVIEW. The group policy has been through its own process; this
+// page's site-specific wording has not.
+
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How LINK Rescue collects, uses and protects your information.",
+  title: "Privacy",
+  description:
+    "The complete LINK privacy policy is at link.com.au. The assessment is anonymous unless you leave your details, and a rescue enquiry is never used for marketing.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -11,62 +56,76 @@ export default function Privacy() {
   return (
     <main className="container-x py-14 lg:py-20">
       <div className="max-w-3xl">
-        <h1 className="font-display text-4xl font-normal tracking-tight text-ink">
-          Privacy policy.
-        </h1>
-        <div className="mt-8 space-y-6 leading-relaxed text-ink/75">
-          <p>
-            Confidentiality is the foundation of what this site does, so this
-            policy is written to be read. LINK Rescue (ABN {SITE.abn}) collects
-            personal information in line with the Privacy Act 1988 (Cth) and
-            the Australian Privacy Principles.
+        <h1 className="font-display text-4xl font-normal tracking-tight text-ink">Privacy.</h1>
+
+        <p className="mt-6 leading-relaxed text-ink/75">
+          We have a complete privacy policy available at link.com.au. It covers {SITE.name} and
+          every other LINK division - what we collect, why, who we disclose it to, how it is held
+          and how long for, and how to access it, correct it or complain.
+        </p>
+
+        <div className="mt-8">
+          <a
+            href="https://link.com.au/privacy"
+            target="_blank"
+            rel="noopener"
+            className="btn btn-primary"
+          >
+            Read the LINK Privacy Policy
+          </a>
+          <p className="mt-3 text-sm text-ink/55">
+            One policy for the whole group, kept in one place - so it is always the current
+            version.
           </p>
-          <h2 className="font-display text-2xl font-semibold text-ink">What we collect.</h2>
-          <p>
-            Your assessment answers are collected anonymously and are not
-            linked to you unless you choose to leave your contact details. If
-            you do, we collect your name, phone number, email address, business
-            name if provided, your assessment result, and how you found the
-            site (referrer and campaign parameters).
-          </p>
-          <h2 className="font-display text-2xl font-semibold text-ink">How we use it.</h2>
-          <p>
-            Your information is used for one purpose: contacting you about your
-            enquiry and helping you with it. Enquiries are stored securely,
-            shared within the LINK Rescue team, and passed to trusted
-            professionals such as registered insolvency practitioners only with
-            your knowledge as part of helping you. We never sell your
-            information and we never use a rescue enquiry for unrelated
-            marketing.
-          </p>
-          <h2 className="font-display text-2xl font-semibold text-ink">Storage and security.</h2>
-          <p>
-            Enquiries are stored in access-controlled systems used by the LINK
-            group. We keep information only as long as needed to help you and
-            to meet our legal obligations, then delete it.
-          </p>
-          <h2 className="font-display text-2xl font-semibold text-ink">Analytics.</h2>
-          <p>
-            The site uses privacy-friendly analytics to understand how pages
-            perform. Assessment answers are not sent to analytics tools.
-          </p>
+        </div>
+
+        <div className="mt-10 space-y-6 leading-relaxed text-ink/75">
           <h2 className="font-display text-2xl font-semibold text-ink">
-            Access, correction and questions.
+            What that policy does not say, and this page does.
           </h2>
           <p>
-            You can ask what we hold about you, ask us to correct it, or ask us
-            to delete it by calling{" "}
+            Confidentiality is the whole point of this site, so three things are worth saying
+            plainly rather than leaving you to find them in a group document.
+          </p>
+          <p>
+            <strong className="font-semibold text-ink">The assessment is anonymous.</strong> Your
+            answers are not linked to you at all unless you choose to leave your contact details
+            at the end. You can work through it and close the tab and we will not know who you
+            were.
+          </p>
+          <p>
+            <strong className="font-semibold text-ink">
+              A rescue enquiry is never used for marketing.
+            </strong>{" "}
+            Not for our services, not for another LINK division&rsquo;s. You came here about one
+            thing and it is used for that one thing.
+          </p>
+          <p>
+            <strong className="font-semibold text-ink">
+              Nothing goes to an insolvency practitioner behind your back.
+            </strong>{" "}
+            Where it helps to bring in a registered practitioner or another professional, that
+            happens as part of helping you and with your knowledge, not quietly.
+          </p>
+
+          <h2 className="font-display text-2xl font-semibold text-ink">
+            What runs on this website.
+          </h2>
+          <p>
+            Privacy-friendly analytics that counts pages, and nothing else - no tag manager, no
+            advertising pixel, no tracking between sites. Your assessment answers are never sent
+            to it.
+          </p>
+          <p>
+            If you would rather talk to a person about any of this, call{" "}
             <a href={SITE.phoneHref} className="font-semibold text-rescue">
               {SITE.phone}
             </a>{" "}
-            and asking for the privacy officer, through the{" "}
+            or use the{" "}
             <a href="/contact" className="font-semibold text-rescue">
               contact page
             </a>
-            , or by writing to us at Level 1, 57 Berwick Street, Fortitude
-            Valley QLD 4006. If you are not satisfied with our response you can
-            contact the Office of the Australian Information Commissioner at
-            oaic.gov.au.
+            .
           </p>
         </div>
       </div>
