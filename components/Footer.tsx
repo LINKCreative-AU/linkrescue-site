@@ -26,7 +26,7 @@ const COMPANY = [
   { label: "Contact us", href: "/contact" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Who you talk to", href: "/#team" },
-  { label: "Privacy", href: "/privacy" },
+  { label: "Privacy", href: "https://link.com.au/privacy" },
   { label: "The LINK group", href: SITE.group.url, external: true },
 ];
 
