@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { QUESTIONS, score, type Outcome } from "@/lib/assessment";
 import { CONFIDENTIALITY, SITE } from "@/lib/site";
+import { SpamTrap, useSpamGuard } from "@/components/SpamGuard";
 
 // The hero feature, cart-style (the gstregister funnel pattern):
 //   1. Business (ABR lookup) + email first - the cart opens here, so an
@@ -486,6 +487,7 @@ function LeadForm({
   entityType: string;
   entityLocation: string;
 }) {
+  const { guardFields, trap, setTrap } = useSpamGuard();
   const [form, setForm] = useState({ name: "", phone: "", email: initialEmail });
   // Only asked here when it was skipped at the intro. At this point they have
   // seen their result and the question costs almost nothing.
@@ -502,6 +504,7 @@ function LeadForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          ...guardFields(),
           cartId: (() => {
             try {
               return sessionStorage.getItem("rescue_cart_id") ?? crypto.randomUUID();
@@ -531,6 +534,7 @@ function LeadForm({
 
   return (
     <form onSubmit={submit} className="mt-6 border-t border-line pt-6">
+      <SpamTrap value={trap} onChange={setTrap} />
       <p className="font-display text-lg font-semibold text-ink">{outcome.cta}.</p>
       <p className="mt-1 text-sm text-ink/60">
         Add a name and number and the right person calls you back

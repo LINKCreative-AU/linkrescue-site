@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { QUESTIONS, score, summarise } from "@/lib/assessment";
 import { emailLead, emailVisitor, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
+import { guardFormPost, guardOrigin, guardResponse } from "@/lib/form-guard";
 
 // Cart-style lead intake (gstregister funnel pattern):
 //   started   → business + email captured, cart row created
@@ -29,6 +30,21 @@ function cleanAnswers(v: unknown, requireFull: boolean): number[] | null {
 export async function POST(req: Request) {
   const data = await req.json().catch(() => null);
   if (!data) return NextResponse.json({ ok: false }, { status: 400 });
+
+  // ORIGIN CHECK ON EVERY STAGE, THE FULL GUARD ON `completed` ONLY.
+  //
+  // This route is not a form, it is a funnel: `progress` fires after every
+  // answered question, so one honest person completing the assessment is a
+  // dozen POSTs from one address. guardFormPost allows six in ten minutes
+  // across all endpoints, so putting it here wholesale would refuse real
+  // people in the middle of the assessment - and a check that fires on real
+  // people gets taken out, which leaves nothing.
+  //
+  // So the half that costs an honest visitor nothing applies throughout, and
+  // the full guard waits for the stage that actually reaches a human: see
+  // below, just before the Slack and email notifications fire.
+  const originOk = guardOrigin(req);
+  if (!originOk.ok) return guardResponse(originOk, "/api/lead");
 
   const id = clean(data.cartId);
   const stage = clean(data.stage) as LeadStage;
@@ -74,7 +90,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  // completed
+  // completed - the stage that notifies a human and sends email, so it takes
+  // the whole guard: honeypot, fill time, link stuffing and flood control.
+  const guard = guardFormPost(req, data);
+  if (!guard.ok) return guardResponse(guard, "/api/lead");
+
   const name = clean(data.name);
   const phone = clean(data.phone);
   const rawAnswers = cleanAnswers(data.answers, true);

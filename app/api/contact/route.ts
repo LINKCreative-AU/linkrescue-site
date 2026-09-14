@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { notifyEnquiry, type Enquiry } from "@/lib/leads";
+import { guardFormPost, guardResponse } from "@/lib/form-guard";
 
 // Direct enquiries from /contact - people who want to talk rather than run
 // the assessment first. Name and phone are the only required fields: this
@@ -15,6 +16,14 @@ const URGENCY = ["dpn", "urgent", "soon", "planning"];
 export async function POST(req: Request) {
   const data = await req.json().catch(() => null);
   if (!data) return NextResponse.json({ ok: false }, { status: 400 });
+
+  // The shared guard, ON TOP OF the `company` honeypot below rather than
+  // instead of it. That one is older, uses a different field name and answers
+  // 200 so a bot logs a success and moves on - all still true and all still
+  // worth keeping. What it did not have was an origin check, a fill-time check
+  // or a rate limit. See lib/form-guard.ts.
+  const guard = guardFormPost(req, data);
+  if (!guard.ok) return guardResponse(guard, "/api/contact");
 
   // Honeypot: a field hidden from people, irresistible to bots. Return 200 so
   // the bot logs a success and does not come back looking for the real path.

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CONFIDENTIALITY, SITE } from "@/lib/site";
+import { SpamTrap, useSpamGuard } from "@/components/SpamGuard";
 
 // The callback request on /contact. Deliberately short: name and phone are
 // the only required fields, because the person filling this in is usually
@@ -43,6 +44,7 @@ const HEARD_OTHER = "Something else";
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
 export function ContactForm() {
+  const { guardFields, trap, setTrap } = useSpamGuard();
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -71,7 +73,7 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        body: JSON.stringify({ ...guardFields(),
           ...form,
           heard:
             form.heard === HEARD_OTHER && form.heardDetail.trim()
@@ -142,6 +144,7 @@ export function ContactForm() {
 
   return (
     <form onSubmit={submit} className="relative rounded-xl2 border border-line bg-white p-6 sm:p-8">
+      <SpamTrap value={trap} onChange={setTrap} />
       <p className="eyebrow">Ask for a call back</p>
       <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
         Two fields. We will call you.
