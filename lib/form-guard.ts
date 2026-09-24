@@ -138,15 +138,56 @@ function sameOrigin(req: Request): boolean {
 export const isEmail = (v: unknown): v is string =>
   typeof v === "string" && /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim()) && v.length <= 254;
 
+/**
+ * Fields the SITE fills in, never the visitor. Excluded from the scan below.
+ *
+ * THIS LIST EXISTS BECAUSE ITS ABSENCE REFUSED REAL LEADS. The scan used to
+ * join every string in the body, and a form body carries our own attribution
+ * alongside what the person typed. A visitor arriving from a Google search
+ * sent `referrer: "https://www.google.com/"` - which is TWO matches, the
+ * scheme and the `www.` - plus an absolute `page_url`, for three. Three is the
+ * threshold. So an ordinary person, arriving the ordinary way, filling in
+ * nothing but their name and number, was refused as a link spammer and shown
+ * the failure state, while the site logged `link-spam` and moved on.
+ *
+ * It refused selectively, which is why it went unnoticed: a referrer without
+ * `www.` (l.facebook.com, duckduckgo.com) scores one and passes, so paid
+ * social traffic converted and organic search did not.
+ *
+ * ANYTHING ADDED TO THE SUBMIT BODY THAT THE VISITOR DOES NOT TYPE BELONGS
+ * HERE. The default is to scan, so a new question on a form is covered
+ * automatically; a new machine-set field is not, and forgetting one puts the
+ * bug straight back. These names match lib/attribution.ts's SubmitAttribution
+ * where the site has one.
+ */
+const NOT_TYPED_BY_VISITOR = new Set([
+  "landing",
+  "referrer",
+  "path",
+  "page_url",
+  "session_id",
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+]);
+
 /** Free-text spam signal: link stuffing.
  *
  *  Two links in a message is unusual but happens - someone pasting their site
  *  and their LinkedIn. Three or more in an enquiry to an accounting firm is
  *  effectively always an advert, and BBCode markup is never a human on a
- *  React form. */
+ *  React form.
+ *
+ *  Counted across what the VISITOR wrote, not across the whole body - see
+ *  NOT_TYPED_BY_VISITOR. Still counted across their fields together rather
+ *  than per field, because a name, a message and a phone box with one link
+ *  each is the same advert split three ways. */
 function looksLikeLinkSpam(data: Record<string, unknown>): boolean {
-  const text = Object.values(data)
-    .filter((v) => typeof v === "string")
+  const text = Object.entries(data)
+    .filter(([k, v]) => typeof v === "string" && !NOT_TYPED_BY_VISITOR.has(k))
+    .map(([, v]) => v as string)
     .join(" ");
   const urls = text.match(/https?:\/\/|www\./gi)?.length ?? 0;
   const bbcode = /\[url[=\]]|\[link[=\]]/i.test(text);
