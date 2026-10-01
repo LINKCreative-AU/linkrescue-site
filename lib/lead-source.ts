@@ -27,7 +27,7 @@
 // Not every lead begins in a browser. A Stripe webhook has no Referer and no
 // visitor, and says so plainly rather than inventing a page.
 
-export type LeadSource = { site: string; page: string; form: string };
+export type LeadSource = { site: string; page: string; form: string; label?: string };
 
 // A hostname, and nothing but. This value reaches an email subject line, and
 // hostile input must never be able to put a newline or a comma in there.
@@ -75,7 +75,36 @@ function pageOf(req: Request, site: string): string {
   }
 }
 
-export function leadSource(req: Request, form: string): LeadSource {
+/**
+ * `publicBase` is for an app served under SOMEONE ELSE'S domain, and only then.
+ *
+ * LINK Coworking and LINK Culture are separate Next apps reached at
+ * link.com.au/coworking and link.com.au/culture through EXTERNAL rewrites in
+ * linkhq's next.config.mjs. Vercel's proxy makes a fresh request to the
+ * destination deployment, so those apps observe their own internal host
+ * (linkcowork-site.vercel.app) and a Referer on link.com.au that does not match
+ * it. Observed, they would report the wrong Site and no Page at all.
+ *
+ * So these two - and only these two - pass the public base they are really
+ * reached on, from the ORIGIN/BASE_PATH constants already in their own
+ * lib/site.ts. That IS a declared value rather than an observed one, which is
+ * the thing this module otherwise exists to avoid; the honest trade is that for
+ * a proxied app there is nothing truthful to observe, and a constant in the
+ * app's own source is reviewable in a way a proxy header is not. Every other
+ * site passes nothing and keeps the observed host.
+ */
+export function leadSource(req: Request, form: string, publicBase?: string): LeadSource {
+  if (publicBase) {
+    try {
+      const u = new URL(publicBase);
+      const site = u.hostname.toLowerCase();
+      const seg = u.pathname.split("/").filter(Boolean)[0] ?? "";
+      return { site, page: pageOf(req, site), form, label: seg || undefined };
+    } catch {
+      // A malformed constant falls through to the observed host rather than
+      // throwing on a live lead.
+    }
+  }
   const site = hostOf(req);
   return { site, page: pageOf(req, site), form };
 }
@@ -91,5 +120,8 @@ export function sourceRows(src: LeadSource): [string, string][] {
 
 /** "[marketing] Website lead - Dimitri E" */
 export function tagSubject(src: LeadSource, subject: string): string {
-  return `[${labelOf(src.site)}] ${subject}`;
+  // A proxied app labels by its own section - [coworking], not [link] - because
+  // the host it shares with the hub would make its leads indistinguishable from
+  // every linkhq lead, which is the fault this whole module exists to fix.
+  return `[${src.label ?? labelOf(src.site)}] ${subject}`;
 }

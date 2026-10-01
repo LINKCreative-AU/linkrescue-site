@@ -320,6 +320,7 @@ export async function notifyEnquiry(rec: Enquiry, source: LeadSource): Promise<b
         body: JSON.stringify({
           text: [
             `${URGENCY_PREFIX[rec.urgency] ?? ":speech_balloon:"} New contact enquiry (not an assessment)`,
+            `_${source.site}${source.page} via ${source.form}_`,
             `*Name:* ${rec.name}`,
             `*Phone:* ${rec.phone}`,
             rec.email ? `*Email:* ${rec.email}` : "",
