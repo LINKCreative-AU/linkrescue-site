@@ -114,8 +114,31 @@ function clientIp(req: Request): string {
  * list, so preview deployments, localhost and every domain in the estate work
  * without configuration - and no future domain gets locked out because someone
  * forgot to add it here.
+ *
+ * BEHIND AN EXTERNAL REWRITE, COMPARING AGAINST HOST LOCKS THE SITE OUT.
+ *
+ * link.com.au/coworking is an EXTERNAL rewrite in linkhq's next.config.mjs to
+ * https://linkcowork-site.vercel.app/coworking/*. Vercel's proxy makes a FRESH
+ * request to that deployment, so the coworking app's own Host is
+ * linkcowork-site.vercel.app - while the visitor's browser, correctly, sends
+ * Origin: https://link.com.au. Host never equals Origin, so every genuine tour
+ * enquiry was refused 403 "We could not accept that submission."
+ *
+ * Verified against production, 1 Oct 2026, empty body so nothing could be
+ * created: Origin link.com.au -> 403; Origin linkcowork-site.vercel.app -> 400,
+ * which is the route's own missing-email check and is only reachable if the
+ * guard passed. The same probe against /culture/api/lead -> 400, so the proxy
+ * is fine; it was this comparison.
+ *
+ * `alsoAllow` is for exactly that case: an app served under another domain
+ * passes the public origin it is really reached on. It is a CONSTANT in that
+ * app's own source (lib/site.ts ORIGIN), reviewable in a diff - deliberately
+ * not an environment variable and not a proxy header, because a proxy header is
+ * attacker-supplied and an env var cannot be reviewed. An app that passes
+ * nothing is unchanged: the default is an empty list, so nothing is loosened
+ * anywhere it is not explicitly asked for.
  */
-function sameOrigin(req: Request): boolean {
+function sameOrigin(req: Request, alsoAllow: string[] = []): boolean {
   const host = req.headers.get("host");
   if (!host) return true; // Cannot judge; abstain rather than guess.
 
@@ -123,10 +146,21 @@ function sameOrigin(req: Request): boolean {
   const referer = req.headers.get("referer");
   if (!origin && !referer) return false;
 
+  // The request's own Host, plus any public origin this app declares it is
+  // legitimately served on. See the note above `alsoAllow`.
+  const allowed = new Set([host]);
+  for (const extra of alsoAllow) {
+    try {
+      allowed.add(new URL(extra).host);
+    } catch {
+      // A malformed constant must never silently widen what is accepted.
+    }
+  }
+
   for (const value of [origin, referer]) {
     if (!value) continue;
     try {
-      if (new URL(value).host === host) return true;
+      if (allowed.has(new URL(value).host)) return true;
     } catch {
       // Malformed header. Not evidence of good faith.
     }
@@ -200,11 +234,16 @@ function looksLikeLinkSpam(data: Record<string, unknown>): boolean {
  * Call it first in the route, before any delivery, subscription or logging that
  * costs money or reaches a human.
  */
-export function guardFormPost(req: Request, body: unknown): GuardResult {
+export function guardFormPost(
+  req: Request,
+  body: unknown,
+  /** Public origins this app is legitimately reached on - see sameOrigin. */
+  opts: { alsoAllow?: string[] } = {}
+): GuardResult {
   const data = (body && typeof body === "object" ? body : {}) as Record<string, unknown>;
 
   // 1. Did this come from one of our pages at all?
-  if (!sameOrigin(req)) {
+  if (!sameOrigin(req, opts.alsoAllow ?? [])) {
     return { ok: false, status: 403, reason: "off-origin" };
   }
 
