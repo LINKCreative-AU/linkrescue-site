@@ -315,15 +315,28 @@ export function guardOrigin(req: Request): GuardResult {
  * the log needs to know which check fired and whether it is catching real
  * people.
  */
+/**
+ * The two sentences a refused visitor sees - exported because something else has
+ * to be able to RECOGNISE a refusal.
+ *
+ * The estate canary probes these endpoints as a visitor and must tell a guard
+ * refusal (real enquiries being turned away) from a route's own validation
+ * rejecting an empty payload (healthy). It did that by matching this wording.
+ * Inline strings meant a reword here would silently blind the canary to the
+ * exact fault it exists to catch - which is how the coworking form refused
+ * tour enquiries for a week while the report called it fine. Exported, the
+ * canary imports them and the compiler keeps the two in step.
+ */
+export const GUARD_REFUSED_MESSAGE = "We could not accept that submission.";
+export const GUARD_RATE_LIMITED_MESSAGE =
+  "Too many submissions - please wait a few minutes and try again.";
+
 export function guardResponse(fail: GuardFailure, route: string): Response {
   console.warn(`[form-guard] ${route} refused: ${fail.reason}`);
   return Response.json(
     {
       ok: false,
-      error:
-        fail.status === 429
-          ? "Too many submissions - please wait a few minutes and try again."
-          : "We could not accept that submission.",
+      error: fail.status === 429 ? GUARD_RATE_LIMITED_MESSAGE : GUARD_REFUSED_MESSAGE,
     },
     { status: fail.status },
   );
