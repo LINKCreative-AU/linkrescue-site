@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileCta } from "@/components/MobileCta";
 import { JsonLd, firmSchema } from "@/components/Schema";
+import { Attribution } from "@/components/Attribution";
 import { SITE } from "@/lib/site";
 
 const elza = localFont({
@@ -45,6 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <Attribution />
+        {/* The Engine Room's session tracker. Structure only - pageviews,
+            scroll depth, anonymous click targets - never field values or PII. */}
+        <script defer src="https://engine.link.com.au/t.js" data-site="linkrescue" />
         <MobileCta />
         <Analytics />
       </body>
