@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { notifyEnquiry, type Enquiry } from "@/lib/leads";
+import { leadSource } from "@/lib/lead-source";
 import { guardFormPost, guardResponse } from "@/lib/form-guard";
 
 // Direct enquiries from /contact - people who want to talk rather than run
@@ -14,6 +15,7 @@ const clean = (v: unknown, max = MAX_LEN) => String(v ?? "").trim().slice(0, max
 const URGENCY = ["dpn", "urgent", "soon", "planning"];
 
 export async function POST(req: Request) {
+  const leadSrc = leadSource(req, "/api/contact");
   const data = await req.json().catch(() => null);
   if (!data) return NextResponse.json({ ok: false }, { status: 400 });
 
@@ -67,6 +69,6 @@ export async function POST(req: Request) {
   // channel is down the enquiry is only in the server log, and the form says
   // so and pushes the phone number rather than showing a clean confirmation
   // over a lead nobody will see.
-  const delivered = await notifyEnquiry(rec);
+  const delivered = await notifyEnquiry(rec, leadSrc);
   return NextResponse.json({ ok: true, delivered });
 }

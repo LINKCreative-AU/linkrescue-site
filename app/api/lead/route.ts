@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { QUESTIONS, score, summarise } from "@/lib/assessment";
 import { emailLead, emailVisitor, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
+import { leadSource } from "@/lib/lead-source";
 import { guardFormPost, guardOrigin, guardResponse } from "@/lib/form-guard";
 
 // Cart-style lead intake (gstregister funnel pattern):
@@ -28,6 +29,7 @@ function cleanAnswers(v: unknown, requireFull: boolean): number[] | null {
 }
 
 export async function POST(req: Request) {
+  const leadSrc = leadSource(req, "/api/lead");
   const data = await req.json().catch(() => null);
   if (!data) return NextResponse.json({ ok: false }, { status: 400 });
 
@@ -123,8 +125,8 @@ export async function POST(req: Request) {
 
   const [stored, slacked, emailed] = await Promise.all([
     upsertCart(rec),
-    notifySlack(rec),
-    emailLead(rec),
+    notifySlack(rec, leadSrc),
+    emailLead(rec, leadSrc),
     emailVisitor(rec), // the visitor's copy of their result
   ]);
   // Three independent channels, so one failing is survivable. All three failing

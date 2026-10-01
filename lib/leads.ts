@@ -1,3 +1,4 @@
+import { sourceRows, tagSubject, type LeadSource } from "./lead-source";
 // Lead delivery, cart-style (the gstregister funnel pattern): one row per
 // assessment "cart", created the moment business + email land, updated on
 // every answered question, finalised on completion. Abandoned carts stay in
@@ -157,7 +158,12 @@ const PRIORITY_PREFIX: Record<string, string> = {
   standard: ":large_green_circle:",
 };
 
-export async function notifySlack(rec: CompletedCart): Promise<boolean> {
+// `source` is REQUIRED - see lib/lead-source.ts. Rescue delivers into the SAME
+// #leads address as LINK Advisors (James's call, 2026-07-30), so once an email
+// lands the sender display name is the only thing telling the two apart - and
+// that name is a hand-set RESEND_FROM. On 1 Oct 2026 a lead one site over
+// could not be placed at all, for exactly this reason.
+export async function notifySlack(rec: CompletedCart, source: LeadSource): Promise<boolean> {
   const hook = process.env.SLACK_LEADS_WEBHOOK;
   if (!hook) {
     console.log("[lead - slack not configured]");
@@ -169,6 +175,7 @@ export async function notifySlack(rec: CompletedCart): Promise<boolean> {
   const summary = rec.answers.map((a) => `• *${a.topic}:* ${a.answer}`).join("\n");
   const text = [
     `${PRIORITY_PREFIX[rec.outcome.priority]} New rescue lead - *${rec.outcome.label}* (score ${rec.score})`,
+    `_${source.site}${source.page} via ${source.form}_`,
     `*Name:* ${rec.name}`,
     `*Phone:* ${rec.phone}`,
     `*Email:* ${rec.email}`,
@@ -196,7 +203,7 @@ export async function notifySlack(rec: CompletedCart): Promise<boolean> {
   }
 }
 
-export async function emailLead(rec: CompletedCart): Promise<boolean> {
+export async function emailLead(rec: CompletedCart, source: LeadSource): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   // Rescue has no entry of its own in the group register
   // (SLACK-EMAIL-INTEGRATIONS.md in the linkhq repo); James's call 2026-07-30 is
@@ -209,7 +216,7 @@ export async function emailLead(rec: CompletedCart): Promise<boolean> {
   // link.com.au is verified in Resend, so the shared leads@ sender works; it is
   // SEND-ONLY and must never appear as a recipient.
   const from = process.env.RESEND_FROM ?? "LINK Rescue <leads@link.com.au>";
-  const subject = `[${rec.outcome.label}] Rescue lead - ${rec.name}`;
+  const subject = tagSubject(source, `[${rec.outcome.label}] Rescue lead - ${rec.name}`);
   const lines: [string, string][] = [
     ["Outcome", `${rec.outcome.label} (${rec.outcome.priority} priority, score ${rec.score})`],
     ["Name", rec.name],
@@ -218,8 +225,9 @@ export async function emailLead(rec: CompletedCart): Promise<boolean> {
     ["Business", rec.business ? `${rec.business}${rec.abn ? ` (ABN ${rec.abn})` : ""}` : "-"],
     ["Location", rec.entityLocation || "-"],
     ...rec.answers.map((a) => [a.topic, a.answer] as [string, string]),
-    ["Source", JSON.stringify(rec.attribution?.utm ?? {})],
+    ["UTM", JSON.stringify(rec.attribution?.utm ?? {})],
     ["Referrer", rec.attribution?.referrer || "-"],
+    ...sourceRows(source),
   ];
   const text = lines.map(([k, v]) => `${k}: ${v}`).join("\n");
   if (!key) {
@@ -286,7 +294,7 @@ const URGENCY_PREFIX: Record<string, string> = {
   "planning": ":large_green_circle: *Planning ahead*",
 };
 
-export async function notifyEnquiry(rec: Enquiry): Promise<boolean> {
+export async function notifyEnquiry(rec: Enquiry, source: LeadSource): Promise<boolean> {
   const lines: [string, string][] = [
     ["Name", rec.name],
     ["Phone", rec.phone],
@@ -297,11 +305,12 @@ export async function notifyEnquiry(rec: Enquiry): Promise<boolean> {
     // Self-reported, and worth more than the UTM line under it: no analytics
     // tool can see an accountant's recommendation or an AI assistant's answer.
     ["Heard about us", rec.heard || "-"],
-    ["Source", JSON.stringify(rec.attribution?.utm ?? {})],
+    ["UTM", JSON.stringify(rec.attribution?.utm ?? {})],
     ["Referrer", rec.attribution?.referrer || "-"],
+    ...sourceRows(source),
   ];
   const text = lines.map(([k, v]) => `${k}: ${v}`).join("\n");
-  const subject = `[Enquiry] Rescue contact - ${rec.name}`;
+  const subject = tagSubject(source, `[Enquiry] Rescue contact - ${rec.name}`);
 
   const hook = process.env.SLACK_LEADS_WEBHOOK;
   const slack = hook
