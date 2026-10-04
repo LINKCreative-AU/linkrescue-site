@@ -48,7 +48,7 @@ export const TEAM = [
   {
     name: "James Webb",
     role: "Co-Founder, LINK", // TODO confirm title
-    bio: "James co-founded LINK.com.au and leads its growth engines. His lens on a rescue is a growth accountant's: fix the model, fix the cash, then make the business worth saving.", // TODO James to confirm
+    bio: "James founded LINK.com.au and leads its growth engines. His lens on a rescue is a growth accountant's: fix the model, fix the cash, then make the business worth saving.", // TODO James to confirm
     photo: "/team/james.jpg",
   },
   {
