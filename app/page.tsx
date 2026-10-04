@@ -84,7 +84,7 @@ const FAQS = [
   },
   {
     q: "Are you liquidators?",
-    a: "We are advisors backed by the LINK group of accounting and advisory businesses. Where a formal appointment is the right path, registered insolvency practitioners we work alongside handle the appointment, and we stay in your corner through it.",
+    a: "We are advisors backed by LINK.com.au's accounting and advisory businesses. Where a formal appointment is the right path, registered insolvency practitioners we work alongside handle the appointment, and we stay in your corner through it.",
   },
   {
     q: "Is it too late if I have already received a Director Penalty Notice?",
@@ -162,7 +162,7 @@ export default function Home() {
               },
               {
                 title: "You are not carrying this alone",
-                text: "From the first call there is a team beside you, backed by the LINK group. Most directors tell us the weight lifts the day someone else finally knows the full picture.",
+                text: "From the first call there is a team beside you, backed by LINK.com.au. Most directors tell us the weight lifts the day someone else finally knows the full picture.",
               },
             ].map((c) => (
               <div key={c.title}>
@@ -415,7 +415,7 @@ export default function Home() {
               },
               {
                 stat: "520+ reviews",
-                label: "4.9 average across the LINK group",
+                label: "4.9 average across LINK.com.au",
                 text: "The accountants behind this site are the same team clients rate on Google every week, year after year.",
               },
             ].map((s) => (
@@ -460,7 +460,7 @@ export default function Home() {
           <p className="mt-6 max-w-3xl text-xs leading-relaxed text-ink/45">
             Plan outcomes are historical results from matters the LINK team has
             supported, every situation differs and past results are not a
-            promise. Reviews relate to services across the LINK group.
+            promise. Reviews relate to services across LINK.com.au.
           </p>
         </div>
       </section>
