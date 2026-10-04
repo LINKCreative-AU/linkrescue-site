@@ -22,7 +22,7 @@ export const SITE = {
   group: {
     name: "LINK",
     url: "https://link.com.au",
-    line: "Backed by the LINK group - accounting, bookkeeping, finance, wealth and property, one connected team.",
+    line: "Backed by LINK.com.au - accounting, bookkeeping, finance, wealth and property, one connected team.",
   },
 } as const;
 
@@ -48,7 +48,7 @@ export const TEAM = [
   {
     name: "James Webb",
     role: "Co-Founder, LINK", // TODO confirm title
-    bio: "James co-founded the LINK group and leads its growth engines. His lens on a rescue is a growth accountant's: fix the model, fix the cash, then make the business worth saving.", // TODO James to confirm
+    bio: "James co-founded LINK.com.au and leads its growth engines. His lens on a rescue is a growth accountant's: fix the model, fix the cash, then make the business worth saving.", // TODO James to confirm
     photo: "/team/james.jpg",
   },
   {

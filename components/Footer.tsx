@@ -27,7 +27,7 @@ const COMPANY = [
   { label: "How it works", href: "/#how-it-works" },
   { label: "Who you talk to", href: "/#team" },
   { label: "Privacy", href: "https://link.com.au/privacy" },
-  { label: "The LINK group", href: SITE.group.url, external: true },
+  { label: "LINK.com.au", href: SITE.group.url, external: true },
 ];
 
 export function Footer() {
@@ -78,7 +78,7 @@ export function Footer() {
               </a>
               . Power forward.
             </p>
-            <a href={SITE.group.url} aria-label="LINK group">
+            <a href={SITE.group.url} aria-label="LINK.com.au">
               <Image src={symbol} alt="LINK symbol" height={26} className="opacity-90" />
             </a>
           </div>
