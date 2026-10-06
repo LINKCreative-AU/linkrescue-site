@@ -16,7 +16,18 @@ export function firmSchema() {
     description:
       "Confidential business rescue guidance for Australian company directors: ATO debt, Director Penalty Notices, creditor pressure, restructuring and alternatives to liquidation.",
     areaServed: { "@type": "Country", name: "Australia" },
-    parentOrganization: { "@type": "Organization", name: "LINK", url: SITE.group.url },
+    parentOrganization: {
+      // By @id, not by name. The hub publishes this exact node at
+      // link.com.au/#organization; pointing at it is what makes nine domains,
+      // the Instagram and the Google listing resolve to ONE business rather
+      // than to several that happen to share a word. Name-and-url matching
+      // leaves that to inference. Keep this string identical across the
+      // estate - it is the join key.
+      "@id": "https://link.com.au/#organization",
+      "@type": "Organization",
+      name: "LINK",
+      url: SITE.group.url,
+    },
     knowsAbout: [
       "Business rescue",
       "ATO debt negotiation",
