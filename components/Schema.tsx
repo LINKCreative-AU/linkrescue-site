@@ -17,12 +17,19 @@ export function firmSchema() {
       "Confidential business rescue guidance for Australian company directors: ATO debt, Director Penalty Notices, creditor pressure, restructuring and alternatives to liquidation.",
     areaServed: { "@type": "Country", name: "Australia" },
     parentOrganization: {
-      // By @id, not by name. The hub publishes this exact node at
-      // link.com.au/#organization; pointing at it is what makes nine domains,
-      // the Instagram and the Google listing resolve to ONE business rather
-      // than to several that happen to share a word. Name-and-url matching
-      // leaves that to inference. Keep this string identical across the
-      // estate - it is the join key.
+      // By @id as well as by name. The hub publishes this exact node at
+      // link.com.au/#organization.
+      //
+      // Be honest about what this buys: Google does not dereference an @id
+      // across documents - JSON-LD is parsed per document, and Google's
+      // documented cross-site entity mechanisms are `url` and `sameAs`, not
+      // @id or parentOrganization. So this is a correctness and consistency
+      // measure, not a ranking one. It costs nothing (name and url are kept,
+      // so a parser that ignores the IRI sees exactly what it saw before) and
+      // it is right in linked-data terms. The signal that actually ties this
+      // estate together is the group listing in the hub's sameAs.
+      //
+      // Keep the string identical across the estate.
       "@id": "https://link.com.au/#organization",
       "@type": "Organization",
       name: "LINK",
