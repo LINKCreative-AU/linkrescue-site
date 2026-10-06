@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { pushLead } from "@/lib/linkleads";
 import { notifyEnquiry, type Enquiry } from "@/lib/leads";
 import { leadSource } from "@/lib/lead-source";
 import { guardFormPost, guardResponse } from "@/lib/form-guard";
@@ -64,6 +65,27 @@ export async function POST(req: Request) {
       landing: clean(data.attribution?.landing),
     },
   };
+
+  // A second copy into the Engine Room, on top of this site's own email and
+  // Slack notification. Before notifyEnquiry on purpose: when every channel
+  // is down this copy is the only place the enquiry survives outside the
+  // server log, which is exactly when it is worth the most.
+  //
+  // rec.attribution is nested; the Engine Room reads flat utm_* / referrer /
+  // landing, so it is spread out here rather than changing what forms send.
+  pushLead({
+    form: "contact",
+    name: rec.name,
+    email: rec.email || undefined,
+    phone: rec.phone || undefined,
+    message: rec.message || undefined,
+    details: { business: rec.business, urgency: rec.urgency, heard: rec.heard },
+    src: {
+      ...rec.attribution?.utm,
+      referrer: rec.attribution?.referrer,
+      landing: rec.attribution?.landing,
+    },
+  });
 
   // `delivered` is honest about whether a human was actually alerted. If every
   // channel is down the enquiry is only in the server log, and the form says

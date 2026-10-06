@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { pushLead } from "@/lib/linkleads";
 import { QUESTIONS, score, summarise } from "@/lib/assessment";
 import { emailLead, emailVisitor, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
 import { leadSource } from "@/lib/lead-source";
@@ -122,6 +123,32 @@ export async function POST(req: Request) {
     flags,
     attribution,
   } satisfies CartRecord as CompletedCart;
+
+  // A second copy into the Engine Room, on top of the three channels below.
+  // Only the completed stage: `started` and `progress` are an abandoned-cart
+  // trail with partial details, and pushing those would fill the group lead
+  // desk with half-finished assessments and fire the unclaimed-lead siren on
+  // people who never asked to be contacted.
+  pushLead({
+    form: "assessment",
+    name: rec.name,
+    email: rec.email || undefined,
+    phone: rec.phone || undefined,
+    details: {
+      business: rec.business,
+      abn: rec.abn,
+      entity_type: rec.entityType,
+      entity_location: rec.entityLocation,
+      score: rec.score,
+      outcome: rec.outcome,
+      flags: rec.flags,
+    },
+    src: {
+      ...rec.attribution?.utm,
+      referrer: rec.attribution?.referrer,
+      landing: rec.attribution?.landing,
+    },
+  });
 
   const [stored, slacked, emailed] = await Promise.all([
     upsertCart(rec),
