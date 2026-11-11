@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { QUESTIONS, score, summarise } from "@/lib/assessment";
 import { emailLead, emailVisitor, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
 import { leadSource } from "@/lib/lead-source";
 import { guardFormPost, guardOrigin, guardResponse } from "@/lib/form-guard";
+import { forwardLeadToRank, rankAttribution, rankFullDetail } from "@/lib/rank";
 
 // Cart-style lead intake (gstregister funnel pattern):
 //   started   → business + email captured, cart row created
@@ -122,6 +123,42 @@ export async function POST(req: Request) {
     flags,
     attribution,
   } satisfies CartRecord as CompletedCart;
+
+  // A second record in rank, for completed assessments only: `started` and
+  // `progress` are a cart filling up, not an enquiry. Keyed on the cart id so
+  // a double submit is one lead.
+  //
+  // WHAT IS LEFT OUT, AND WHY. The site promises that nothing entered in the
+  // assessment is shared outside the LINK Rescue team. By default rank gets
+  // who to call and the result band that sets how fast, and NOT the six
+  // answers, the score, the flags or the ABN. See docs/rank.md before
+  // widening this.
+  const full = rankFullDetail();
+  after(() =>
+    forwardLeadToRank({
+      name,
+      email,
+      phone,
+      company: business,
+      form_id: "assessment",
+      source_path: leadSrc.page.split("?")[0] || "/assessment",
+      idempotencyKey: `assessment-${id}`,
+      ...rankAttribution(attribution),
+      fields: {
+        result: outcome.label,
+        priority: outcome.priority,
+        ...(full
+          ? {
+              score: total,
+              flags,
+              abn,
+              entity_type: rec.entityType,
+              ...Object.fromEntries(rec.answers.map((a) => [a.topic, a.answer])),
+            }
+          : {}),
+      },
+    }),
+  );
 
   const [stored, slacked, emailed] = await Promise.all([
     upsertCart(rec),
