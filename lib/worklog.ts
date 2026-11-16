@@ -19,6 +19,32 @@ export type WorklogEntry = { id: string; date: string; title: string; detail?: s
 
 export const WORKLOG: WorklogEntry[] = [
   {
+    id: "2026-11-17-payment-plan-calculator",
+    date: "2026-11-17",
+    title: "ATO payment plan calculator expanded, with the current ATO interest rate and clearer guidance",
+    detail:
+      "You can now type exact amounts and see the monthly payment that clears the debt in 12 or 24 months, with plain guidance on how payment plans work and when one is the right tool.",
+  },
+  {
+    id: "2026-11-17-dpn-page",
+    date: "2026-11-17",
+    title: "Director penalty notice page now fully explains the notice, the two types and the 21 days",
+    detail:
+      "Directors with a notice in hand get a clear list of what to do now and a direct way to call or ask for a priority call back.",
+  },
+  {
+    id: "2026-11-17-search-titles",
+    date: "2026-11-17",
+    title: "Clearer Google listings for seven pages people already find in search",
+    detail:
+      "The page names and summaries shown in Google now match what people search for, and the key pages link to each other more.",
+  },
+  {
+    id: "2026-11-17-visitor-analytics",
+    date: "2026-11-17",
+    title: "Visitor counting now set up the same way as LINK.com.au's other websites",
+  },
+  {
     id: "2026-11-16-enquiries-in-rank",
     date: "2026-11-16",
     title: "Every website enquiry is now also recorded in rank.",

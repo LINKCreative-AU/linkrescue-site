@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InfoPage } from "@/components/InfoPage";
 
 export const metadata: Metadata = {
-  title: "Safe Harbour - Insolvent Trading Protection While You Turn Around",
+  title: "Safe Harbour: Insolvent Trading Protection",
   description:
-    "Safe harbour protects directors from insolvent trading liability while they pursue a credible turnaround plan with proper advice. What it covers, the conditions, and how to enter it before the option expires.",
+    "Safe harbour shields directors from insolvent trading claims during a credible turnaround. See what it covers and the conditions, then talk to us by phone.",
   alternates: { canonical: "/safe-harbour" },
 };
 
@@ -69,6 +69,7 @@ export default function Page() {
         { label: "Alternatives to liquidation", href: "/liquidation-alternatives" },
         { label: "Small business restructuring", href: "/small-business-restructuring" },
         { label: "Voluntary administration", href: "/voluntary-administration" },
+        { label: "Director penalty notice help", href: "/director-penalty-notice" },
       ]}
     />
   );

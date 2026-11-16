@@ -5,9 +5,9 @@ import { JsonLd, breadcrumbSchema, faqSchema } from "@/components/Schema";
 import { DISCLAIMER } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Am I Insolvent? The 12 Warning Signs Courts Look At",
+  title: "Am I Insolvent? Free 12-Sign Insolvency Test",
   description:
-    "A free insolvency test built on the indicators courts and ASIC use: continuing losses, overdue tax, creditors outside terms and more. Check your business against all 12 and see what your count means.",
+    "Check your business against the 12 indicators of insolvency courts and ASIC weigh. Free, private, instant, with what your count means and what to do next.",
   alternates: { canonical: "/am-i-insolvent" },
 };
 
@@ -148,6 +148,11 @@ export default function Page() {
               <li>
                 <Link href="/ato-payment-plan-calculator" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
                   ATO payment plan calculator →
+                </Link>
+              </li>
+              <li>
+                <Link href="/director-penalty-notice" className="text-sm font-medium text-ink/75 transition hover:text-rescue">
+                  Director penalty notice help →
                 </Link>
               </li>
               <li>

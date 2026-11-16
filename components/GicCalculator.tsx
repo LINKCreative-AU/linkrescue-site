@@ -7,22 +7,29 @@ import { SITE } from "@/lib/site";
 // payment actually clears it. Pure client-side maths, no data leaves the page.
 //
 // GIC compounds daily and the ATO resets the annual rate quarterly.
-// TODO update GIC_ANNUAL_PCT each quarter from ato.gov.au (rates page:
-// "General interest charge") - it is deliberately surfaced in the UI so a
-// stale value is visible rather than silent.
-const GIC_ANNUAL_PCT = 10.78;
+// TODO update GIC_ANNUAL_PCT and GIC_QUARTER each quarter from ato.gov.au
+// (rates page: "General interest charge") - both are deliberately surfaced in
+// the UI so a stale value is visible rather than silent.
+const GIC_ANNUAL_PCT = 11.51;
+const GIC_QUARTER = "October to December 2026";
 const DAILY_RATE = GIC_ANNUAL_PCT / 100 / 365;
 const AVG_DAYS_PER_MONTH = 365 / 12;
 const MAX_MONTHS = 240;
+const MONTHLY_RATE = Math.pow(1 + DAILY_RATE, AVG_DAYS_PER_MONTH) - 1;
+
+// The level monthly payment that clears `debt` in `months` instalments with
+// interest compounding at the GIC rate (standard amortisation).
+function paymentToClear(debt: number, months: number) {
+  return (debt * MONTHLY_RATE) / (1 - Math.pow(1 + MONTHLY_RATE, -months));
+}
 
 function project(debt: number, monthly: number) {
-  const monthlyFactor = Math.pow(1 + DAILY_RATE, AVG_DAYS_PER_MONTH);
-  const firstMonthInterest = debt * (monthlyFactor - 1);
+  const firstMonthInterest = debt * MONTHLY_RATE;
   let balance = debt;
   let months = 0;
   let totalInterest = 0;
   while (balance > 0 && months < MAX_MONTHS) {
-    const interest = balance * (monthlyFactor - 1);
+    const interest = balance * MONTHLY_RATE;
     totalInterest += interest;
     balance = balance + interest - monthly;
     months += 1;
@@ -54,8 +61,9 @@ export function GicCalculator() {
         What is your tax debt costing you?
       </h2>
       <p className="mt-2 text-sm text-ink/60">
-        Using the general interest charge at {GIC_ANNUAL_PCT}% a year, compounding daily.
-        Estimates only, and GIC stopped being tax deductible on 1 July 2025.
+        Using the general interest charge at {GIC_ANNUAL_PCT}% a year ({GIC_QUARTER}),
+        compounding daily. Estimates only, and GIC stopped being tax deductible on 1 July 2025.
+        Nothing you enter leaves this page.
       </p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
@@ -66,6 +74,7 @@ export function GicCalculator() {
           min={5000}
           max={1000000}
           step={5000}
+          inputMax={5000000}
         />
         <SliderField
           label="What you can pay each month"
@@ -74,11 +83,25 @@ export function GicCalculator() {
           min={0}
           max={50000}
           step={250}
+          inputMax={500000}
         />
       </div>
 
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        {(debt > 0 ? [12, 24] : []).map((m) => (
+          <div key={m} className="rounded-lg border border-line px-4 py-3">
+            <p className="text-xs font-semibold text-ink/60">To clear it in {m} months</p>
+            <p className="mt-1 font-display text-lg font-semibold text-ink">
+              About {fmt(paymentToClear(debt, m))} a month
+            </p>
+          </div>
+        ))}
+      </div>
+
       <div aria-live="polite" className="mt-6 rounded-lg border border-line bg-cloud/50 p-5">
-        {interestOnly || r.neverClears ? (
+        {debt <= 0 ? (
+          <p className="text-sm text-ink/75">Enter your ATO debt above to see the numbers.</p>
+        ) : interestOnly || r.neverClears ? (
           <>
             <p className="font-display text-lg font-semibold text-rescue-dark">
               At {fmt(monthly)} a month, this debt never clears.
@@ -128,6 +151,7 @@ function SliderField({
   min,
   max,
   step,
+  inputMax,
 }: {
   label: string;
   value: number;
@@ -135,22 +159,42 @@ function SliderField({
   min: number;
   max: number;
   step: number;
+  /** Typed amounts may go past the slider's range, up to this. */
+  inputMax: number;
 }) {
+  const id = label.toLowerCase().replace(/[^a-z]+/g, "-");
   return (
-    <label className="block">
-      <span className="flex items-baseline justify-between">
-        <span className="text-xs font-semibold text-ink/60">{label}</span>
-        <span className="font-display text-lg font-semibold text-ink">{fmt(value)}</span>
-      </span>
+    <div>
+      <label htmlFor={id} className="block text-xs font-semibold text-ink/60">
+        {label}
+      </label>
+      <div className="mt-1.5 flex items-center rounded-lg border border-line focus-within:border-rescue">
+        <span className="pl-3 font-display text-lg font-semibold text-ink/50">$</span>
+        <input
+          id={id}
+          type="number"
+          inputMode="numeric"
+          min={0}
+          max={inputMax}
+          step={step}
+          value={value}
+          onChange={(e) => {
+            const n = Number(e.target.value);
+            onChange(Number.isFinite(n) ? Math.min(Math.max(n, 0), inputMax) : 0);
+          }}
+          className="w-full rounded-lg bg-transparent px-2 py-2 font-display text-lg font-semibold text-ink focus:outline-none"
+        />
+      </div>
       <input
         type="range"
+        aria-label={`${label} slider`}
         min={min}
         max={max}
         step={step}
-        value={value}
+        value={Math.min(Math.max(value, min), max)}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-2 w-full accent-[#7B1E3A]"
+        className="mt-3 w-full accent-[#7B1E3A]"
       />
-    </label>
+    </div>
   );
 }

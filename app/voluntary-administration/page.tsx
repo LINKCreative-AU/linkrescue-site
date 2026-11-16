@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InfoPage } from "@/components/InfoPage";
 
 export const metadata: Metadata = {
-  title: "Voluntary Administration - Process, Timeline & Alternatives",
+  title: "Voluntary Administration: Meaning and Timeline",
   description:
-    "Voluntary administration gives an insolvent company breathing space while creditors decide its future: a deed of company arrangement, liquidation, or a return to the directors. The process, the timeline and how it compares to restructuring.",
+    "What voluntary administration means for your company, how the weeks run to the creditors' vote, and the three ways it ends. Then talk it through free.",
   alternates: { canonical: "/voluntary-administration" },
 };
 

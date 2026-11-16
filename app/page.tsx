@@ -48,7 +48,7 @@ const PATHS = [
     href: "/ato-payment-plan",
   },
   {
-    title: "Director Penalty Notice response",
+    title: "Director penalty notice help",
     text: "A DPN runs on fixed clocks and the response depends on the notice type. You get the notice read properly and the options laid out the same day.",
     href: "/director-penalty-notice",
   },
@@ -282,7 +282,7 @@ export default function Home() {
           </div>
 
           {/* Free tools promo */}
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <Link
               href="/ato-payment-plan-calculator"
               className="group rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-7 transition hover:border-rescue"
@@ -292,8 +292,8 @@ export default function Home() {
                 ATO payment plan calculator
               </h3>
               <p className="mt-3 text-sm text-ink/75">
-                Two sliders show what your tax debt costs to carry, and whether your payment
-                clears it or just feeds the interest.
+                See how long your tax debt takes to clear, what interest adds, and the monthly
+                payment that clears it in 12 or 24 months.
               </p>
               <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
                 Run the numbers →
@@ -313,6 +313,22 @@ export default function Home() {
               </p>
               <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
                 Check the signs →
+              </span>
+            </Link>
+            <Link
+              href="/director-penalty-notice"
+              className="group rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-7 transition hover:border-rescue"
+            >
+              <p className="eyebrow !text-rescue">Free tool</p>
+              <h3 className="mt-6 font-display text-xl font-semibold text-ink">
+                Director penalty notice deadline checker
+              </h3>
+              <p className="mt-3 text-sm text-ink/75">
+                Enter the date on your DPN and its type to see how much of the 21 days is left,
+                and what still removes the penalty.
+              </p>
+              <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
+                Check your clock →
               </span>
             </Link>
           </div>

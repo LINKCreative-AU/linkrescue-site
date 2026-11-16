@@ -8,7 +8,7 @@ const HELP = [
   { label: "Business rescue assessment", href: "/assessment" },
   { label: "ATO debt help", href: "/ato-debt-help" },
   { label: "ATO payment plans", href: "/ato-payment-plan" },
-  { label: "Director Penalty Notices", href: "/director-penalty-notice" },
+  { label: "Director penalty notice help", href: "/director-penalty-notice" },
   { label: "Small business restructuring", href: "/small-business-restructuring" },
   { label: "Voluntary administration", href: "/voluntary-administration" },
   { label: "Safe harbour", href: "/safe-harbour" },
