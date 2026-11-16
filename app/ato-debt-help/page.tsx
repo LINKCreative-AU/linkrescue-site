@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InfoPage } from "@/components/InfoPage";
 
 export const metadata: Metadata = {
-  title: "ATO Debt Help - Payment Plans & Tax Debt Negotiation",
+  title: "ATO Debt Help: Payment Plans and Negotiation",
   description:
-    "You can deal with ATO debt before the ATO deals with you. Payment plans, remission requests and restructuring options for Australian businesses, explained in plain language with a free two-minute assessment.",
+    "Behind with the ATO? See every option, from payment plans and interest remission to restructuring, in plain language. Then take the free 2-minute check.",
   alternates: { canonical: "/ato-debt-help" },
 };
 
@@ -67,7 +67,8 @@ export default function Page() {
       ]}
       related={[
         { label: "ATO payment plans", href: "/ato-payment-plan" },
-        { label: "Director Penalty Notices", href: "/director-penalty-notice" },
+        { label: "ATO payment plan calculator", href: "/ato-payment-plan-calculator" },
+        { label: "Director penalty notice help", href: "/director-penalty-notice" },
         { label: "Small business restructuring", href: "/small-business-restructuring" },
       ]}
     />

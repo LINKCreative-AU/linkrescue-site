@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { InfoPage } from "@/components/InfoPage";
 
 export const metadata: Metadata = {
-  title: "ATO Payment Plan - How to Set One Up That Actually Holds",
+  title: "ATO Payment Plan: How to Set One Up That Holds",
   description:
-    "You can put most ATO debt on a payment plan, and the ATO accepts plans it believes in. How to set one up, what the ATO looks for, what interest costs you, and what to do when a plan is not the right tool.",
+    "How to set up an ATO payment plan the ATO accepts: what it looks for, what interest costs, and when another tool fits. Run the free calculator first.",
   alternates: { canonical: "/ato-payment-plan" },
 };
 
@@ -19,6 +20,24 @@ export default function Page() {
       intro="An ATO payment plan is the most common way out of tax debt, and the most commonly botched. Plans built on optimistic numbers default, and every default makes the next negotiation harder. Built properly, a plan buys the business room to trade its way back."
       serviceName="ATO payment plan negotiation"
       serviceDescription="Help setting up and negotiating ATO payment plans for Australian business tax debt, including defaulted and repeat plans."
+      afterHero={
+        <Link
+          href="/ato-payment-plan-calculator"
+          className="group block rounded-xl2 border border-rescue/25 bg-rescue-light/25 p-6 transition hover:border-rescue sm:p-7"
+        >
+          <p className="eyebrow !text-rescue">Free tool</p>
+          <h2 className="mt-6 font-display text-xl font-semibold text-ink">
+            Run your numbers first: the ATO payment plan calculator
+          </h2>
+          <p className="mt-3 text-sm text-ink/75">
+            Enter your debt and what you can pay each month. See how long the plan takes, what the
+            general interest charge adds, and the payment that clears it in 12 or 24 months.
+          </p>
+          <span className="mt-4 inline-block text-sm font-semibold text-rescue group-hover:text-rescue-dark">
+            Open the calculator →
+          </span>
+        </Link>
+      }
       sections={[
         {
           heading: "How ATO payment plans work.",
@@ -86,6 +105,7 @@ export default function Page() {
       related={[
         { label: "ATO payment plan calculator", href: "/ato-payment-plan-calculator" },
         { label: "ATO debt help", href: "/ato-debt-help" },
+        { label: "Director penalty notice help", href: "/director-penalty-notice" },
         { label: "Small business restructuring", href: "/small-business-restructuring" },
       ]}
     />
