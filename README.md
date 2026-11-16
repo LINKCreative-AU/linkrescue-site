@@ -60,3 +60,4 @@ dropped. Configure at least one before going live.
 - Never `next build` while the dev server runs (corrupts `.next`).
 - Copy rules: no em dashes, never "honest/honestly", no "very/really",
   lead with "you".
+- Every change to the site adds one entry to lib/worklog.ts in the same commit (see the header there); rank. reads it nightly.
