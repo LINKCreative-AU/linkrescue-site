@@ -90,3 +90,39 @@ body {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Body of an article published from rank (app/insights). The same type, colour
+   and burgundy list rule as the hand-built info pages. */
+.prose-insight {
+  @apply leading-relaxed text-ink/75;
+}
+.prose-insight > * + * {
+  @apply mt-4;
+}
+.prose-insight h2 {
+  @apply mt-10 font-display text-2xl font-semibold tracking-tight text-ink;
+}
+.prose-insight h3 {
+  @apply mt-8 font-display text-lg font-semibold text-ink;
+}
+.prose-insight h4 {
+  @apply mt-6 font-semibold text-ink;
+}
+.prose-insight a {
+  @apply font-medium text-rescue underline underline-offset-2 hover:text-rescue-dark;
+}
+.prose-insight ul {
+  @apply list-disc space-y-2.5 pl-5 marker:text-rescue;
+}
+.prose-insight ol {
+  @apply list-decimal space-y-2.5 pl-5;
+}
+.prose-insight blockquote {
+  @apply border-l-2 border-rescue pl-5 text-ink;
+}
+.prose-insight hr {
+  @apply my-10 border-line;
+}
+.prose-insight code {
+  @apply rounded bg-cloud px-1 py-0.5 text-[0.9em];
+}

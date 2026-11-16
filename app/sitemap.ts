@@ -1,7 +1,14 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
+import { rankArticles } from "@/lib/rank";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Hourly, so an article approved in rank is listed without a deploy.
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Articles published from rank. Empty until RANK_SITE_TOKEN is set, and the
+  // index is only declared once there is something on it.
+  const articles = await rankArticles();
   const routes = [
     { path: "", priority: 1 },
     { path: "/assessment", priority: 0.9 },
@@ -17,10 +24,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/what-it-costs", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
   ];
-  return routes.map((r) => ({
-    url: `${SITE.url}${r.path}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: r.priority,
-  }));
+  return [
+    ...routes.map((r) => ({
+      url: `${SITE.url}${r.path}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: r.priority,
+    })),
+    ...(articles.length > 0
+      ? [
+          {
+            url: `${SITE.url}/insights`,
+            lastModified: new Date(articles[0].published_at),
+            changeFrequency: "weekly" as const,
+            priority: 0.6,
+          },
+        ]
+      : []),
+    ...articles.map((a) => ({
+      url: `${SITE.url}/insights/${a.slug}`,
+      lastModified: new Date(a.published_at),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
 }

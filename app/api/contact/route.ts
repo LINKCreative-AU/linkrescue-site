@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { notifyEnquiry, type Enquiry } from "@/lib/leads";
 import { leadSource } from "@/lib/lead-source";
 import { guardFormPost, guardResponse } from "@/lib/form-guard";
+import { forwardLeadToRank, rankAttribution, rankFullDetail } from "@/lib/rank";
 
 // Direct enquiries from /contact - people who want to talk rather than run
 // the assessment first. Name and phone are the only required fields: this
@@ -64,6 +65,27 @@ export async function POST(req: Request) {
       landing: clean(data.attribution?.landing),
     },
   };
+
+  // A second record of the enquiry in rank, alongside the alerts below and
+  // never instead of them; `after` runs it once the response has gone.
+  //
+  // WHAT IS LEFT OUT, AND WHY. The contact page promises that what a person
+  // tells us stays with the LINK Rescue team, so by default rank gets who to
+  // call and how urgent it is, and NOT the free-text account of what is
+  // happening to their business. See docs/rank.md before widening this.
+  after(() =>
+    forwardLeadToRank({
+      name: rec.name,
+      email: rec.email,
+      phone: rec.phone,
+      company: rec.business,
+      message: rankFullDetail() ? rec.message : undefined,
+      form_id: "contact",
+      source_path: leadSrc.page.split("?")[0] || "/contact",
+      ...rankAttribution(rec.attribution),
+      fields: { urgency: rec.urgency, heard_about_us: rec.heard },
+    }),
+  );
 
   // `delivered` is honest about whether a human was actually alerted. If every
   // channel is down the enquiry is only in the server log, and the form says

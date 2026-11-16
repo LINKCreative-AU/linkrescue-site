@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { DISCLAIMER, SITE } from "@/lib/site";
+import { rankArticles } from "@/lib/rank";
 import symbol from "@/public/link-symbol-reversed.png";
 
 const HELP = [
@@ -30,7 +31,13 @@ const COMPANY = [
   { label: "LINK.com.au", href: SITE.group.url, external: true },
 ];
 
-export function Footer() {
+export async function Footer() {
+  // Insights is linked only once rank has published something: with no
+  // articles the section does not exist, so there is nothing to point at.
+  const hasInsights = (await rankArticles()).length > 0;
+  const company = hasInsights
+    ? [COMPANY[0], { label: "Insights", href: "/insights" }, ...COMPANY.slice(1)]
+    : COMPANY;
   return (
     <footer className="bg-ink py-16 text-white">
       <div className="container-x">
@@ -59,7 +66,7 @@ export function Footer() {
 
           <FooterCol title="How we help" links={HELP} />
           <FooterCol title="Free tools" links={TOOLS} />
-          <FooterCol title="Company" links={COMPANY} />
+          <FooterCol title="Company" links={company} />
         </div>
 
         <p className="mt-10 max-w-4xl border-t border-white/10 pt-6 text-xs leading-relaxed text-white/55">
