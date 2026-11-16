@@ -14,6 +14,7 @@ import { sourceRows, tagSubject, type LeadSource } from "./lead-source";
 //   RESEND_API_KEY, RESEND_FROM, LEADS_TO    → email via Resend (LEADS_TO = comma list)
 
 import type { Outcome } from "./assessment";
+import { sendLeadToRank } from "./rank-lead";
 
 export type LeadStage = "started" | "progress" | "completed";
 
@@ -373,9 +374,28 @@ export async function notifyEnquiry(rec: Enquiry, source: LeadSource): Promise<b
     : Promise.resolve(false);
 
   const [slacked, emailed] = await Promise.all([slack, mail]);
+  // A copy for rank. (see lib/rank-lead.ts). Never changes the answer below.
+  await sendLeadToRank(lines, source);
   if (!slacked && !emailed) {
     console.error(`[enquiry - all channels unconfigured or failed] ${subject}\n${text}`);
     return false;
   }
   return true;
+}
+
+/** A completed assessment as the rows rank. stores (see lib/rank-lead.ts). The
+ *  answers come over as they read in Slack: one row per question. */
+export function rankRows(rec: CompletedCart): [string, string][] {
+  return [
+    ["Name", rec.name],
+    ["Phone", rec.phone],
+    ["Email", rec.email],
+    ["Business", rec.business || "-"],
+    ["ABN", rec.abn || "-"],
+    ["Location", rec.entityLocation || "-"],
+    ["Assessment result", `${rec.outcome.label} (score ${rec.score})`],
+    ...rec.answers.map((a) => [a.topic, a.answer] as [string, string]),
+    ["Landed on", rec.attribution?.landing || "-"],
+    ["Referrer", rec.attribution?.referrer || "-"],
+  ];
 }

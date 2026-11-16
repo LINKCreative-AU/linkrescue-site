@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { QUESTIONS, score, summarise } from "@/lib/assessment";
-import { emailLead, emailVisitor, notifySlack, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
+import { emailLead, emailVisitor, notifySlack, rankRows, upsertCart, type CartRecord, type CompletedCart, type LeadStage } from "@/lib/leads";
+import { sendLeadToRank } from "@/lib/rank-lead";
 import { leadSource } from "@/lib/lead-source";
 import { guardFormPost, guardOrigin, guardResponse } from "@/lib/form-guard";
 
@@ -134,6 +135,8 @@ export async function POST(req: Request) {
   // the site where the person filling it in is in genuine trouble. Sending them
   // to a result page that implies we have their details would be the worst
   // possible outcome, so fail loudly and let the form offer the phone number.
+  // A copy for rank. (see lib/rank-lead.ts). Never changes the answer below.
+  await sendLeadToRank(rankRows(rec), leadSrc);
   if (!stored && !slacked && !emailed) {
     console.error("[lead NOT DELIVERED - every channel unconfigured or failed]", JSON.stringify(rec));
     return NextResponse.json({ ok: false, error: "not-delivered" }, { status: 502 });
