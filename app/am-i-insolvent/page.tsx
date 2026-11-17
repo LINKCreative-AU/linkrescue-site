@@ -103,7 +103,7 @@ export default function Page() {
                 voluntary administration
               </Link>
               , should be on the table this week, chosen on your timeline rather than a
-              creditor's.
+              creditor&apos;s.
             </p>
 
             <h2 className="mt-10 font-display text-2xl font-semibold tracking-tight text-ink">
