@@ -9,7 +9,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur">
       <div className="container-x flex h-16 items-center justify-between gap-6">
-        <a href="/" aria-label="LINK Rescue home" className="shrink-0">
+        <a /* eslint-disable-line @next/next/no-html-link-for-pages -- plain <a> kept on purpose: <Link> would change navigation to client-side */ href="/" aria-label="LINK Rescue home" className="shrink-0">
           <Logo />
         </a>
 

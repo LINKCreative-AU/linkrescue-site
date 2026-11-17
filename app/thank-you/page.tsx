@@ -72,7 +72,7 @@ export default async function ThankYou({
             <a href={SITE.phoneHref} className={process.env.NEXT_PUBLIC_BOOKING_URL ? "btn btn-ghost" : "btn btn-rescue"}>
               Call {SITE.phone}
             </a>
-            <a href="/" className="btn btn-ghost">
+            <a /* eslint-disable-line @next/next/no-html-link-for-pages -- plain <a> kept on purpose: <Link> would change navigation to client-side */ href="/" className="btn btn-ghost">
               Back to the site
             </a>
           </div>

@@ -156,7 +156,7 @@ export function SbrCalculator() {
       <p className="mt-4 text-xs leading-relaxed text-ink/45">
         The 20 to 40 cent range reflects historical plans the LINK team has
         supported on debts between $200,000 and $500,000. Every plan is voted
-        by creditors on your company's real numbers, results vary and no
+        by creditors on your company&apos;s real numbers, results vary and no
         outcome is guaranteed.
       </p>
     </div>
